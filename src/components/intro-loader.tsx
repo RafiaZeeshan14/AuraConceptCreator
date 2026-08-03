@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
-const MIN_DISPLAY_DURATION = 950;
+const MIN_DISPLAY_DURATION = 1350;
 const MAX_DISPLAY_DURATION = 2400;
-const EXIT_DURATION = 240;
+const EXIT_DURATION = 480;
 
 const logoLetters = [
   { src: "/loader-a.png", alt: "A", width: 365, height: 365 },
