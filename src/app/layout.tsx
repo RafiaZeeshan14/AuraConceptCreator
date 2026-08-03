@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist } from "next/font/google";
+
+import { IntroLoader } from "@/components/intro-loader";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,7 +36,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${editorial.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <IntroLoader />
+        {children}
+      </body>
     </html>
   );
 }
