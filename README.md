@@ -9,6 +9,7 @@ A production-ready foundation for a digital creative agency website.
 - Tailwind CSS 4
 - Motion for intentional UI animation
 - React Icons for tree-shakeable icon sets
+- React Bits Magic Rings powered by Three.js
 - `clsx` + `tailwind-merge` via `src/lib/utils.ts`
 
 ## Commands
