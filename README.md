@@ -7,7 +7,7 @@ A production-ready foundation for a digital creative agency website.
 - Next.js 16 App Router and React 19
 - TypeScript with strict type checking
 - Tailwind CSS 4
-- Motion for intentional UI animation
+- GPU-friendly CSS animations with reduced-motion support
 - React Icons for tree-shakeable icon sets
 - React Bits Magic Rings powered by Three.js
 - `clsx` + `tailwind-merge` via `src/lib/utils.ts`

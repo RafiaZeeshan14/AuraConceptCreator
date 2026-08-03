@@ -1,7 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import {
+  Color,
+  Mesh,
+  OrthographicCamera,
+  PlaneGeometry,
+  Scene,
+  ShaderMaterial,
+  Vector2,
+  WebGLRenderer,
+} from "three";
 
 const vertexShader = `
 void main() {
@@ -85,6 +94,8 @@ interface MagicRingsProps {
   hoverScale?: number;
   parallax?: number;
   clickBurst?: boolean;
+  maxDpr?: number;
+  targetFps?: number;
 }
 
 export default function MagicRings({
@@ -109,6 +120,8 @@ export default function MagicRings({
   hoverScale = 1.2,
   parallax = 0.05,
   clickBurst = false,
+  maxDpr = 1,
+  targetFps = 30,
 }: MagicRingsProps) {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const propsRef = useRef<Required<MagicRingsProps> | null>(null);
@@ -141,6 +154,8 @@ export default function MagicRings({
       hoverScale,
       parallax,
       clickBurst,
+      maxDpr,
+      targetFps,
     };
   });
 
@@ -148,9 +163,9 @@ export default function MagicRings({
     const mount = mountRef.current;
     if (!mount) return;
 
-    let renderer: THREE.WebGLRenderer;
+    let renderer: WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({
+      renderer = new WebGLRenderer({
         alpha: true,
         antialias: false,
         powerPreference: "low-power",
@@ -165,18 +180,19 @@ export default function MagicRings({
     }
 
     renderer.setClearColor(0x000000, 0);
+    renderer.domElement.style.display = "block";
     mount.appendChild(renderer.domElement);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
+    const scene = new Scene();
+    const camera = new OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
     camera.position.z = 1;
 
     const uniforms = {
       uTime: { value: 0 },
       uAttenuation: { value: 0 },
-      uResolution: { value: new THREE.Vector2() },
-      uColor: { value: new THREE.Color() },
-      uColorTwo: { value: new THREE.Color() },
+      uResolution: { value: new Vector2() },
+      uColor: { value: new Color() },
+      uColorTwo: { value: new Color() },
       uLineThickness: { value: 0 },
       uBaseRadius: { value: 0 },
       uRadiusStep: { value: 0 },
@@ -188,7 +204,7 @@ export default function MagicRings({
       uRingGap: { value: 1.6 },
       uFadeIn: { value: 0.5 },
       uFadeOut: { value: 0.75 },
-      uMouse: { value: new THREE.Vector2() },
+      uMouse: { value: new Vector2() },
       uMouseInfluence: { value: 0 },
       uHoverAmount: { value: 0 },
       uHoverScale: { value: 1 },
@@ -196,20 +212,20 @@ export default function MagicRings({
       uBurst: { value: 0 },
     };
 
-    const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms, transparent: true });
-    const quad = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+    const material = new ShaderMaterial({ vertexShader, fragmentShader, uniforms, transparent: true });
+    const geometry = new PlaneGeometry(1, 1);
+    const quad = new Mesh(geometry, material);
     scene.add(quad);
 
     const resize = () => {
       const w = mount.clientWidth;
       const h = mount.clientHeight;
-      const dpr = Math.min(window.devicePixelRatio, 2);
-      renderer.setSize(w, h);
+      const dpr = Math.min(window.devicePixelRatio, propsRef.current?.maxDpr ?? 1);
       renderer.setPixelRatio(dpr);
+      renderer.setSize(w, h);
       uniforms.uResolution.value.set(w * dpr, h * dpr);
     };
     resize();
-    window.addEventListener('resize', resize);
 
     const ro = new ResizeObserver(resize);
     ro.observe(mount);
@@ -227,20 +243,40 @@ export default function MagicRings({
     };
     const onClick = () => { burstRef.current = 1; };
 
-    mount.addEventListener('mousemove', onMouseMove);
-    mount.addEventListener('mouseenter', onMouseEnter);
-    mount.addEventListener('mouseleave', onMouseLeave);
-    mount.addEventListener('click', onClick);
+    const tracksPointer = propsRef.current?.followMouse ?? false;
+    const tracksClick = propsRef.current?.clickBurst ?? false;
+
+    if (tracksPointer) {
+      mount.addEventListener("mousemove", onMouseMove);
+      mount.addEventListener("mouseenter", onMouseEnter);
+      mount.addEventListener("mouseleave", onMouseLeave);
+    }
+    if (tracksClick) mount.addEventListener("click", onClick);
 
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    let frameId: number;
+    let frameId = 0;
+    let lastFrameTime = 0;
+    let isInViewport = true;
+    let isPageVisible = !document.hidden;
+
+    const scheduleFrame = () => {
+      cancelAnimationFrame(frameId);
+      if (isInViewport && isPageVisible) {
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+
     const animate = (t: number) => {
       if (!prefersReducedMotion) {
         frameId = requestAnimationFrame(animate);
       }
       const p = propsRef.current!;
+      const frameInterval = 1000 / p.targetFps;
+
+      if (!prefersReducedMotion && t - lastFrameTime < frameInterval) return;
+      lastFrameTime = t;
 
       smoothMouseRef.current[0] += (mouseRef.current[0] - smoothMouseRef.current[0]) * 0.08;
       smoothMouseRef.current[1] += (mouseRef.current[1] - smoothMouseRef.current[1]) * 0.08;
@@ -272,19 +308,39 @@ export default function MagicRings({
 
       renderer.render(scene, camera);
     };
-    frameId = requestAnimationFrame(animate);
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isInViewport = entry.isIntersecting;
+        scheduleFrame();
+      },
+      { threshold: 0.01 },
+    );
+    visibilityObserver.observe(mount);
+
+    const onVisibilityChange = () => {
+      isPageVisible = !document.hidden;
+      scheduleFrame();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    scheduleFrame();
 
     return () => {
       cancelAnimationFrame(frameId);
-      window.removeEventListener('resize', resize);
       ro.disconnect();
-      mount.removeEventListener('mousemove', onMouseMove);
-      mount.removeEventListener('mouseenter', onMouseEnter);
-      mount.removeEventListener('mouseleave', onMouseLeave);
-      mount.removeEventListener('click', onClick);
+      visibilityObserver.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      if (tracksPointer) {
+        mount.removeEventListener("mousemove", onMouseMove);
+        mount.removeEventListener("mouseenter", onMouseEnter);
+        mount.removeEventListener("mouseleave", onMouseLeave);
+      }
+      if (tracksClick) mount.removeEventListener("click", onClick);
       mount.removeChild(renderer.domElement);
+      renderer.forceContextLoss();
       renderer.dispose();
       material.dispose();
+      geometry.dispose();
     };
   }, []);
 
