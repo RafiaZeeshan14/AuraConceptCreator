@@ -6,7 +6,6 @@ import { MagicRingsLayer } from "@/components/effects/magic-rings-layer";
 import { FloatingInsightCard } from "@/components/ui/floating-insight-card";
 import { HeroTag } from "@/components/ui/hero-tag";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
-import { ServicesTicker } from "@/components/ui/services-ticker";
 import { VerticalServicesRail } from "@/components/ui/vertical-services-rail";
 
 const revealDelay = (delay: string) =>
@@ -25,7 +24,7 @@ export function Hero() {
 
       <div
         style={revealDelay("0s")}
-        className="hero-reveal relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1320px] items-center justify-center px-0 pt-12 pb-6 sm:min-h-[540px] sm:px-12 sm:py-12 lg:min-h-[520px] lg:px-20"
+        className="hero-stage-content hero-reveal relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1320px] items-center justify-center px-0 pt-12 pb-6 sm:min-h-[540px] sm:px-12 sm:py-12 lg:min-h-[520px] lg:px-20"
       >
         <FloatingInsightCard
           eyebrow="Creative impact"
@@ -62,7 +61,7 @@ export function Hero() {
         <div className="relative z-10 mx-auto w-full max-w-5xl text-center">
           <div
             style={revealDelay("0.12s")}
-            className="hero-reveal mx-auto mb-5 flex min-h-[145px] w-full max-w-[390px] items-start justify-between md:hidden"
+            className="hero-reveal mx-auto mb-2 flex min-h-[145px] w-full max-w-[390px] items-start justify-between md:hidden"
           >
             <FloatingInsightCard
               compact
@@ -179,7 +178,6 @@ export function Hero() {
         </div>
       </div>
 
-      <ServicesTicker />
     </section>
   );
 }

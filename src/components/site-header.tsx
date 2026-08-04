@@ -16,10 +16,10 @@ type NavigationItem = {
 
 const navigation: NavigationItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "#about" },
-  { label: "Work", href: "#work" },
-  { label: "Pages", href: "#pages", hasMenu: true },
-  { label: "Blog", href: "#blog" },
+  { label: "About", href: "/about" },
+  { label: "Work", href: "/#work" },
+  { label: "Pages", href: "/#pages", hasMenu: true },
+  { label: "Blog", href: "/#blog" },
 ];
 
 const socialLinks = [
@@ -140,7 +140,7 @@ export function SiteHeader() {
           ))}
           <li className="pt-2">
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={() => setMenuOpen(false)}
               className="block cursor-pointer rounded-2xl bg-cream px-4 py-4 text-center text-sm font-semibold text-wine shadow-[0_12px_35px_rgba(20,0,2,0.18)] transition-transform hover:-translate-y-0.5"
             >
