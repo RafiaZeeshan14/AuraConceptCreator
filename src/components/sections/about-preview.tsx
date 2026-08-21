@@ -2,15 +2,53 @@
 
 import { useRef, type PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { HiArrowRight } from "react-icons/hi2";
 
 import { ServicesTicker } from "@/components/ui/services-ticker";
 
-const studioStats = [
-  { label: "Digital launches", value: "24+" },
-  { label: "Creative disciplines", value: "03" },
-  { label: "One independent studio", value: "01" },
-];
+const textRevealVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.025,
+    },
+  },
+};
+
+const characterRevealVariants = {
+  hidden: {
+    opacity: 0,
+    y: "0.7em",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
+function RevealLine({ children, className = "" }: { children: string; className?: string }) {
+  return (
+    <motion.span
+      variants={textRevealVariants}
+      className={`about-preview__line block whitespace-pre ${className}`}
+    >
+      {Array.from(children).map((character, index) => (
+        <motion.span
+          key={`${character}-${index}`}
+          variants={characterRevealVariants}
+          className="about-preview__character inline-block"
+        >
+          {character}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
 
 export function AboutPreview() {
   const storyRef = useRef<HTMLDivElement>(null);
@@ -49,7 +87,7 @@ export function AboutPreview() {
       <div aria-hidden="true" className="about-preview__orb" />
       <ServicesTicker />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-5 pt-2 sm:px-8 sm:pt-3 lg:px-14 lg:pt-4">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-5 pt-2 pb-16 sm:px-8 sm:pt-3 sm:pb-20 lg:px-14 lg:pt-4 lg:pb-24">
         <div className="about-reveal flex items-center justify-between border-t border-wine/15 pt-5 text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
           <span>02 — About Aura</span>
           <span className="hidden sm:block">Independent creative studio</span>
@@ -57,13 +95,18 @@ export function AboutPreview() {
 
         <div className="mt-8 grid gap-10 sm:mt-10 lg:grid-cols-[1.22fr_0.78fr] lg:items-start lg:gap-12">
           <div>
-            <h2 className="about-reveal about-preview__heading max-w-5xl text-[clamp(3.1rem,6.8vw,6.9rem)] font-medium leading-[0.9] tracking-[-0.065em]">
-              <span className="about-preview__line block">Built for brands</span>
-              <span className="about-preview__line block">that refuse to</span>
-              <span className="about-preview__line block font-editorial font-medium italic text-accent">
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.45 }}
+              className="about-preview__heading max-w-5xl text-[clamp(3.1rem,6.8vw,6.9rem)] font-medium leading-[0.98] tracking-[-0.065em]"
+            >
+              <RevealLine>Built for brands</RevealLine>
+              <RevealLine>that refuse to</RevealLine>
+              <RevealLine className="font-editorial font-medium italic text-accent">
                 blend in.
-              </span>
-            </h2>
+              </RevealLine>
+            </motion.h2>
 
             <div className="about-reveal about-preview__purpose mt-6 grid max-w-[620px] grid-cols-[48px_1fr] gap-6 sm:mt-8 sm:grid-cols-[56px_1fr] sm:gap-8">
               <div aria-hidden="true" className="about-preview__purpose-marker relative">
@@ -135,22 +178,6 @@ export function AboutPreview() {
           </div>
         </div>
 
-        <div className="about-preview__stats about-reveal mt-14 grid sm:mt-16 sm:grid-cols-3">
-          {studioStats.map((stat, index) => (
-            <div
-              key={stat.label}
-              className="about-preview__stat relative border-t border-wine/20 py-8 sm:min-h-[220px] sm:px-7 sm:py-7 sm:first:pl-0 sm:last:pr-0"
-            >
-              <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.18em] text-wine/45">
-                <span>{stat.label}</span>
-                <span>0{index + 1}</span>
-              </div>
-              <strong className="about-preview__stat-value mt-5 block text-[clamp(5rem,11vw,10rem)] font-medium leading-[0.78] tracking-[-0.09em]">
-                {stat.value}
-              </strong>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
