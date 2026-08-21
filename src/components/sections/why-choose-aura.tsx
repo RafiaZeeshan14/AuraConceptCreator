@@ -56,7 +56,7 @@ export function WhyChooseAura() {
         <div className="relative min-h-[680px] lg:min-h-[700px]">
           <div className="why-choose-aura__intro relative z-10 max-w-[500px]">
             <p className="text-[9px] text-wine/45 ab font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">
-              03 — Why choose Aura
+              04 — Why choose Aura
             </p>
             <h2 className="mt-7 text-[clamp(3.4rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
               <span className="block">Why</span>

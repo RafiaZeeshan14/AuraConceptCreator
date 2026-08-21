@@ -54,7 +54,7 @@ export function Testimonials() {
       <div className="mx-auto w-full max-w-[1600px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
         <div className="testimonials__layout">
           <div className="testimonials__intro">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">04 — Testimonials</p>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">05 — Testimonials</p>
             <h2 className="mt-7 text-[clamp(3.5rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
               <span className="whitespace-nowrap">Voices of</span>
               <span className="block font-editorial italic text-accent">impact.</span>

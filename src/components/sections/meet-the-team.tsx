@@ -35,7 +35,7 @@ export function MeetTheTeam() {
         <div className="meet-team__intro flex flex-col gap-6 border-t border-wine/15 pt-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">
-              05 — Meet the team
+              06 — Meet the team
             </p>
             <h2 className="mt-6 w-max max-w-full text-[clamp(3.4rem,7vw,7rem)] font-medium leading-[0.82] tracking-[-0.075em]">
               <span className="block whitespace-nowrap">People behind</span>
