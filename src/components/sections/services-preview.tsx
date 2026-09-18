@@ -1,29 +1,46 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import {
   HiArrowUpRight,
-  HiOutlineChartBar,
-  HiOutlineCube,
-  HiOutlineFilm,
-  HiOutlineGlobeAlt,
-  HiOutlineLightBulb,
-  HiOutlineMegaphone,
 } from "react-icons/hi2";
-
-const services = [
-  { number: "01", title: "Branding & Strategy", copy: "Build a clear foundation with strategy, identity and positioning.", icon: HiOutlineLightBulb },
-  { number: "02", title: "Creative & Design", copy: "Create visual systems that capture attention across every platform.", icon: HiOutlineCube },
-  { number: "03", title: "Content Production", copy: "Tell your story through photography, video and engaging content.", icon: HiOutlineFilm },
-  { number: "04", title: "Digital Marketing & Social Media", copy: "Grow your presence with data-led marketing and social strategy.", icon: HiOutlineMegaphone },
-  { number: "05", title: "Web & E-Commerce", copy: "Build useful digital experiences designed for growth.", icon: HiOutlineGlobeAlt },
-  { number: "06", title: "Specialized Services", copy: "Bring ambitious launches, events and unique ideas to life.", icon: HiOutlineChartBar },
-];
+import { services } from "@/components/sections/services-data";
 
 export function ServicesPreview() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [hasEntered, setHasEntered] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section || hasEntered) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEntered(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08 },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [hasEntered]);
+
   return (
-    <section id="services" className="services-preview relative overflow-hidden bg-wine text-cream">
+    <section
+      ref={sectionRef}
+      id="services"
+      className={`services-preview relative overflow-hidden bg-wine text-cream ${hasEntered ? "is-visible" : ""}`}
+    >
+      <div className="services-preview__sparkline" aria-hidden="true" />
       <div className="services-preview__orbit" aria-hidden="true" />
       <div className="mx-auto w-full max-w-[1600px] px-5 pt-8 pb-16 sm:px-8 sm:pt-12 sm:pb-20 lg:px-14 lg:pt-16 lg:pb-24">
-        <div className="services-preview__header flex flex-col gap-7 border-t border-cream/15 pt-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="services-preview__header flex flex-col gap-7 pt-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">03 — What we do</p>
             <h2 className="mt-6 max-w-2xl text-[clamp(3.4rem,7vw,7rem)] font-medium leading-[0.82] tracking-[-0.075em]">
@@ -42,14 +59,27 @@ export function ServicesPreview() {
         </div>
 
         <div className="services-preview__grid mt-14 sm:mt-16">
-          {services.map(({ number, title, copy, icon: Icon }) => (
+          {services.map(({ number, title, intro, items, icon: Icon }) => (
             <Link href="/services" key={title} className="services-preview__card">
               <div className="flex items-start justify-between">
                 <span className="text-[10px] font-semibold tracking-[0.18em] text-accent">{number}</span>
                 <span className="services-preview__icon"><Icon /></span>
               </div>
-              <h3>{title}</h3>
-              <p>{copy}</p>
+              <h3>
+                {title === "AI Content Creation" ? (
+                  <>
+                    AI Content
+                    <br />
+                    Creation
+                  </>
+                ) : (
+                  title
+                )}
+              </h3>
+              <p>{intro}</p>
+              <ul>
+                {items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
               <span className="services-preview__arrow"><HiArrowUpRight /></span>
             </Link>
           ))}

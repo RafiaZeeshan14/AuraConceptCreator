@@ -8,15 +8,17 @@ import { SiteFooter } from "@/components/site-footer";
 import { Testimonials } from "@/components/sections/testimonials";
 import { ServicesPreview } from "@/components/sections/services-preview";
 import { FaqSection } from "@/components/sections/faq-section";
+import { ServicesTicker } from "@/components/ui/services-ticker";
 
 export default function Home() {
   return (
     <main className="min-h-svh overflow-hidden">
       <SiteHeader />
       <Hero />
+      <ServicesTicker />
+      <BrandsShowcase />
       <AboutPreview />
       <ServicesPreview />
-       <BrandsShowcase />
       <WhyChooseAura />
       <Testimonials />
       <MeetTheTeam />

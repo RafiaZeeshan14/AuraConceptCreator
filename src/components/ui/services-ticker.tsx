@@ -12,9 +12,9 @@ export function ServicesTicker() {
   return (
     <section
       aria-label="Aura creative services"
-      className="services-transition relative z-20 h-20 overflow-visible sm:h-24"
+      className="services-transition relative z-20 h-0 overflow-visible"
     >
-      <div className="absolute -top-4 -left-[6%] -right-[6%] rotate-[-1.5deg] overflow-hidden border-y border-cream/10 bg-wine py-5 sm:-top-5 sm:py-6 lg:rotate-[-2deg]">
+      <div className="absolute top-0 -left-[6%] -right-[6%] rotate-[-1.5deg] overflow-hidden border-y border-cream/10 bg-wine py-4 sm:py-5 lg:rotate-[-2deg]">
         <div className="services-ticker flex w-max items-center">
           {tickerItems.map((service, index) => (
             <div

@@ -49,6 +49,7 @@ function TestimonialCard({ quote, name, role, initials }: (typeof testimonials)[
 export function Testimonials() {
   return (
     <section className="testimonials relative overflow-hidden bg-wine text-cream">
+      <div className="section-sparkline" aria-hidden="true" />
       <div className="testimonials__rings" aria-hidden="true" />
       <span className="testimonials__visual-number" aria-hidden="true">04</span>
       <div className="mx-auto w-full max-w-[1600px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
