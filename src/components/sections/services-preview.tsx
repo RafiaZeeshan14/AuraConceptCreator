@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   HiArrowUpRight,
@@ -52,15 +51,12 @@ export function ServicesPreview() {
             <p className="text-sm leading-7 text-cream/62 sm:text-base sm:leading-8">
               From the first thought to the final launch, we bring the right disciplines around the idea.
             </p>
-            <Link href="/services" className="mt-6 inline-flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-cream hover:text-accent">
-              Explore all services <span className="grid size-8 place-items-center rounded-full bg-accent"><HiArrowUpRight className="size-4" /></span>
-            </Link>
           </div>
         </div>
 
         <div className="services-preview__grid mt-14 sm:mt-16">
           {services.map(({ number, title, intro, items, icon: Icon }) => (
-            <Link href="/services" key={title} className="services-preview__card">
+            <article key={title} className="services-preview__card">
               <div className="flex items-start justify-between">
                 <span className="text-[10px] font-semibold tracking-[0.18em] text-accent">{number}</span>
                 <span className="services-preview__icon"><Icon /></span>
@@ -81,7 +77,7 @@ export function ServicesPreview() {
                 {items.map((item) => <li key={item}>{item}</li>)}
               </ul>
               <span className="services-preview__arrow"><HiArrowUpRight /></span>
-            </Link>
+            </article>
           ))}
         </div>
       </div>

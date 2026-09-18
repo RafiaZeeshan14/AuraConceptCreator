@@ -1,5 +1,3 @@
-"use client";
-
 import {
   HiOutlineCursorArrowRays,
   HiOutlineLightBulb,
@@ -9,7 +7,7 @@ import {
   HiOutlineUserGroup,
 } from "react-icons/hi2";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { CountUpStat } from "@/components/ui/count-up-stat";
 
 const reasons = [
   {
@@ -56,58 +54,6 @@ const reasons = [
   },
 ] as const;
 
-function CountUpStat({ value, suffix }: { value: number; suffix: string }) {
-  const [count, setCount] = useState(0);
-  const statRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const stat = statRef.current;
-
-    if (!stat) return;
-
-    const showFinalValue = () => setCount(value);
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      showFinalValue();
-      return;
-    }
-
-    let frameId = 0;
-    let hasStarted = false;
-    const duration = 1500;
-
-    const animate = (startTime: number) => {
-      const progress = Math.min((performance.now() - startTime) / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      setCount(Math.round(value * easedProgress));
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(() => animate(startTime));
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasStarted) {
-          hasStarted = true;
-          frameId = requestAnimationFrame(() => animate(performance.now()));
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 },
-    );
-
-    observer.observe(stat);
-
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(frameId);
-    };
-  }, [value]);
-
-  return <span ref={statRef}>{count.toLocaleString()}{suffix}</span>;
-}
 
 export function WhyChooseAura() {
   return (

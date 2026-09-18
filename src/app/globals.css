@@ -1,5 +1,5 @@
-@import "tailwindcss";
-
+@import 'tailwindcss';
+@plugin 'lightswind/plugin';
 :root {
   --cream: #ede8df;
   --wine: #5d1011;
@@ -1371,173 +1371,287 @@ a {
   z-index: 1;
 }
 
-.meet-team__carousel {
-  position: relative;
-  width: calc(100% + 2 * clamp(1.25rem, 5vw, 3.5rem));
-  margin-left: calc(-1 * clamp(1.25rem, 5vw, 3.5rem));
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+.meet-team__orbit {
+  position: absolute;
+  top: -18%;
+  right: -14%;
+  width: min(46vw, 700px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(93 16 17 / 7%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 80px rgb(93 16 17 / 2%), 0 0 0 160px rgb(182 41 53 / 3%);
+  pointer-events: none;
 }
 
-.meet-team__track {
-  display: flex;
-  width: max-content;
-  gap: 1.25rem;
-  padding: 10px 0 18px;
-  animation: team-carousel 42s linear infinite;
-  will-change: transform;
+.meet-team__carousel {
+  position: relative;
+  z-index: 1;
+}
+
+.meet-team__carousel:focus-visible {
+  border-radius: 1.5rem;
+  outline: 2px solid var(--accent);
+  outline-offset: 8px;
+}
+
+.meet-team__stage {
+  touch-action: pan-y;
+}
+
+.meet-team__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgb(93 16 17 / 18%);
+  border-radius: 50%;
+  background: rgb(237 232 223 / 78%);
+  color: var(--wine);
+  cursor: pointer;
+  transform: translateY(-50%);
+  backdrop-filter: blur(10px);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.meet-team__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.meet-team__arrow:hover {
+  border-color: var(--wine);
+  background: var(--wine);
+  color: var(--cream);
+}
+
+.meet-team__arrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.meet-team__arrow--prev {
+  left: clamp(0.25rem, 1.5vw, 1.25rem);
+}
+
+.meet-team__arrow--next {
+  right: clamp(0.25rem, 1.5vw, 1.25rem);
 }
 
 .meet-team__card {
-  position: relative;
-  width: clamp(250px, 23vw, 330px);
-  height: clamp(430px, 38vw, 520px);
-  flex: 0 0 auto;
+  position: absolute;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 58%);
-  border-radius: 1.35rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 55%);
   background-color: #c9c1b8;
-  background-position: center;
-  background-size: cover;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 62%),
-    0 18px 38px rgb(93 16 17 / 12%);
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+    0 18px 38px rgb(93 16 17 / 14%);
+  cursor: pointer;
+  backface-visibility: hidden;
+  transition:
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
 }
 
 .meet-team__card:hover {
-  z-index: 2;
-  box-shadow: 0 24px 52px rgb(93 16 17 / 22%);
-  transform: translateY(-8px);
+  border-color: rgb(255 255 255 / 78%);
+  box-shadow: 0 26px 54px rgb(93 16 17 / 24%);
 }
 
-.meet-team__card::after {
+.meet-team__card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.meet-team__card img {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.meet-team__card:hover img,
+.meet-team__card:focus-visible img {
+  transform: scale(1.05);
+}
+
+.meet-team__overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 42%, rgb(20 2 3 / 72%));
-  content: "";
-  opacity: 0.18;
-  transition: opacity 0.4s ease;
-}
-
-.meet-team__card:hover::after {
-  opacity: 0.55;
-}
-
-.meet-team__card-info {
-  position: absolute;
-  z-index: 1;
   right: 0;
   bottom: 0;
   left: 0;
-  display: grid;
-  min-height: 94px;
-  grid-template-columns: 1fr auto;
-  gap: 8px 12px;
-  padding: 17px 18px 15px;
-  border-top: 1px solid rgb(255 255 255 / 62%);
-  background: rgb(237 232 223 / 48%);
-  backdrop-filter: blur(18px) saturate(115%);
-  color: var(--wine);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 55%);
-  transform: translateY(calc(100% - 71px));
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 16px;
+  text-align: left;
 }
 
-.meet-team__card:hover .meet-team__card-info {
-  transform: translateY(0);
+.meet-team__overlay-name {
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+
+.meet-team__overlay-role {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.meet-team__info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  max-width: 620px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.75rem;
+  text-align: center;
+}
+
+.meet-team__info-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.meet-team__counter {
+  color: rgb(93 16 17 / 42%);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.meet-team__counter span {
+  color: rgb(93 16 17 / 26%);
+}
+
+.meet-team__name {
+  color: var(--wine);
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
 }
 
 .meet-team__role {
-  color: rgb(93 16 17 / 52%);
-  font-size: 8px;
+  color: var(--accent);
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
-.meet-team__card h3 {
-  margin-top: 4px;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  font-weight: 650;
-  letter-spacing: -0.05em;
-}
-
 .meet-team__tag {
-  align-self: end;
+  margin-top: 2px;
+  border: 1px solid rgb(93 16 17 / 14%);
   border-radius: 999px;
-  border: 1px solid rgb(93 16 17 / 12%);
-  background: rgb(255 255 255 / 28%);
-  backdrop-filter: blur(8px);
-  padding: 5px 10px;
+  background: rgb(255 255 255 / 32%);
+  padding: 5px 11px;
   color: rgb(93 16 17 / 62%);
   font-size: 8px;
   font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-.meet-team__detail {
-  grid-column: 1 / -1;
-  max-width: 240px;
-  color: rgb(93 16 17 / 68%);
-  font-size: 12px;
-  line-height: 1.55;
+.meet-team__bio {
+  max-width: 380px;
+  margin-top: 6px;
+  color: rgb(93 16 17 / 60%);
+  font-size: 13px;
+  line-height: 1.7;
 }
 
-.meet-team__profile {
-  display: inline-flex;
-  grid-column: 1 / -1;
+.meet-team__progress {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  width: min(280px, 70%);
+  height: 1px;
+  margin-top: 22px;
+  background: rgb(93 16 17 / 14%);
+}
+
+.meet-team__progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  animation-name: meet-team-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.meet-team__dots {
+  position: relative;
+  z-index: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: fit-content;
-  border: 0;
-  border-radius: 999px;
-  background: var(--wine);
-  padding: 9px 14px;
-  color: var(--cream);
-  font-size: 10px;
-  font-weight: 650;
+  margin-top: 18px;
 }
 
-.meet-team__profile svg {
-  width: 14px;
-  height: 14px;
+.meet-team__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(93 16 17 / 22%);
+  cursor: pointer;
+  transition:
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s ease;
+}
+
+.meet-team__dot:hover {
+  background: rgb(93 16 17 / 42%);
+}
+
+.meet-team__dot.is-active {
+  width: 26px;
+  background: var(--accent);
+}
+
+.meet-team__dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 @media (max-width: 767px) {
-  .meet-team__carousel {
-    overflow-x: auto;
-    mask-image: none;
-    -webkit-mask-image: none;
-    scrollbar-width: none;
+  .meet-team__arrow {
+    width: 38px;
+    height: 38px;
   }
 
-  .meet-team__carousel::-webkit-scrollbar {
-    display: none;
+  .meet-team__arrow svg {
+    width: 18px;
+    height: 18px;
   }
 
-  .meet-team__track {
-    animation: none;
-  }
-
-  .meet-team__card {
-    width: min(78vw, 310px);
-    height: 445px;
-  }
-
-  .meet-team__card-info {
-    transform: translateY(0);
-  }
-
-  .meet-team__card::after {
-    opacity: 0.48;
+  .meet-team__info {
+    margin-top: 1.25rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .meet-team__track {
-    animation: none;
+  .meet-team__card img {
+    transition: none;
+  }
+
+  .meet-team__progress {
+    display: none;
   }
 }
 
@@ -2831,9 +2945,13 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
   }
 }
 
-@keyframes team-carousel {
+@keyframes meet-team-progress {
+  from {
+    transform: scaleX(0);
+  }
+
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform: scaleX(1);
   }
 }
 

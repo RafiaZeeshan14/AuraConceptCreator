@@ -16,7 +16,7 @@ export function SiteFooter() {
       <div className="site-footer__orb" aria-hidden="true" />
       <div className="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-24">
         <div className="site-footer__topline flex items-center justify-between border-t border-cream/15 pt-5 text-[9px] font-semibold uppercase tracking-[0.24em] text-cream/45 sm:text-[10px]">
-          <span>06 — Stay curious</span>
+          <span>08 — Stay curious</span>
           <span className="hidden sm:block">Aura Concept Creator</span>
         </div>
 

@@ -54,7 +54,7 @@ export function FaqSection() {
       <div className="faq-section__orbit" aria-hidden="true" />
       <div className="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-24">
         <div className="faq-section__header pt-5">
-          <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">06 — Frequently asked</p>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">07 — Frequently asked</p>
           <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_0.55fr] lg:items-end">
             <h2 className="max-w-3xl text-[clamp(3.4rem,7vw,7rem)] font-medium leading-[0.82] tracking-[-0.075em]">
               Questions worth
