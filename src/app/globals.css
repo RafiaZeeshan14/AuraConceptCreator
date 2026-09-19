@@ -3053,6 +3053,32 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
   }
 }
 
+.pricing-hero__orbit-revolve {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-origin: center;
+  animation: pricing-orbit-revolve 50s linear infinite;
+  will-change: transform;
+}
+
+.pricing-hero__orbit-word {
+  animation: pricing-orbit-word 50s linear infinite;
+  will-change: transform;
+}
+
+@keyframes pricing-orbit-revolve {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pricing-orbit-word {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

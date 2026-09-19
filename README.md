@@ -23,3 +23,13 @@ npm run start      # serve the production build
 
 Node.js 20.9 or newer is required. Keep pages as Server Components by default and
 add `"use client"` only to interactive components to minimize browser JavaScript.
+
+## Dependency notes
+
+- `.npmrc` sets `legacy-peer-deps=true`. `lightswind` ships stale optional peer
+  ranges (`framer-motion ^10–^12`, `tailwind-merge ^2.6.1`) that this project
+  intentionally exceeds, so npm's strict peer resolution would abort
+  `npm install` with `ERESOLVE` on clean installs (including Vercel builds).
+- `package-lock.json` is committed and pins React to 19.2.8 because
+  `@react-three/fiber` currently requires `react >=19 <19.3`. Keep the lockfile
+  in sync (`npm install`) instead of deleting it.
