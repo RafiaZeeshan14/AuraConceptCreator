@@ -44,7 +44,7 @@ export function ServicesPreview() {
             <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">03 — What we do</p>
             <h2 className="mt-6 max-w-2xl text-[clamp(3.4rem,7vw,7rem)] font-medium leading-[0.82] tracking-[-0.075em]">
               Services that
-              <span className="block font-editorial italic text-accent">are tailored.</span>
+              <span className="about-impact block font-editorial italic">are tailored.</span>
             </h2>
           </div>
           <div className="max-w-sm sm:text-right">

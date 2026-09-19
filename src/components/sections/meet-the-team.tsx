@@ -55,19 +55,21 @@ export function MeetTheTeam() {
     >
       <div className="meet-team__grid" aria-hidden="true" />
       <div className="meet-team__orbit" aria-hidden="true" />
+      <span className="meet-team__visual-number" aria-hidden="true">06</span>
 
       <div className="mx-auto w-full max-w-[1600px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
         <div className="meet-team__intro flex flex-col gap-8 border-t border-wine/15 pt-5 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
               06 — Meet the team
             </p>
             <h2
               id="meet-the-team-title"
-              className="mt-6 w-max max-w-full text-[clamp(3.4rem,7vw,7rem)] font-medium leading-[0.82] tracking-[-0.075em]"
+              className="mt-6 w-max max-w-full text-[clamp(3.7rem,7.4vw,7.4rem)] font-medium leading-[0.82] tracking-[-0.075em]"
             >
-              <span className="block whitespace-nowrap">People behind</span>
-              <span className="block font-editorial italic text-accent">the work.</span>
+              <span className="block whitespace-nowrap">People</span>
+              <span className="block whitespace-nowrap">behind</span>
+              <span className="about-impact block font-editorial italic">the work.</span>
             </h2>
           </div>
 

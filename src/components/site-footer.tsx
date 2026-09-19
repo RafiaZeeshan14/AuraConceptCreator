@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { HiArrowUpRight } from "react-icons/hi2";
@@ -7,6 +8,13 @@ const footerLinks = [
   { label: "Work", href: "/#work" },
   { label: "Services", href: "/#services" },
   { label: "Contact", href: "/#contact" },
+];
+
+const logoLetters = [
+  { src: "/loader-a.png", alt: "A", width: 365, height: 365 },
+  { src: "/loader-u.png", alt: "U", width: 309, height: 361 },
+  { src: "/loader-r.png", alt: "R", width: 309, height: 365 },
+  { src: "/loader-a.png", alt: "A", width: 365, height: 365 },
 ];
 
 export function SiteFooter() {
@@ -48,10 +56,23 @@ export function SiteFooter() {
         <div className="mt-20 grid gap-10 border-t border-cream/15 pt-7 sm:grid-cols-[1fr_auto_auto] sm:items-end">
           <div>
             <Link href="/" className="site-footer__wordmark" aria-label="Aura Concept Creator home">
-              AURA<span>.</span>
+              {logoLetters.map((letter, index) => (
+                <span
+                  className="site-footer__letter"
+                  key={`${letter.alt}-${index}`}
+                >
+                  <Image
+                    src={letter.src}
+                    alt=""
+                    width={letter.width}
+                    height={letter.height}
+                  />
+                </span>
+              ))}
+              <span className="site-footer__wordmark-dot" aria-hidden="true">.</span>
             </Link>
             <p className="mt-3 max-w-xs text-[10px] uppercase tracking-[0.18em] text-cream/38">
-              Independent creative studio for brands that refuse to blend in.
+              Independent creative agency for brands that refuse to blend in.
             </p>
           </div>
 

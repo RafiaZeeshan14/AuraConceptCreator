@@ -54,6 +54,28 @@ function RevealLine({
   );
 }
 
+function RevealInline({
+  children,
+  className = "",
+}: {
+  children: string;
+  className?: string;
+}) {
+  return (
+    <motion.span variants={textRevealVariants} className={className}>
+      {Array.from(children).map((character, index) => (
+        <motion.span
+          key={`${character}-${index}`}
+          variants={characterRevealVariants}
+          className="about-preview__character inline-block"
+        >
+          {character === " " ? "\u00A0" : character}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
 export function AboutPreview() {
   const storyRef = useRef<HTMLDivElement>(null);
 
@@ -122,7 +144,7 @@ export function AboutPreview() {
   return (
     <section
       id="about"
-      className="about-preview relative overflow-x-clip bg-cream text-wine"
+      className="about-preview relative overflow-x-clip bg-cream pt-8 text-wine"
     >
       <div
         aria-hidden="true"
@@ -132,7 +154,7 @@ export function AboutPreview() {
       <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-5 pt-2 pb-16 sm:px-8 sm:pt-3 sm:pb-20 lg:px-14 lg:pt-4 lg:pb-24">
 
         {/* TOP LABEL */}
-        <div className="about-reveal flex items-center justify-between border-t border-wine/15 pt-5 text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
+        <div className="about-preview__topline about-reveal flex items-center justify-between border-t border-wine/25 pt-5 text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
           <span>02 — Who we are</span>
 
           <span className="hidden sm:block">
@@ -144,7 +166,7 @@ export function AboutPreview() {
         <div className="mt-8 grid gap-10 sm:mt-10 lg:grid-cols-[1.4fr_0.6fr] lg:items-start lg:gap-12">
 
           {/* LEFT SIDE */}
-          <div className="w-full">
+          <div className="order-2 w-full lg:order-1">
 
             {/* HEADING */}
             <motion.h2
@@ -154,19 +176,23 @@ export function AboutPreview() {
                 once: true,
                 amount: 0.45,
               }}
-              className="about-preview__heading m-0 w-full max-w-[1050px] p-0 text-[clamp(3.2rem,6vw,6.5rem)] font-medium leading-[0.92] tracking-[-0.065em]"
+              className="about-preview__heading m-0 w-full max-w-[1050px] p-0 text-[clamp(3.2rem,6vw,6.5rem)] font-semibold leading-[0.92] tracking-[-0.065em]"
             >
-              <RevealLine>
-                You bring the visions
-              </RevealLine>
+              <span className="about-preview__desktop-lines hidden sm:block">
+                <RevealLine>You bring the visions</RevealLine>
+                <RevealLine>we give it an</RevealLine>
+                <RevealLine className="font-editorial font-medium italic text-accent">Aura.</RevealLine>
+              </span>
 
-              <RevealLine>
-                we give it an
-              </RevealLine>
-
-              <RevealLine className="font-editorial font-medium italic text-accent">
-                Aura.
-              </RevealLine>
+              <span className="about-preview__mobile-lines block text-[clamp(3.25rem,13vw,4.4rem)] font-semibold leading-[0.86] tracking-[-0.07em] sm:hidden">
+                <RevealLine>You bring</RevealLine>
+                <RevealLine>the visions</RevealLine>
+                <RevealLine>we give it</RevealLine>
+                <motion.span variants={textRevealVariants} className="about-preview__line block font-editorial font-medium italic text-wine">
+                  <RevealInline>an </RevealInline>
+                  <RevealInline className="about-preview__mobile-aura about-impact">Aura</RevealInline>
+                </motion.span>
+              </span>
             </motion.h2>
 
             {/* PURPOSE */}
@@ -190,6 +216,19 @@ export function AboutPreview() {
                 brings strategy and creativity under one roof.
               </p>
             </div>
+
+            <Link
+              href="/about"
+              className="about-preview__story-link group relative z-10 mt-8 inline-flex w-fit items-center gap-4 text-base font-semibold sm:text-lg"
+            >
+              <span className="grid size-14 place-items-center rounded-full bg-wine text-cream shadow-[0_12px_30px_rgba(93,16,17,0.2)] transition-transform duration-300 group-hover:translate-x-1 sm:size-16">
+                <HiArrowRight className="size-6" />
+              </span>
+              Discover our story
+              <span aria-hidden="true" className="about-preview__story-rule">
+                <i />
+              </span>
+            </Link>
           </div>
 
           {/* RIGHT SIDE */}
@@ -197,7 +236,7 @@ export function AboutPreview() {
             ref={storyRef}
             onPointerMove={handleStoryPointerMove}
             onPointerLeave={resetStoryPointer}
-            className="about-preview__story relative min-h-[490px] lg:min-h-[520px]"
+            className="about-preview__story order-1 relative min-h-[280px] lg:order-2 lg:min-h-[520px]"
           >
 
             {/* BACKGROUND NUMBER */}
@@ -253,27 +292,6 @@ export function AboutPreview() {
 
               </div>
             </div>
-
-            {/* STORY LINK */}
-            <Link
-              href="/about"
-              className="about-preview__story-link group relative z-10 mt-8 inline-flex w-fit items-center gap-4 text-base font-semibold sm:text-lg"
-            >
-              <span className="grid size-14 place-items-center rounded-full bg-wine text-cream shadow-[0_12px_30px_rgba(93,16,17,0.2)] transition-transform duration-300 group-hover:translate-x-1 sm:size-16">
-
-                <HiArrowRight className="size-6" />
-
-              </span>
-
-              Discover our story
-
-              <span
-                aria-hidden="true"
-                className="about-preview__story-rule"
-              >
-                <i />
-              </span>
-            </Link>
 
           </div>
         </div>

@@ -67,7 +67,7 @@ export function WhyChooseAura() {
         className="why-choose-aura__visual-number"
         aria-hidden="true"
       >
-        03
+        04
       </span>
 
       <div className="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-14 lg:py-20">
@@ -75,14 +75,14 @@ export function WhyChooseAura() {
 
           {/* LEFT INTRO */}
           <div className="why-choose-aura__intro relative z-10 max-w-[500px]">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
               04 — Why choose Aura
             </p>
 
             <h2 className="mt-7 text-[clamp(3.4rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
               <span className="block">Why</span>
               <span className="block">choose</span>
-              <span className="block font-editorial italic text-accent">
+              <span className="about-impact block font-editorial italic">
                 Aura.
               </span>
             </h2>
@@ -168,11 +168,11 @@ export function WhyChooseAura() {
 
         {/* FOOTER */}
         <div className="why-choose-aura__footer mt-14 flex items-center justify-center gap-4 text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/50 sm:mt-20">
-          <span className="h-px w-16 bg-wine/20 sm:w-40" />
+     
 
           Ideas with purpose. Design with impact.
 
-          <span className="h-px w-16 bg-wine/20 sm:w-40" />
+    
         </div>
       </div>
     </section>
