@@ -16,6 +16,8 @@ A production-ready foundation for a digital creative agency website.
 
 ```bash
 npm run dev        # local development
+npm run dev:clean  # reset the .next cache, then start local development
+npm run clean      # reset the .next cache only
 npm run check      # lint and type-check
 npm run build      # optimized production build
 npm run start      # serve the production build
@@ -23,6 +25,26 @@ npm run start      # serve the production build
 
 Node.js 20.9 or newer is required. Keep pages as Server Components by default and
 add `"use client"` only to interactive components to minimize browser JavaScript.
+
+## Troubleshooting
+
+### Links stop navigating (for example `/about` does nothing)
+
+This is a stale dev-server state, not a routing bug: after a broken/saved
+intermediate import the running `next dev` keeps a corrupt module graph in
+`.next`, so the RSC payload for the target route keeps failing and the client
+router silently falls back to a full page load that never renders.
+
+Recover with:
+
+```bash
+# stop the current dev server (Ctrl+C), then:
+npm run dev:clean
+```
+
+If a browser tab is still open on the broken session, hard-refresh it once
+(Ctrl+Shift+R) so the old client runtime is discarded.
+
 
 ## Dependency notes
 

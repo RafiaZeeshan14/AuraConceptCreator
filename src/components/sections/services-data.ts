@@ -8,24 +8,8 @@ import {
 } from "react-icons/hi2";
 
 export const services = [
-  {
+   {
     number: "01",
-    title: "AI Content Creation",
-    intro:
-      "Create high-quality, on-brand content faster with AI-powered ideas, copy, visuals, and content workflows tailored to your audience.",
-    items: [
-      "AI Content Strategy",
-      "Prompt Development",
-      "AI Copywriting",
-      "AI Image Generation",
-      "AI Video Concepts",
-      "Content Repurposing",
-    ],
-    icon: HiOutlineLightBulb,
-    forceTwoLines: true,
-  },
-  {
-    number: "02",
     title: "Branding & Creative Design",
     intro:
       "Creative visuals that capture attention and communicate your brand message across both digital and print platforms.",
@@ -39,6 +23,24 @@ export const services = [
     ],
     icon: HiOutlineCube,
   },
+   {
+    number: "02",
+    title: "Digital Marketing & Social Media",
+    intro:
+      "Grow your online presence with data-driven marketing strategies and engaging social media management.",
+    items: [
+      "Social Media Management",
+      "Content Planning",
+      "Content Calendar",
+      "Facebook & Instagram Marketing",
+      "LinkedIn Marketing",
+      "Community Management",
+      "Meta Ads",
+      "Performance Reporting",
+    ],
+    icon: HiOutlineMegaphone,
+  },
+ 
   {
     number: "03",
     title: "Video Production & Editing",
@@ -56,25 +58,9 @@ export const services = [
     ],
     icon: HiOutlineFilm,
   },
+ 
   {
     number: "04",
-    title: "Digital Marketing & Social Media",
-    intro:
-      "Grow your online presence with data-driven marketing strategies and engaging social media management.",
-    items: [
-      "Social Media Management",
-      "Content Planning",
-      "Content Calendar",
-      "Facebook & Instagram Marketing",
-      "LinkedIn Marketing",
-      "Community Management",
-      "Meta Ads",
-      "Performance Reporting",
-    ],
-    icon: HiOutlineMegaphone,
-  },
-  {
-    number: "05",
     title: "Web & E-Commerce",
     intro:
       "Modern websites and e-commerce solutions designed for performance, user experience, and business growth.",
@@ -87,6 +73,22 @@ export const services = [
       "SEO Optimization",
     ],
     icon: HiOutlineGlobeAlt,
+  },
+  {
+    number: "05",
+    title: "AI Content Creation",
+    intro:
+      "Create high-quality, on-brand content faster with AI-powered ideas, copy, visuals, and content workflows tailored to your audience.",
+    items: [
+      "AI Content Strategy",
+      "Prompt Development",
+      "AI Copywriting",
+      "AI Image Generation",
+      "AI Video Concepts",
+      "Content Repurposing",
+    ],
+    icon: HiOutlineLightBulb,
+    forceTwoLines: true,
   },
   {
     number: "06",
