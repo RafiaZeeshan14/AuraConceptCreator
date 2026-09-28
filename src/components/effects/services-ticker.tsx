@@ -1,13 +1,7 @@
-const services = [
-  "Brand strategy",
-  "Creative direction",
-  "Web experiences",
-  "Digital products",
-  "Motion design",
-];
+import { servicesTickerItems } from "@/data/hero-effects";
 
 export function ServicesTicker() {
-  const tickerItems = [...services, ...services];
+  const tickerItems = [...servicesTickerItems, ...servicesTickerItems];
 
   return (
     <section
@@ -19,7 +13,7 @@ export function ServicesTicker() {
           {tickerItems.map((service, index) => (
             <div
               key={`${service}-${index}`}
-              aria-hidden={index >= services.length}
+              aria-hidden={index >= servicesTickerItems.length}
               className="flex shrink-0 items-center"
             >
               <span className="px-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-cream/65 sm:px-12 sm:text-xs">

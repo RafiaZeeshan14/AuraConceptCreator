@@ -1,18 +1,12 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { HiArrowRight } from "react-icons/hi2";
 import { BsPlayFill } from "react-icons/bs";
+import { revealDelay, staggerDelay } from "@/components/effects";
 import type { WorkProject } from "@/data/portfolio-data";
 import { workOrnaments } from "@/data/portfolio-visuals";
-
-const CARD_REVEAL_STEP = 0.06;
-const CARD_REVEAL_MAX_INDEX = 5;
-
-const revealDelay = (delay: string) =>
-  ({ "--reveal-delay": delay }) as CSSProperties;
 
 interface WorkCardProps {
   project: WorkProject;
@@ -22,9 +16,6 @@ interface WorkCardProps {
 
 export function WorkCard({ project, index, onOpenVideo }: WorkCardProps) {
   const number = String(index + 1).padStart(2, "0");
-
-  const revealDelaySeconds =
-    Math.min(index, CARD_REVEAL_MAX_INDEX) * CARD_REVEAL_STEP;
 
   const isVideo = Boolean(project.videoUrl);
 
@@ -170,7 +161,7 @@ export function WorkCard({ project, index, onOpenVideo }: WorkCardProps) {
 
   return (
     <div
-      style={revealDelay(`${revealDelaySeconds}s`)}
+      style={revealDelay(staggerDelay(index))}
       className={cn("hero-reveal group block")}
     >
       {cardContent}

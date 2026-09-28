@@ -1,146 +1,16 @@
 "use client";
 
-import { useRef, type PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { HiArrowRight } from "react-icons/hi2";
-
-const textRevealVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.025,
-    },
-  },
-};
-
-const characterRevealVariants = {
-  hidden: {
-    opacity: 0,
-    y: "0.7em",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
-function RevealLine({
-  children,
-  className = "",
-}: {
-  children: string;
-  className?: string;
-}) {
-  return (
-    <motion.span
-      variants={textRevealVariants}
-      className={`about-preview__line !ml-0 !pl-0 block w-full text-left ${className}`}
-    >
-      {Array.from(children).map((character, index) => (
-        <motion.span
-          key={`${character}-${index}`}
-          variants={characterRevealVariants}
-          className="about-preview__character inline-block"
-        >
-          {character === " " ? "\u00A0" : character}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
-function RevealInline({
-  children,
-  className = "",
-}: {
-  children: string;
-  className?: string;
-}) {
-  return (
-    <motion.span variants={textRevealVariants} className={className}>
-      {Array.from(children).map((character, index) => (
-        <motion.span
-          key={`${character}-${index}`}
-          variants={characterRevealVariants}
-          className="about-preview__character inline-block"
-        >
-          {character === " " ? "\u00A0" : character}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
+import {
+  PointerParallaxLayer,
+  RevealInline,
+  RevealLine,
+  textRevealContainerVariants,
+} from "@/components/effects";
 
 export function AboutPreview() {
-  const storyRef = useRef<HTMLDivElement>(null);
-
-  const handleStoryPointerMove = (
-    event: ReactPointerEvent<HTMLDivElement>
-  ) => {
-    const story = storyRef.current;
-
-    if (!story) return;
-
-    const bounds = story.getBoundingClientRect();
-
-    const x =
-      (event.clientX - bounds.left) / bounds.width - 0.5;
-
-    const y =
-      (event.clientY - bounds.top) / bounds.height - 0.5;
-
-    story.style.setProperty(
-      "--about-card-x",
-      `${x * 14}px`
-    );
-
-    story.style.setProperty(
-      "--about-card-y",
-      `${y * 12}px`
-    );
-
-    story.style.setProperty(
-      "--about-orbit-x",
-      `${x * -8}px`
-    );
-
-    story.style.setProperty(
-      "--about-orbit-y",
-      `${y * -7}px`
-    );
-  };
-
-  const resetStoryPointer = () => {
-    const story = storyRef.current;
-
-    if (!story) return;
-
-    story.style.setProperty(
-      "--about-card-x",
-      "0px"
-    );
-
-    story.style.setProperty(
-      "--about-card-y",
-      "0px"
-    );
-
-    story.style.setProperty(
-      "--about-orbit-x",
-      "0px"
-    );
-
-    story.style.setProperty(
-      "--about-orbit-y",
-      "0px"
-    );
-  };
-
   return (
     <section
       id="about"
@@ -188,7 +58,7 @@ export function AboutPreview() {
                 <RevealLine>You bring</RevealLine>
                 <RevealLine>the visions</RevealLine>
                 <RevealLine>we give it</RevealLine>
-                <motion.span variants={textRevealVariants} className="about-preview__line block font-editorial font-medium italic text-wine">
+                <motion.span variants={textRevealContainerVariants} className="about-preview__line block font-editorial font-medium italic text-wine">
                   <RevealInline>an </RevealInline>
                   <RevealInline className="about-preview__mobile-aura about-impact">Aura</RevealInline>
                 </motion.span>
@@ -232,12 +102,7 @@ export function AboutPreview() {
           </div>
 
           {/* RIGHT SIDE */}
-          <div
-            ref={storyRef}
-            onPointerMove={handleStoryPointerMove}
-            onPointerLeave={resetStoryPointer}
-            className="about-preview__story order-1 relative min-h-[280px] lg:order-2 lg:min-h-[520px]"
-          >
+          <PointerParallaxLayer className="about-preview__story order-1 relative min-h-[280px] lg:order-2 lg:min-h-[520px]">
 
             {/* BACKGROUND NUMBER */}
             <span
@@ -293,7 +158,7 @@ export function AboutPreview() {
               </div>
             </div>
 
-          </div>
+          </PointerParallaxLayer>
         </div>
       </div>
     </section>

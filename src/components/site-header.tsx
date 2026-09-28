@@ -6,7 +6,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/f
 import { HiOutlineChevronDown, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
 import { BrandLogo } from "@/components/brand-logo";
-import { services } from "@/components/sections/services-data";
+import { services } from "@/data/services";
 import { cn } from "@/lib/utils";
 
 type NavigationItem = {

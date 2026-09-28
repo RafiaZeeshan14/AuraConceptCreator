@@ -1,15 +1,18 @@
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import { HiArrowRight, HiOutlineExternalLink } from "react-icons/hi";
 
-import { MagicRingsLayer } from "@/components/effects/magic-rings-layer";
-import { FloatingInsightCard } from "@/components/ui/floating-insight-card";
-import { HeroTag } from "@/components/ui/hero-tag";
-import { ScrollIndicator } from "@/components/ui/scroll-indicator";
-import { VerticalServicesRail } from "@/components/ui/vertical-services-rail";
+import {
+  FloatingInsightCard,
+  HeroTag,
+  MagicRingsLayer,
+  ScrollIndicator,
+  VerticalServicesRail,
+  revealDelay,
+} from "@/components/effects";
+import { heroAvatars, heroCopy, heroInsightCards, heroTags } from "@/data/hero";
 
-const revealDelay = (delay: string) =>
-  ({ "--reveal-delay": delay }) as CSSProperties;
+const [impactCard, velocityCard] = heroInsightCards;
+const [agencyTag, expertTag, innovativeTag] = heroTags;
 
 export function Hero() {
   return (
@@ -26,56 +29,63 @@ export function Hero() {
         style={revealDelay("0s")}
         className="hero-stage-content hero-reveal relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1320px] items-center justify-center px-0 pt-12 pb-6 sm:min-h-[540px] sm:px-12 sm:py-12 lg:min-h-[520px] lg:px-20"
       >
+        {/* Desktop floating cards */}
         <FloatingInsightCard
-          eyebrow="Creative impact"
-          value="4.9/5"
-          detail="Average partner rating across global launches."
+          eyebrow={impactCard.eyebrow}
+          value={impactCard.value}
+          detail={impactCard.detail}
           className="left-0 top-[18%]"
           delay={0.7}
         />
         <FloatingInsightCard
-          eyebrow="Built to move"
-          value="24+"
-          detail="Distinctive digital experiences shipped."
+          eyebrow={velocityCard.eyebrow}
+          value={velocityCard.value}
+          detail={velocityCard.detail}
           className="right-0 bottom-[15%]"
           delay={1.1}
         />
 
-        <HeroTag className="hidden md:left-[2%] md:top-[30%] md:block lg:left-[14%] lg:top-[48%]" delay={0.9}>
-          Agency
+        {/* Desktop tags */}
+        <HeroTag
+          className="hidden md:left-[2%] md:top-[30%] md:block lg:left-[14%] lg:top-[48%]"
+          delay={0.9}
+        >
+          {agencyTag.label}
         </HeroTag>
         <HeroTag
           className="hidden md:top-[16%] md:right-[3%] md:block lg:top-[24%] lg:right-[13%]"
           delay={1.05}
           pointer="top-right"
         >
-          Expert
+          {expertTag.label}
         </HeroTag>
         <HeroTag
           className="hidden md:right-[5%] md:bottom-[8%] md:block lg:right-[16%] lg:bottom-[13%]"
           delay={1.2}
         >
-          Innovative
+          {innovativeTag.label}
         </HeroTag>
 
         <div className="relative z-10 mx-auto w-full max-w-5xl text-center">
+          {/* Mobile top cluster */}
           <div
             style={revealDelay("0.12s")}
             className="hero-reveal mx-auto mb-2 flex min-h-[145px] w-full max-w-[390px] items-start justify-between md:hidden"
           >
             <FloatingInsightCard
               compact
-              eyebrow="Creative impact"
-              value="4.9/5"
-              detail="Average partner rating across global launches."
+              eyebrow={impactCard.eyebrow}
+              value={impactCard.value}
+              detail={impactCard.detail}
               className="max-w-[150px]"
               delay={0.45}
             />
             <HeroTag flow className="mt-[88px]" delay={0.6} pointer="top-right">
-              Expert
+              {expertTag.label}
             </HeroTag>
           </div>
 
+          {/* Badge */}
           <div
             style={revealDelay("0.15s")}
             className="hero-reveal mb-6 inline-flex max-w-full items-center gap-3 rounded-full border border-cream/15 bg-cream/[0.06] px-4 py-2 text-center text-[9px] font-semibold uppercase tracking-[0.18em] text-cream/65 shadow-[0_10px_40px_rgba(30,0,2,0.18)] backdrop-blur-xl sm:text-[10px] sm:tracking-[0.22em]"
@@ -84,18 +94,19 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex size-2 rounded-full bg-accent" />
             </span>
-            Independent creative studio
+            {heroCopy.badge}
           </div>
 
+          {/* Headline */}
           <h1
             style={revealDelay("0.28s")}
             className="hero-reveal mx-auto text-balance text-[clamp(3rem,13vw,4.25rem)] font-medium leading-[0.9] tracking-[-0.06em] drop-shadow-[0_18px_45px_rgba(24,0,2,0.15)] sm:text-[clamp(3.25rem,8.1vw,6.5rem)] sm:leading-[0.86] sm:tracking-[-0.07em]"
           >
-            <span className="block">Designing</span>
+            <span className="block">{heroCopy.headlineLead}</span>
             <span className="mt-2 block sm:mt-3">
               Digital{" "}
               <span className="future-shimmer font-editorial relative inline-block text-[1.08em] font-medium italic tracking-[-0.035em]">
-                futures
+                {heroCopy.headlineAccent}
                 <span
                   aria-hidden="true"
                   className="hero-line-reveal absolute -bottom-1 left-[8%] h-px w-[88%] origin-left bg-gradient-to-r from-transparent via-accent to-transparent"
@@ -104,35 +115,37 @@ export function Hero() {
             </span>
           </h1>
 
+          {/* Description */}
           <p
             style={revealDelay("0.58s")}
             className="hero-reveal mx-auto mt-6 max-w-[340px] text-balance text-[13px] leading-6 text-cream/68 sm:mt-7 sm:max-w-2xl sm:text-[15px] sm:leading-7"
           >
-            We unite strategy, design and technology to turn ambitious ideas into memorable
-            digital experiences built for what comes next.
+            {heroCopy.description}
           </p>
 
+          {/* Mobile bottom cluster */}
           <div
             style={revealDelay("0.68s")}
             className="hero-reveal mx-auto mt-6 flex min-h-[190px] w-full max-w-[390px] items-start justify-between md:hidden"
           >
             <HeroTag flow className="mt-5" delay={0.78}>
-              Agency
+              {agencyTag.label}
             </HeroTag>
             <div className="flex w-[150px] flex-col items-center gap-5">
               <FloatingInsightCard
                 compact
-                eyebrow="Built to move"
-                value="24+"
-                detail="Distinctive digital experiences shipped."
+                eyebrow={velocityCard.eyebrow}
+                value={velocityCard.value}
+                detail={velocityCard.detail}
                 delay={0.82}
               />
               <HeroTag flow delay={0.92}>
-                Innovative
+                {innovativeTag.label}
               </HeroTag>
             </div>
           </div>
 
+          {/* CTAs */}
           <div
             style={revealDelay("0.76s")}
             className="hero-reveal mt-7 flex flex-col items-center justify-center gap-1 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3"
@@ -155,16 +168,13 @@ export function Hero() {
             </Link>
           </div>
 
+          {/* Social proof */}
           <div
             style={revealDelay("0.95s")}
             className="hero-reveal mt-5 flex flex-col items-center justify-center gap-2 text-center text-[10px] text-cream/45 sm:mt-6 sm:flex-row sm:gap-3 sm:text-xs"
           >
             <div className="flex -space-x-2" aria-hidden="true">
-              {[
-                "A",
-                "N",
-                "O",
-              ].map((letter) => (
+              {heroAvatars.map((letter) => (
                 <span
                   key={letter}
                   className="grid size-7 place-items-center rounded-full border border-wine bg-cream/10 text-[8px] font-semibold text-cream backdrop-blur-md"
@@ -173,11 +183,10 @@ export function Hero() {
                 </span>
               ))}
             </div>
-            <span className="max-w-[280px]">Trusted by ambitious founders and growing teams</span>
+            <span className="max-w-[280px]">{heroCopy.trustLine}</span>
           </div>
         </div>
       </div>
-
     </section>
   );
 }

@@ -1,52 +1,6 @@
-import Link from "next/link";
-import {
-  HiArrowRight,
-  HiOutlineArrowDown,
-  HiOutlineArrowRight,
-} from "react-icons/hi";
-import { SiteFooter } from "../site-footer";
-
-// ─────────────────────────────────────────────
-// CONTENT
-// ─────────────────────────────────────────────
-
-const principles = [
-  {
-    number: "01",
-    title: "Clarity first",
-    copy: "Every decision should make the idea stronger, the message clearer and the experience easier to understand.",
-  },
-  {
-    number: "02",
-    title: "Built together",
-    copy: "The best work comes from honest collaboration, shared context and open communication.",
-  },
-  {
-    number: "03",
-    title: "Made to move",
-    copy: "We create flexible ideas and systems that can evolve with the people and businesses behind them.",
-  },
-];
-
-const milestones = [
-  {
-    number: "2021",
-    label: "Where it started",
-    copy: "Aura Concept Creator was founded with a simple purpose — helping local businesses understand the power of digital.",
-  },
-  {
-    number: "1,500+",
-    label: "Clients worked with",
-    copy: "Businesses we've helped build their digital presence, strengthen their brands and connect with their audiences.",
-  },
-  {
-    number: "30+",
-    label: "Active clients",
-    copy: "Brands currently trusting Aura with their social presence and digital growth.",
-  },
-];
-
-
+import { HiOutlineArrowDown } from "react-icons/hi";
+import { SiteFooter } from "@/components/site-footer";
+import { commitments, heroStats, principles, storyStats } from "@/data/about-page";
 
 export function AboutPageContent() {
   return (
@@ -90,23 +44,16 @@ export function AboutPageContent() {
               forward with confidence.
             </p>
 
-            <div>
-              <p className="text-3xl font-medium tracking-[-0.05em]">
-                1,500+
-              </p>
-              <p className="mt-1 text-[9px] uppercase tracking-[0.18em] text-cream/40">
-                Clients served
-              </p>
-            </div>
-
-            <div>
-              <p className="text-3xl font-medium tracking-[-0.05em]">
-                2021
-              </p>
-              <p className="mt-1 text-[9px] uppercase tracking-[0.18em] text-cream/40">
-                Founded
-              </p>
-            </div>
+            {heroStats.map((stat) => (
+              <div key={stat.label}>
+                <p className="text-3xl font-medium tracking-[-0.05em]">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.18em] text-cream/40">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -179,37 +126,24 @@ export function AboutPageContent() {
 
           {/* BOTTOM STATS */}
           <div className="about-reveal mt-20 grid border-y border-wine/15 sm:mt-28 sm:grid-cols-3">
+            {storyStats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={
+                  index === 0
+                    ? "py-8 sm:py-10 sm:pr-10"
+                    : "border-t border-wine/15 py-8 sm:border-l sm:border-t-0 sm:px-10 sm:py-10"
+                }
+              >
+                <p className="text-[14px] font-semibold uppercase tracking-[0.2em] text-accent">
+                  {stat.label}
+                </p>
 
-            <div className="py-8 sm:py-10 sm:pr-10">
-              <p className="text-[14px] font-semibold uppercase tracking-[0.2em] text-accent">
-                Founded
-              </p>
-
-              <p className="mt-4 text-3xl font-medium tracking-[-0.05em] sm:text-4xl">
-                2021
-              </p>
-            </div>
-
-            <div className="border-t border-wine/15 py-8 sm:border-l sm:border-t-0 sm:px-10 sm:py-10">
-              <p className="text-[14px] font-semibold uppercase tracking-[0.2em] text-accent">
-                Clients served
-              </p>
-
-              <p className="mt-4 text-3xl font-medium tracking-[-0.05em] sm:text-4xl">
-                1,500+
-              </p>
-            </div>
-
-            <div className="border-t border-wine/15 py-8 sm:border-l sm:border-t-0 sm:pl-10 sm:py-10">
-              <p className="text-[14px] font-semibold uppercase tracking-[0.2em] text-accent">
-                Active partnerships
-              </p>
-
-              <p className="mt-4 text-3xl font-medium tracking-[-0.05em] sm:text-4xl">
-                30+
-              </p>
-            </div>
-
+                <p className="mt-4 text-3xl font-medium tracking-[-0.05em] sm:text-4xl">
+                  {stat.value}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -281,43 +215,20 @@ export function AboutPageContent() {
 
               {/* Commitment points */}
               <div className="mt-10 border-t border-cream/15">
+                {commitments.map((commitment) => (
+                  <div
+                    key={commitment.label}
+                    className="grid gap-4 border-b border-cream/15 py-6 sm:grid-cols-[150px_1fr] sm:items-center"
+                  >
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-accent">
+                      {commitment.label}
+                    </span>
 
-                {/* Point 01 */}
-                <div className="grid gap-4 border-b border-cream/15 py-6 sm:grid-cols-[150px_1fr] sm:items-center">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-accent">
-                    Purpose
-                  </span>
-
-                  <p className="max-w-3xl text-sm leading-7 text-cream/60 sm:text-base sm:leading-8">
-                    Every piece of work starts with understanding what your business
-                    actually needs.
-                  </p>
-                </div>
-
-                {/* Point 02 */}
-                <div className="grid gap-4 border-b border-cream/15 py-6 sm:grid-cols-[150px_1fr] sm:items-center">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-accent">
-                    Consistency
-                  </span>
-
-                  <p className="max-w-3xl text-sm leading-7 text-cream/60 sm:text-base sm:leading-8">
-                    Strong brands are built through consistency, not one-off
-                    moments.
-                  </p>
-                </div>
-
-                {/* Point 03 */}
-                <div className="grid gap-4 border-b border-cream/15 py-6 sm:grid-cols-[150px_1fr] sm:items-center">
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-accent">
-                    Results
-                  </span>
-
-                  <p className="max-w-3xl text-sm leading-7 text-cream/60 sm:text-base sm:leading-8">
-                    Creativity should ultimately create movement, awareness,
-                    engagement, trust or growth.
-                  </p>
-                </div>
-
+                    <p className="max-w-3xl text-sm leading-7 text-cream/60 sm:text-base sm:leading-8">
+                      {commitment.copy}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -356,110 +267,42 @@ export function AboutPageContent() {
           {/* Principles */}
           <div className="about-principles">
 
-            {/* Principle 01 */}
-            <article className="about-principle about-reveal group relative grid gap-8 border-b border-wine/15 py-10 sm:grid-cols-[100px_1fr_auto] sm:items-start sm:py-14">
-
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold text-accent">
-                  01
-                </span>
-                <span className="hidden h-px w-8 bg-accent/50 sm:block" />
-              </div>
-
-              <div>
-                <h3 className="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.055em] transition-transform duration-500 group-hover:translate-x-2">
-                  Clarity
-                  <span className="font-editorial italic text-accent">
-                    {" "}first.
+            {principles.map((principle) => (
+              <article
+                key={principle.number}
+                className="about-principle about-reveal group relative grid gap-8 border-b border-wine/15 py-10 sm:grid-cols-[100px_1fr_auto] sm:items-start sm:py-14"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-semibold text-accent">
+                    {principle.number}
                   </span>
-                </h3>
+                  <span className="hidden h-px w-8 bg-accent/50 sm:block" />
+                </div>
 
-                <p className="mt-5 max-w-xl text-sm leading-7 text-wine/55 sm:text-base sm:leading-8">
-                  Every decision should make the idea stronger, the message clearer
-                  and the experience easier to understand.
-                </p>
-              </div>
+                <div>
+                  <h3 className="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.055em] transition-transform duration-500 group-hover:translate-x-2">
+                    {principle.title}
+                    <span className="font-editorial italic text-accent">
+                      {" "}
+                      {principle.accent}
+                    </span>
+                  </h3>
 
-              <span className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-wine/30 sm:block">
-                Foundation
-              </span>
+                  <p className="mt-5 max-w-xl text-sm leading-7 text-wine/55 sm:text-base sm:leading-8">
+                    {principle.copy}
+                  </p>
+                </div>
 
-              <div
-                aria-hidden="true"
-                className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full"
-              />
-            </article>
-
-
-            {/* Principle 02 */}
-            <article className="about-principle about-reveal group relative grid gap-8 border-b border-wine/15 py-10 sm:grid-cols-[100px_1fr_auto] sm:items-start sm:py-14">
-
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold text-accent">
-                  02
+                <span className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-wine/30 sm:block">
+                  {principle.tag}
                 </span>
-                <span className="hidden h-px w-8 bg-accent/50 sm:block" />
-              </div>
 
-              <div>
-                <h3 className="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.055em] transition-transform duration-500 group-hover:translate-x-2">
-                  Built
-                  <span className="font-editorial italic text-accent">
-                    {" "}together.
-                  </span>
-                </h3>
-
-                <p className="mt-5 max-w-xl text-sm leading-7 text-wine/55 sm:text-base sm:leading-8">
-                  The best work comes from honest collaboration, shared context and
-                  open communication from the very beginning.
-                </p>
-              </div>
-
-              <span className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-wine/30 sm:block">
-                Collaboration
-              </span>
-
-              <div
-                aria-hidden="true"
-                className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full"
-              />
-            </article>
-
-
-            {/* Principle 03 */}
-            <article className="about-principle about-reveal group relative grid gap-8 border-b border-wine/15 py-10 sm:grid-cols-[100px_1fr_auto] sm:items-start sm:py-14">
-
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold text-accent">
-                  03
-                </span>
-                <span className="hidden h-px w-8 bg-accent/50 sm:block" />
-              </div>
-
-              <div>
-                <h3 className="max-w-3xl text-[clamp(2rem,4vw,4.5rem)] font-medium leading-[0.95] tracking-[-0.055em] transition-transform duration-500 group-hover:translate-x-2">
-                  Made to
-                  <span className="font-editorial italic text-accent">
-                    {" "}move.
-                  </span>
-                </h3>
-
-                <p className="mt-5 max-w-xl text-sm leading-7 text-wine/55 sm:text-base sm:leading-8">
-                  We create flexible ideas and systems that evolve with the people,
-                  audiences and businesses behind them.
-                </p>
-              </div>
-
-              <span className="hidden text-[9px] font-semibold uppercase tracking-[0.2em] text-wine/30 sm:block">
-                Evolution
-              </span>
-
-              <div
-                aria-hidden="true"
-                className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full"
-              />
-            </article>
-
+                <div
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full"
+                />
+              </article>
+            ))}
           </div>
 
         </div>

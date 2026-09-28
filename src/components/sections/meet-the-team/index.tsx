@@ -1,50 +1,11 @@
-import { TeamCarousel, type TeamMember } from "@/components/lightswind/team-carousel";
+"use client";
 
-/**
- * Team members are defined here, on the server, and streamed to the
- * (client) carousel as plain serialisable data.
- *
- * `id` values must be unique — the carousel also de-duplicates colliding ids
- * as a safety net so React never sees two children with the same key.
- */
-const team: TeamMember[] = [
-  {
-    id: "asma",
-    name: "ASMA",
-    role: "Digital Director",
-    tag: "Digital",
-    bio: "Builds digital experiences people want to use.",
-    image: "/manager.png",
-  },
-  {
-    id: "ALISHBA KHAN",
-    name: "ALISHBA KHAN",
-    role: "Experience Designer",
-    tag: "Experience",
-    bio: "Makes every interaction feel considered and human.",
-    image: "/sc.png",
-  },
-  {
-    id: "manaim-ahmed",
-    name: "MANAIM AHMED",
-    role: "Creative Technologist",
-    tag: "Technology",
-    bio: "Connects expressive design with useful technology.",
-    image: "/ch.png",
-  },
-  {
-    id: "sofia-reed",
-    name: "Sofia Reed",
-    role: "Creative Technologist",
-    tag: "Technology",
-    bio: "Connects expressive design with useful technology.",
-    image: "/ch.png",
-  },
-];
+import { TeamCarousel } from "@/components/lightswind/team-carousel";
+import { teamMembers } from "@/data/team";
 
 export function MeetTheTeam() {
   const disciplines = Array.from(
-    new Set(team.map((member) => member.tag).filter((tag): tag is string => Boolean(tag))),
+    new Set(teamMembers.map((member) => member.tag).filter((tag): tag is string => Boolean(tag))),
   );
 
   return (
@@ -82,7 +43,7 @@ export function MeetTheTeam() {
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-wine/45 lg:justify-end">
               <span className="inline-flex items-center gap-2">
                 <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
-                {team.length} specialists
+                {teamMembers.length} specialists
               </span>
               <span className="h-3 w-px bg-wine/20" aria-hidden="true" />
               <span>{disciplines.join(" · ")}</span>
@@ -91,7 +52,7 @@ export function MeetTheTeam() {
         </div>
 
         <TeamCarousel
-          members={team}
+          members={teamMembers}
           className="mt-14 sm:mt-16"
           ariaLabel="Aura Concept Creator team members"
           cardWidth={370}

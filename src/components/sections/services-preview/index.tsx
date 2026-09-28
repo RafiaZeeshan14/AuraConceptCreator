@@ -1,34 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import {
-  HiArrowUpRight,
-} from "react-icons/hi2";
-import { services } from "@/components/sections/services-data";
+import { HiArrowUpRight } from "react-icons/hi2";
+import { useRevealOnScroll } from "@/components/effects";
+import { services } from "@/data/services";
 
 export function ServicesPreview() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [hasEntered, setHasEntered] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-
-    if (!section || hasEntered) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasEntered(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.08 },
-    );
-
-    observer.observe(section);
-
-    return () => observer.disconnect();
-  }, [hasEntered]);
+  const { ref: sectionRef, hasEntered } = useRevealOnScroll<HTMLElement>();
 
   return (
     <section

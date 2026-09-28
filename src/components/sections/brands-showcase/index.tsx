@@ -1,13 +1,4 @@
-const brands = [
-  { name: "Fieldnote", detail: "DIGITAL", mark: "⌁" },
-  { name: "Aster", detail: "STUDIO", mark: "✳" },
-  { name: "Northline", detail: "OBJECTS", mark: "◒" },
-  { name: "Forma", detail: "WORKS", mark: "▱" },
-  { name: "Morrow", detail: "ATELIER", mark: "∞" },
-  { name: "Common", detail: "GROUND", mark: "◌" },
-];
-
-const loopedBrands = [...brands, ...brands];
+import { brands, loopedBrands } from "@/data/brands";
 
 function BrandMark({ name, mark }: (typeof brands)[number]) {
   return (

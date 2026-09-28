@@ -1,15 +1,9 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { BsPlayFill } from "react-icons/bs";
+import { revealDelay, staggerDelay } from "@/components/effects";
 import type { WorkProject } from "@/data/portfolio-data";
-
-const CARD_REVEAL_STEP = 0.06;
-const CARD_REVEAL_MAX_INDEX = 5;
-
-const revealDelay = (delay: string) =>
-  ({ "--reveal-delay": delay }) as CSSProperties;
 
 interface ReelCardProps {
   project: WorkProject;
@@ -18,14 +12,11 @@ interface ReelCardProps {
 }
 
 export function ReelCard({ project, index, onOpenVideo }: ReelCardProps) {
-  const revealDelaySeconds =
-    Math.min(index, CARD_REVEAL_MAX_INDEX) * CARD_REVEAL_STEP;
-
   const hasPoster = Boolean(project.posterUrl);
 
   return (
     <div
-      style={revealDelay(`${revealDelaySeconds}s`)}
+      style={revealDelay(staggerDelay(index))}
       className="hero-reveal group block"
     >
       <article className="group relative overflow-hidden rounded-[1.5rem] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">

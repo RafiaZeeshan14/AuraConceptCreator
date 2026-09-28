@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEscapeKey } from "@/components/effects";
 import type { WorkProject } from "@/data/portfolio-data";
 
 interface VideoModalProps {
@@ -9,16 +9,7 @@ interface VideoModalProps {
 }
 
 export function VideoModal({ project, onClose }: VideoModalProps) {
-  // Close on Escape key
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+  useEscapeKey(onClose);
 
   return (
     <div

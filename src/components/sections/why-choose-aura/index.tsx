@@ -1,59 +1,6 @@
-import {
-  HiOutlineCursorArrowRays,
-  HiOutlineLightBulb,
-  HiOutlineRocketLaunch,
-  HiOutlineShieldCheck,
-  HiOutlineSquare3Stack3D,
-  HiOutlineUserGroup,
-} from "react-icons/hi2";
 import Image from "next/image";
-import { CountUpStat } from "@/components/ui/count-up-stat";
-
-const reasons = [
-  {
-    value: 500,
-    suffix: "+",
-    label: "Projects delivered",
-    icon: HiOutlineLightBulb,
-    position: "top-left",
-  },
-  {
-    value: 1500,
-    suffix: "+",
-    label: "Satisfied clients",
-    icon: HiOutlineCursorArrowRays,
-    position: "top-right",
-  },
-  {
-    value: 5,
-    suffix: "+",
-    label: "Years of experience",
-    icon: HiOutlineRocketLaunch,
-    position: "middle-left",
-  },
-  {
-    value: 25,
-    suffix: "+",
-    label: "Creative experts",
-    icon: HiOutlineUserGroup,
-    position: "middle-right",
-  },
-  {
-    value: 98,
-    suffix: "%",
-    label: "Client satisfaction",
-    icon: HiOutlineShieldCheck,
-    position: "bottom-left",
-  },
-  {
-    value: 12,
-    suffix: "+",
-    label: "Industries served",
-    icon: HiOutlineSquare3Stack3D,
-    position: "bottom-right",
-  },
-] as const;
-
+import { CountUpStat } from "@/components/effects";
+import { whyChooseReasons } from "@/data/why-choose-aura";
 
 export function WhyChooseAura() {
   return (
@@ -124,11 +71,12 @@ export function WhyChooseAura() {
 
           {/* STAT CARDS */}
           <div className="why-choose-aura__reasons">
-            {reasons.map(
+            {whyChooseReasons.map(
               ({ value, suffix, label, icon: Icon, position }) => (
                 <article
                   key={label}
-                  className={`why-choose-aura__card why-choose-aura__card--${position}`}              >
+                  className={`why-choose-aura__card why-choose-aura__card--${position}`}
+                >
                   {/* ICON */}
                   <span className="why-choose-aura__icon">
                     <Icon className="size-7" />
@@ -168,11 +116,10 @@ export function WhyChooseAura() {
 
         {/* FOOTER */}
         <div className="why-choose-aura__footer mt-14 flex items-center justify-center gap-4 text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/50 sm:mt-20">
-     
-
+      
           Ideas with purpose. Design with impact.
 
-    
+     
         </div>
       </div>
     </section>
