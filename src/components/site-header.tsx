@@ -20,7 +20,7 @@ const navigation: NavigationItem[] = [
   { label: "About", href: "/about" },
   { label: "Services", hasMenu: true },
   { label: "Pricing", href: "/pricing" },
-  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact", href: "/#contact" },
   { label: "Careers", href: "/#careers" },
 ];
