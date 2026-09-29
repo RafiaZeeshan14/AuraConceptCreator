@@ -1,50 +1,7 @@
 "use client";
 
 import React from "react";
-import type { WorkVisual, WorkVisualStyle } from "./portfolio-data";
-
-export const workVisualStyles: Record<WorkVisual, WorkVisualStyle> = {
-  orbit: {
-    surface: "bg-[#5b0d13]",
-    label: "absolute left-[10%] top-[12%] text-[8px] uppercase tracking-[0.3em] text-cream/40",
-    eyebrow: "text-[9px] uppercase tracking-[0.25em] text-accent",
-    headline: "text-cream",
-    accent: "text-accent",
-    arrow: "bg-cream text-wine",
-  },
-  columns: {
-    surface: "border border-wine/10 bg-[#e9e1d5]",
-    label: "absolute right-[10%] top-[12%] text-[8px] uppercase tracking-[0.3em] text-wine/40",
-    eyebrow: "text-[9px] uppercase tracking-[0.25em] text-accent",
-    headline: "text-wine",
-    accent: "text-accent",
-    arrow: "bg-wine text-cream",
-  },
-  rings: {
-    surface: "bg-[#b52835]",
-    label: "absolute left-[10%] top-[12%] text-[8px] uppercase tracking-[0.3em] text-cream/50",
-    eyebrow: "text-[9px] uppercase tracking-[0.25em] text-cream/60",
-    headline: "text-cream",
-    accent: "",
-    arrow: "bg-cream text-wine",
-  },
-  discs: {
-    surface: "bg-wine",
-    label: "absolute right-[10%] top-[12%] text-[8px] uppercase tracking-[0.3em] text-cream/40",
-    eyebrow: "text-[9px] uppercase tracking-[0.25em] text-accent",
-    headline: "text-cream",
-    accent: "text-accent",
-    arrow: "bg-cream text-wine",
-  },
-  video: {
-    surface: "bg-[#1a1a2e]",
-    label: "absolute left-[10%] top-[12%] text-[8px] uppercase tracking-[0.3em] text-cream/40",
-    eyebrow: "text-[9px] uppercase tracking-[0.25em] text-accent",
-    headline: "text-cream",
-    accent: "text-accent",
-    arrow: "bg-cream text-wine",
-  },
-};
+import type { WorkVisual } from "./portfolio-data";
 
 export const workOrnaments: Record<WorkVisual, React.ReactNode> = {
   orbit: (

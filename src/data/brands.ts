@@ -30,7 +30,7 @@ const brandAssets = [
   ["bright-future", "Bright Future", "v1790606741/brightfuture.png", 1345, 300],
   ["bluewater", "Bluewater", "v1790606738/bluewater.png", 1184, 300],
   ["beauty-mark", "Beauty Mark", "v1790606737/beautymark.png", 763, 300],
-  ["autodrapes", "Autodrapes", "v1790606736/autodrapes.png", 435, 300],
+  ["autodrapes", "Autodrapes", "v1790688827/autodrapes.png", 435, 300],
   ["amarat", "Amarat", "v1790606734/amarat.png", 199, 300],
   ["al-jeddah", "Al Jeddah", "v1790606734/aljeddah.png", 398, 300],
   ["ahadi", "Ahadi", "v1790606733/ahadi.png", 235, 300],

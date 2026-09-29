@@ -44,8 +44,8 @@ export const heroStats = [
 
 export const storyStats = [
   { label: "Founded", value: "2021" },
-  { label: "Clients served", value: "1,500+" },
-  { label: "Active partnerships", value: "30+" },
+  { label: "Projects served", value: "1,500+" },
+  { label: "Active Clients", value: "30+" },
 ] as const;
 
 export const milestones = [

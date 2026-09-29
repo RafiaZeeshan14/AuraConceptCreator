@@ -30,16 +30,6 @@ const thumbnail = (path: string) =>
 // Visual style identifiers used by project cards.
 export type WorkVisual = "orbit" | "columns" | "rings" | "discs" | "video";
 
-// Visual style configuration for each visual type
-export interface WorkVisualStyle {
-  surface: string;
-  label: string;
-  eyebrow: string;
-  headline: string;
-  accent: string;
-  arrow: string;
-}
-
 // A single portfolio project.
 export interface WorkProject {
   categories: WorkFilter[];
