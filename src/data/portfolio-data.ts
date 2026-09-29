@@ -19,6 +19,14 @@ export const workCategories = [
 export type WorkCategoryId = (typeof workCategories)[number]["id"];
 export type WorkFilter = Exclude<WorkCategoryId, "all">;
 
+/**
+ * Card thumbnails are 3800px-wide multi-megabyte originals. `c_limit` scales
+ * them down for card-sized display without cropping, keeping the payload
+ * small while the card still renders a crisp image on hi-density screens.
+ */
+const thumbnail = (path: string) =>
+  `https://res.cloudinary.com/l92fw4gu/image/upload/c_limit,w_900,q_auto/${path}`;
+
 // Visual style identifiers used by project cards.
 export type WorkVisual = "orbit" | "columns" | "rings" | "discs" | "video";
 
@@ -40,9 +48,15 @@ export interface WorkProject {
   headline: [string, string];
   title: string;
   tags: string;
+  /** Short one-liner shown under the title on the card (falls back to `tags`). */
+  summary?: string;
   description?: string;
   videoUrl?: string;
   posterUrl?: string;
+  /** Screenshot shown as the card artwork for web projects. */
+  thumbnailUrl?: string;
+  /** Live site opened when the card is clicked. */
+  liveUrl?: string;
 }
 
 // ─────────────────────────────────────────────
@@ -57,14 +71,6 @@ export const workProjects: WorkProject[] = [
     headline: ["Building", "attention."],
     title: "Brand & Social Presence",
     tags: "Strategy · Creative · Social Media",
-  },
-  {
-    categories: ["web", "branding"],
-    visual: "columns",
-    eyebrow: "Digital / Experience",
-    headline: ["Designed", "to move."],
-    title: "Digital Experience",
-    tags: "UX · Design · Development",
   },
   {
     categories: ["branding", "video"],
@@ -90,13 +96,54 @@ export const workProjects: WorkProject[] = [
     title: "Social Content Engine",
     tags: "Reels · Calendar · Community",
   },
+  // ── Live client websites ───────────────────────
+  {
+    categories: ["web"],
+    visual: "columns",
+    eyebrow: "Web / Media Platform",
+    headline: ["Stories that", "move."],
+    title: "Westurn Media",
+    tags: "Web Design · Development · CMS",
+    summary: "Portfolio site for an event management company.",
+    thumbnailUrl:
+      thumbnail("v1790686611/westturn-media.png"),
+    liveUrl: "https://westurn-media.vercel.app/",
+  },
   {
     categories: ["web"],
     visual: "columns",
     eyebrow: "Web / E-Commerce",
-    headline: ["Built to", "convert."],
-    title: "E-Commerce Storefront",
-    tags: "Store · UI/UX · SEO",
+    headline: ["Draped to", "fit."],
+    title: "Autodrapes",
+    tags: "Store · UI/UX · Development",
+    summary: "Shopify store selling car sunshades for all models.",
+    thumbnailUrl:
+      thumbnail("v1790686606/autodrapes.png"),
+    liveUrl: "https://autodrapes.com/",
+  },
+  {
+    categories: ["web"],
+    visual: "columns",
+    eyebrow: "Web / Hospitality",
+    headline: ["Stays worth", "booking."],
+    title: "Vicky Farmhouse",
+    tags: "Web Design · Booking Flow · SEO",
+    summary: "Booking website for a countryside farmhouse.",
+    thumbnailUrl:
+      thumbnail("v1790686605/vickyfarmhouse.png"),
+    liveUrl: "https://vickyfarmhouse.com/",
+  },
+  {
+    categories: ["web"],
+    visual: "columns",
+    eyebrow: "Web / Communications",
+    headline: ["Clear signal,", "sharper reach."],
+    title: "Heights Communications",
+    tags: "Web Design · Content · Development",
+    summary: "Profile site for an event management company.",
+    thumbnailUrl:
+      thumbnail("v1790686608/heights-communications.png"),
+    liveUrl: "https://heights-communications.com/",
   },
   {
     categories: ["branding"],
