@@ -3,8 +3,10 @@
 export { MagicRingsLayer } from "./magic-rings-layer";
 
 // Motion hooks
+export { useBodyScrollLock } from "./use-body-scroll-lock";
 export { useEscapeKey } from "./use-escape-key";
 export { useIntroPhase } from "./use-intro-phase";
+export { useModalNavigation } from "./use-modal-navigation";
 export { useRevealOnScroll } from "./use-reveal-on-scroll";
 
 // Animated layers

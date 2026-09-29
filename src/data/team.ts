@@ -49,7 +49,7 @@ export const teamMembers: TeamMember[] = [
     role: "Web Developer",
     tag: "Development",
     image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790674594/rafia1.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790675378/rafia1.png",
   },
    {
     id: "kaif",

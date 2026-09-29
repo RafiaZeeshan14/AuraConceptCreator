@@ -10,7 +10,7 @@ import { VideoModal } from "./VideoModal";
 
 export function SelectedWorkSection() {
   const [activeCategory, setActiveCategory] = useState<WorkCategoryId>("all");
-  const [activeVideo, setActiveVideo] = useState<WorkProject | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const visibleProjects =
     activeCategory === "all"
@@ -20,6 +20,10 @@ export function SelectedWorkSection() {
         );
 
   const isAIContent = activeCategory === "ai";
+
+  const openVideo = (project: WorkProject) => {
+    setActiveIndex(visibleProjects.findIndex((item) => item.title === project.title));
+  };
 
   return (
     <section
@@ -102,14 +106,14 @@ export function SelectedWorkSection() {
                   key={project.title}
                   project={project}
                   index={index}
-                  onOpenVideo={setActiveVideo}
+                  onOpenVideo={openVideo}
                 />
               ) : (
                 <WorkCard
                   key={project.title}
                   project={project}
                   index={index}
-                  onOpenVideo={setActiveVideo}
+                  onOpenVideo={openVideo}
                 />
               )
             ))}
@@ -117,10 +121,12 @@ export function SelectedWorkSection() {
         )}
 
         {/* Video Modal */}
-        {activeVideo && (
+        {activeIndex !== null && visibleProjects[activeIndex] && (
           <VideoModal
-            project={activeVideo}
-            onClose={() => setActiveVideo(null)}
+            projects={visibleProjects}
+            index={activeIndex}
+            onClose={() => setActiveIndex(null)}
+            onNavigate={setActiveIndex}
           />
         )}
       </div>

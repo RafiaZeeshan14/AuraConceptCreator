@@ -3168,3 +3168,17 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
   }
 
 }
+/* Hide scrollbar on mobile without disabling scrolling */
+@media (max-width: 1023px) {
+  .mobile-modal-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-modal-scroll::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
