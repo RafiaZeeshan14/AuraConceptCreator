@@ -1353,6 +1353,10 @@ a {
   place-items: center;
 }
 
+/* Without this the glyphs render at their natural 309-365px intrinsic size
+   and overflow their boxes, making the spacing between letters uneven.
+   `contain` keeps every glyph inside its identical box, and bottom alignment
+   squares up the differing source aspect ratios on a shared baseline. */
 .site-footer__letter img {
   width: 100%;
   height: 100%;
@@ -2382,19 +2386,26 @@ a {
   animation: brands-marquee-forward 90s linear infinite;
 }
 
+/* One uniform bounding box for every logo. The image scales to fit *inside*
+   this box with `object-fit: contain`, so each mark keeps its original aspect
+   ratio — nothing is stretched, cropped, or shrunk by baked-in transparent
+   padding (padding is stripped upstream via the Cloudinary `e_trim` transform).
+   Centering in a fixed box makes the perceived size consistent across brands. */
 .brands-showcase__tile {
   display: flex;
-  height: clamp(44px, 4.6vw, 68px);
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
+  width: clamp(140px, 15vw, 180px);
+  height: clamp(54px, 6vw, 70px);
 }
 
 .brands-showcase__logo-img {
+  width: 100%;
   height: 100%;
-  width: auto;
-  max-width: none;
+  max-width: 100%;
   object-fit: contain;
+  object-position: center;
   filter: none;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }

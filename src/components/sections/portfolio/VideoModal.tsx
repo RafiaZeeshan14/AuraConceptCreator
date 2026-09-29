@@ -9,23 +9,37 @@ import { useBodyScrollLock, useModalNavigation } from "@/components/effects";
 import { cn } from "@/lib/utils";
 import type { WorkProject } from "@/data/portfolio-data";
 
+/** Media orientation the modal should lay out for. */
+export type VideoModalOrientation = "portrait" | "landscape";
+
 interface VideoModalProps {
   projects: WorkProject[];
   index: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
+  /** Defaults to the side-by-side portrait (reel) layout. */
+  orientation?: VideoModalOrientation;
 }
 
 const pad = (value: number) => String(value).padStart(2, "0");
+
+/**
+ * Landscape media keeps a 16:9 frame inside the viewport height:
+ * width = height x 16/9, so 58dvh tall becomes ~103dvh wide.
+ */
+const landscapeWidth = "w-[min(100%,103dvh,880px)]";
 
 export function VideoModal({
   projects,
   index,
   onClose,
   onNavigate,
+  orientation = "portrait",
 }: VideoModalProps) {
   const total = projects.length;
   const project = projects[index];
+
+  const isLandscape = orientation === "landscape";
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -81,6 +95,219 @@ export function VideoModal({
     </span>
   );
 
+  /* ── Shared pieces ───────────────────────────── */
+
+  const heading = (
+    <>
+      <span className="h-px w-12 shrink-0 bg-accent" />
+
+      <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.25em] text-cream/50 sm:text-[10px]">
+        {project.eyebrow}
+      </p>
+
+      <h2
+        className={cn(
+          "mt-3 break-words font-medium leading-[1.12] tracking-[-0.035em] text-cream",
+          isLandscape
+            ? "text-[clamp(1.4rem,5vw,2rem)]"
+            : "text-[clamp(1.4rem,5vw,1.8rem)] lg:mt-4 lg:text-[clamp(1.5rem,2.5vw,2.15rem)]",
+        )}
+      >
+        {project.title}
+      </h2>
+
+      {project.description && (
+        <p
+          className={cn(
+            "text-sm leading-6 text-cream/55",
+            isLandscape
+              ? "mt-2 line-clamp-2"
+              : "mt-2 lg:mt-5 lg:leading-7",
+          )}
+        >
+          {project.description}
+        </p>
+      )}
+    </>
+  );
+
+  const media = (
+    <video
+      ref={videoRef}
+      key={project.videoUrl}
+      src={project.videoUrl}
+      poster={project.posterUrl}
+      className="absolute inset-0 h-full w-full object-cover"
+      autoPlay
+      controls
+      playsInline
+      onPlay={() => setIsPlaying(true)}
+      onPause={() => setIsPlaying(false)}
+    />
+  );
+
+  const playOverlay = !isPlaying && (
+    <button
+      type="button"
+      aria-label={`Play ${project.title}`}
+      onClick={togglePlayback}
+      className="absolute inset-0 z-10 grid place-items-center bg-black/10"
+    >
+      <span className="grid size-14 place-items-center rounded-full border border-cream/50 bg-black/35 text-cream backdrop-blur-sm transition-transform hover:scale-105 sm:size-16">
+        <BsPlayFill className="ml-1 size-7" />
+      </span>
+    </button>
+  );
+
+  /* ── Landscape layout: heading → video → counter ── */
+
+  if (isLandscape) {
+    return (
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
+        className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-black/55 p-3 backdrop-blur-2xl sm:p-6"
+        onClick={onClose}
+      >
+        {/* Desktop side navigation */}
+        <button
+          type="button"
+          aria-label="Previous project"
+          onClick={(event) => {
+            event.stopPropagation();
+            previous();
+          }}
+          className={cn(
+            arrowButton,
+            "absolute left-3 top-1/2 z-20 hidden -translate-y-1/2 lg:grid lg:size-14",
+          )}
+        >
+          <HiChevronLeft className="size-6" />
+        </button>
+
+        <button
+          type="button"
+          aria-label="Next project"
+          onClick={(event) => {
+            event.stopPropagation();
+            next();
+          }}
+          className={cn(
+            arrowButton,
+            "absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 lg:grid lg:size-14",
+          )}
+        >
+          <HiChevronRight className="size-6" />
+        </button>
+
+        {/* Main modal card */}
+        <div
+          className={cn(
+            "relative flex w-full max-w-[360px] flex-col",
+            "max-h-[94dvh] overflow-x-hidden overflow-y-auto overscroll-contain",
+            "mobile-modal-scroll touch-pan-y",
+            "rounded-[1.5rem] border border-cream/15",
+            "bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-5",
+            "shadow-[0_30px_100px_rgba(0,0,0,0.5)] backdrop-blur-2xl",
+            "sm:rounded-[2rem] sm:p-6",
+            "lg:max-h-[90dvh] lg:max-w-[1080px] lg:gap-8 lg:overflow-hidden lg:p-8",
+          )}
+          onClick={(event) => event.stopPropagation()}
+        >
+          {/* Mobile drag handle */}
+          <span
+            aria-hidden="true"
+            className="mx-auto mb-4 h-1 w-10 shrink-0 rounded-full bg-cream/25 lg:hidden"
+          />
+
+          {/* Close button */}
+          <button
+            type="button"
+            aria-label="Close video"
+            onClick={onClose}
+            className={cn(
+              closeButton,
+              "absolute right-3 top-3 z-30 sm:right-5 sm:top-5",
+            )}
+          >
+            <HiXMark className="size-4" />
+          </button>
+
+          {/* 1 — Heading, aligned with the media frame */}
+          <div
+            className={cn(
+              "w-full shrink-0 pr-10 pt-1",
+              landscapeWidth,
+              "mx-auto",
+            )}
+          >
+            {heading}
+          </div>
+
+          {/* 2 — Landscape media */}
+          <div
+            className={cn(
+              "relative mx-auto w-full shrink-0",
+              landscapeWidth,
+            )}
+          >
+            {/* Ambient glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 m-auto h-3/4 w-3/4 rounded-full bg-accent/10 blur-3xl"
+            />
+
+            <div
+              className={cn(
+                "relative isolate aspect-video w-full overflow-hidden",
+                "rounded-[1.25rem] bg-black ring-1 ring-cream/15 sm:rounded-[1.5rem]",
+              )}
+            >
+              {media}
+              {playOverlay}
+            </div>
+          </div>
+
+          {/* 3 — Counter and progress */}
+          <div className="mt-6 flex w-full shrink-0 items-center justify-center gap-6 lg:mt-1">
+            <button
+              type="button"
+              aria-label="Previous project"
+              onClick={previous}
+              className={cn(arrowButton, "hidden lg:grid")}
+            >
+              <HiChevronLeft className="size-5" />
+            </button>
+
+            <div className="flex items-center gap-4">
+              <span className="text-xl font-medium tabular-nums text-cream sm:text-2xl">
+                {pad(index + 1)}
+              </span>
+
+              {progressTicks}
+
+              <span className="text-sm tabular-nums text-cream/40">
+                {pad(total)}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              aria-label="Next project"
+              onClick={next}
+              className={cn(arrowButton, "hidden lg:grid")}
+            >
+              <HiChevronRight className="size-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Portrait layout (unchanged) ─────────────── */
+
   return (
     <div
       role="dialog"
@@ -122,19 +349,18 @@ export function VideoModal({
 
       {/* Main modal card */}
       <div
-      
-className={cn(
-  "relative flex max-h-[94dvh] w-full max-w-[360px]",
-  "flex-col overflow-x-hidden overflow-y-auto overscroll-contain",
-  "mobile-modal-scroll touch-pan-y",
-  "rounded-[1.5rem] border border-cream/15",
-  "bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-5",
-  "shadow-[0_30px_100px_rgba(0,0,0,0.5)] backdrop-blur-2xl",
-  "sm:rounded-[2rem] sm:p-6",
-  "lg:max-h-[90dvh] lg:max-w-[940px]",
-  "lg:flex-row lg:items-center lg:justify-center lg:gap-16",
-  "lg:overflow-hidden lg:p-8",
-)}
+        className={cn(
+          "relative flex max-h-[94dvh] w-full max-w-[360px]",
+          "flex-col overflow-x-hidden overflow-y-auto overscroll-contain",
+          "mobile-modal-scroll touch-pan-y",
+          "rounded-[1.5rem] border border-cream/15",
+          "bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-5",
+          "shadow-[0_30px_100px_rgba(0,0,0,0.5)] backdrop-blur-2xl",
+          "sm:rounded-[2rem] sm:p-6",
+          "lg:max-h-[90dvh] lg:max-w-[940px]",
+          "lg:flex-row lg:items-center lg:justify-center lg:gap-16",
+          "lg:overflow-hidden lg:p-8",
+        )}
         onClick={(event) => event.stopPropagation()}
       >
         {/* Mobile drag handle */}
@@ -158,64 +384,23 @@ className={cn(
 
         {/* Project information */}
         <div className="flex w-full min-w-0 shrink-0 flex-col pr-10 pt-1 lg:max-w-[20rem] lg:pr-0 lg:pt-0">
-          <span className="h-px w-12 shrink-0 bg-accent" />
-
-          <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.25em] text-cream/50 sm:text-[10px]">
-            {project.eyebrow}
-          </p>
-
-          <h2 className="mt-3 break-words text-[clamp(1.4rem,5vw,1.8rem)] font-medium leading-[1.12] tracking-[-0.035em] text-cream lg:mt-4 lg:text-[clamp(1.5rem,2.5vw,2.15rem)]">
-            {project.title}
-          </h2>
-
-          {project.description && (
-            <p className="mt-2 text-sm leading-6 text-cream/55 lg:mt-5 lg:leading-7">
-              {project.description}
-            </p>
-          )}
+          {heading}
         </div>
 
-       {/* ── Portrait Reel Video ── */}
-<div className="relative mt-5 flex w-full shrink-0 justify-center lg:mt-0 lg:h-[min(76dvh,760px)] lg:w-[350px] lg:flex-none">
+        {/* Portrait reel video */}
+        <div className="relative mt-5 flex w-full shrink-0 justify-center lg:mt-0 lg:h-[min(76dvh,760px)] lg:w-[350px] lg:flex-none">
+          {/* Ambient glow */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 m-auto h-3/4 w-3/4 rounded-full bg-accent/10 blur-3xl"
+          />
 
-  {/* Ambient glow */}
-  <div
-    aria-hidden="true"
-    className="pointer-events-none absolute inset-0 m-auto h-3/4 w-3/4 rounded-full bg-accent/10 blur-3xl"
-  />
-
-  {/* Fixed 9:16 Reel frame */}
-  <div className="relative isolate aspect-[9/16] h-auto w-full max-w-[340px] shrink-0 overflow-hidden rounded-[1.25rem] bg-black ring-1 ring-cream/15 sm:rounded-[1.5rem] lg:h-full lg:w-auto lg:max-w-full lg:aspect-[9/16]">
-
-    <video
-      ref={videoRef}
-      key={project.videoUrl}
-      src={project.videoUrl}
-      poster={project.posterUrl}
-      className="absolute inset-0 h-full w-full object-cover"
-      autoPlay
-      controls
-      playsInline
-      onPlay={() => setIsPlaying(true)}
-      onPause={() => setIsPlaying(false)}
-    />
-
-    {/* Custom play button */}
-    {!isPlaying && (
-      <button
-        type="button"
-        aria-label={`Play ${project.title}`}
-        onClick={togglePlayback}
-        className="absolute inset-0 z-10 grid place-items-center bg-black/10"
-      >
-        <span className="grid size-14 place-items-center rounded-full border border-cream/50 bg-black/35 text-cream backdrop-blur-sm transition-transform hover:scale-105 sm:size-16">
-          <BsPlayFill className="ml-1 size-7" />
-        </span>
-      </button>
-    )}
-
-  </div>
-</div>
+          {/* Fixed 9:16 reel frame */}
+          <div className="relative isolate aspect-[9/16] h-auto w-full max-w-[340px] shrink-0 overflow-hidden rounded-[1.25rem] bg-black ring-1 ring-cream/15 sm:rounded-[1.5rem] lg:h-full lg:w-auto lg:max-w-full lg:aspect-[9/16]">
+            {media}
+            {playOverlay}
+          </div>
+        </div>
 
         {/* Desktop project counter */}
         <div className="hidden shrink-0 items-center lg:flex">
@@ -233,9 +418,7 @@ className={cn(
                   key={tick}
                   className={cn(
                     "w-px rounded-full transition-all duration-300",
-                    tick === index
-                      ? "h-5 bg-accent"
-                      : "h-2.5 bg-cream/20",
+                    tick === index ? "h-5 bg-accent" : "h-2.5 bg-cream/20",
                   )}
                 />
               ))}

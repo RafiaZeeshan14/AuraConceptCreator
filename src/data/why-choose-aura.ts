@@ -9,7 +9,7 @@ import {
 
 export const whyChooseReasons = [
   {
-    value: 500,
+    value: 2000,
     suffix: "+",
     label: "Projects delivered",
     icon: HiOutlineLightBulb,

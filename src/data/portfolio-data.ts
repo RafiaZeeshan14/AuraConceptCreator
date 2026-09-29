@@ -30,6 +30,19 @@ const thumbnail = (path: string) =>
 // Visual style identifiers used by project cards.
 export type WorkVisual = "orbit" | "columns" | "rings" | "discs" | "video";
 
+// Sub-facets shown only while the Video Production tab is active.
+export const videoSubCategories = [
+  { id: "dvc", label: "DVC" },
+  { id: "documentary", label: "Documentary" },
+  { id: "reels", label: "Reels" },
+] as const;
+
+export type VideoSubCategoryId = (typeof videoSubCategories)[number]["id"];
+
+/** Poster frames are derived from the video itself (first frame). */
+const videoPoster = (publicPath: string) =>
+  `https://res.cloudinary.com/l92fw4gu/video/upload/so_0/${publicPath}.jpg`;
+
 // A single portfolio project.
 export interface WorkProject {
   categories: WorkFilter[];
@@ -43,6 +56,8 @@ export interface WorkProject {
   description?: string;
   videoUrl?: string;
   posterUrl?: string;
+  /** Which Video Production sub-tab this project belongs to. */
+  videoKind?: VideoSubCategoryId;
   /** Screenshot shown as the card artwork for web projects. */
   thumbnailUrl?: string;
   /** Live site opened when the card is clicked. */
@@ -86,6 +101,44 @@ export const workProjects: WorkProject[] = [
     title: "Social Content Engine",
     tags: "Reels · Calendar · Community",
   },
+  // ── DVC (Video Production sub-facet) ───────────
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "dvc",
+    eyebrow: "DVC / Men's Salon",
+    headline: ["Dorado,", "redefined."],
+    title: "Dorado Men's Salon DVC",
+    tags: "DVC · Direction · Edit",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692978/Dorado_Men_salon_DVC.mp4",
+    posterUrl: videoPoster("v1790692978/Dorado_Men_salon_DVC"),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "dvc",
+    eyebrow: "DVC / Hospitality",
+    headline: ["A stay worth", "shooting."],
+    title: "Vicky Farmhouse DVC",
+    tags: "DVC · Cinematography · Edit",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692972/Vicky_Farmhous_DVC.mp4",
+    posterUrl: videoPoster("v1790692972/Vicky_Farmhous_DVC"),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "dvc",
+    eyebrow: "DVC / Automotive",
+    headline: ["Built for", "the road."],
+    title: "Titan One DVC",
+    tags: "DVC · Direction · Post",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692940/Titan_One_DVC.mp4",
+    posterUrl: videoPoster("v1790692940/Titan_One_DVC"),
+  },
+
   // ── Live client websites ───────────────────────
   {
     categories: ["web"],
@@ -246,4 +299,26 @@ export const workCounts = workCategories.reduce(
     return counts;
   },
   {} as Record<WorkCategoryId, number>,
+);
+
+// ─────────────────────────────────────────────
+// VIDEO SUB-TAB COUNTS
+// ─────────────────────────────────────────────
+
+/**
+ * Videos without an explicit `videoKind` belong to the Reels sub-tab, so the
+ * existing production reels keep showing without needing a per-entry tag.
+ */
+export const videoSubKind = (project: WorkProject): VideoSubCategoryId =>
+  project.videoKind ?? "reels";
+
+export const videoSubCounts = videoSubCategories.reduce(
+  (counts, { id }) => {
+    counts[id] = workProjects.filter(
+      (project) => project.videoUrl && videoSubKind(project) === id,
+    ).length;
+
+    return counts;
+  },
+  {} as Record<VideoSubCategoryId, number>,
 );
