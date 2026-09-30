@@ -17,16 +17,21 @@ import {
 } from "@/data/portfolio-data";
 import { WorkCard } from "./WorkCard";
 import { ReelCard } from "./ReelCard";
-import { LandscapeCard } from "./LandscapeCard";
+import { MediaCard } from "./MediaCard";
+import type { MediaCardOrientation } from "./MediaCard";
 import { VideoModal } from "./VideoModal";
 
 /**
- * Sub-categories that render with the wide landscape card. Adding another
- * content type here is enough — no new card component or layout code.
+ * Video Production sub-categories rendered with the shared media card.
+ * Adding another content type here is enough — no new card component,
+ * no layout code. `label` powers the top-left tag, `orientation` the frame.
  */
-const landscapeSubCategories: Partial<Record<VideoSubCategoryId, string>> = {
-  dvc: "Video Production",
-  documentary: "Documentary",
+const mediaCardSubCategories: Partial<
+  Record<VideoSubCategoryId, { label: string; orientation: MediaCardOrientation }>
+> = {
+  dvc: { label: "Video Production", orientation: "landscape" },
+  documentary: { label: "Documentary", orientation: "landscape" },
+  reels: { label: "Reels", orientation: "portrait" },
 };
 
 export function SelectedWorkSection() {
@@ -38,11 +43,10 @@ export function SelectedWorkSection() {
   const isVideoTab = activeCategory === "video";
   const isAIContent = activeCategory === "ai";
 
-  /** Landscape layout is used for the sub-categories listed above. */
-  const landscapeLabel = isVideoTab
-    ? landscapeSubCategories[activeSubCategory]
+  /** Media card layout for the active sub-category, if it uses one. */
+  const mediaCard = isVideoTab
+    ? mediaCardSubCategories[activeSubCategory]
     : undefined;
-  const useLandscape = Boolean(landscapeLabel);
 
   const categoryProjects =
     activeCategory === "all"
@@ -180,21 +184,25 @@ export function SelectedWorkSection() {
             key={`${activeCategory}-${isVideoTab ? activeSubCategory : ""}`}
             className={cn(
               "mt-14 grid gap-6",
-              useLandscape
-                ? "gap-7 sm:gap-8 md:grid-cols-2 lg:grid-cols-3"
+              mediaCard
+                ? mediaCard.orientation === "portrait"
+                  ? /* Same grid as AI Content so both card sets share a footprint. */
+                    "md:grid-cols-2 xl:grid-cols-3"
+                  : "gap-7 sm:gap-8 md:grid-cols-2 lg:grid-cols-3"
                 : isAIContent
                   ? "md:grid-cols-2 xl:grid-cols-3"
                   : "sm:gap-6 md:grid-cols-2 xl:grid-cols-3",
             )}
           >
             {visibleProjects.map((project, index) => {
-              if (useLandscape) {
+              if (mediaCard) {
                 return (
-                  <LandscapeCard
+                  <MediaCard
                     key={project.title}
                     project={project}
                     index={index}
-                    label={landscapeLabel}
+                    label={mediaCard.label}
+                    orientation={mediaCard.orientation}
                     onOpenVideo={openVideo}
                   />
                 );
@@ -226,7 +234,7 @@ export function SelectedWorkSection() {
             index={activeIndex}
             onClose={() => setActiveIndex(null)}
             onNavigate={setActiveIndex}
-            orientation={useLandscape ? "landscape" : "portrait"}
+            orientation={mediaCard?.orientation ?? "portrait"}
           />
         )}
       </div>

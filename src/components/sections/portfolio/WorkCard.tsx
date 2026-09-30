@@ -6,6 +6,7 @@ import { HiArrowRight } from "react-icons/hi2";
 import { BsPlayFill } from "react-icons/bs";
 import { revealDelay, staggerDelay } from "@/components/effects";
 import type { WorkProject } from "@/data/portfolio-data";
+import { videoStreamUrl } from "@/data/portfolio-data";
 import { workOrnaments } from "@/data/portfolio-visuals";
 
 interface WorkCardProps {
@@ -119,12 +120,12 @@ export function WorkCard({ project, index, onOpenVideo }: WorkCardProps) {
       {isVideo && (
         <>
           <video
-            src={project.videoUrl}
+            src={videoStreamUrl(project.videoUrl, 720)}
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             muted
             playsInline
             loop
-            preload="auto"
+            preload="none"
             poster={project.posterUrl}
           />
 

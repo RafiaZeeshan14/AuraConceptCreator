@@ -39,9 +39,32 @@ export const videoSubCategories = [
 
 export type VideoSubCategoryId = (typeof videoSubCategories)[number]["id"];
 
-/** Poster frames are derived from the video itself (first frame). */
-const videoPoster = (publicPath: string) =>
-  `https://res.cloudinary.com/l92fw4gu/video/upload/so_0/${publicPath}.jpg`;
+export type VideoSubKindId = VideoSubCategoryId | "ai";
+/**
+ * Poster frames are derived from the video itself. `offset` skips the first
+ * frames — some uploads open on a black frame. `crop` trims baked-in
+ * letterbox bars, given as Cloudinary "x,y,w,h".
+ */
+const videoPoster = (publicPath: string, offset = 0, crop?: string) =>
+  `https://res.cloudinary.com/l92fw4gu/video/upload/so_${offset}${
+    crop ? `,c_crop,${crop}` : ""
+  }/${publicPath}.jpg`;
+
+const VIDEO_CDN = "https://res.cloudinary.com/l92fw4gu/video/upload";
+
+/**
+ * The stored originals are 40–70 MB, which stalls playback on mobile data.
+ * This asks Cloudinary for a lighter H.264 rendition instead — 720p on phones,
+ * 1080p on desktop, both with adaptive quality.
+ */
+export const videoStreamUrl = (url: string | undefined, width: 720 | 1080 = 1080) => {
+  if (!url || !url.startsWith(`${VIDEO_CDN}/`)) return url;
+
+  return url.replace(
+    `${VIDEO_CDN}/`,
+    `${VIDEO_CDN}/vc_h264,q_auto:eco,w_${width}/`,
+  );
+};
 
 // A single portfolio project.
 export interface WorkProject {
@@ -57,7 +80,7 @@ export interface WorkProject {
   videoUrl?: string;
   posterUrl?: string;
   /** Which Video Production sub-tab this project belongs to. */
-  videoKind?: VideoSubCategoryId;
+  videoKind?: VideoSubKindId;
   /** Screenshot shown as the card artwork for web projects. */
   thumbnailUrl?: string;
   /** Live site opened when the card is clicked. */
@@ -112,7 +135,11 @@ export const workProjects: WorkProject[] = [
     tags: "DVC · Direction · Edit",
     videoUrl:
       "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692978/Dorado_Men_salon_DVC.mp4",
-    posterUrl: videoPoster("v1790692978/Dorado_Men_salon_DVC"),
+    posterUrl: videoPoster(
+      "v1790692978/Dorado_Men_salon_DVC",
+      2,
+      "x_0,y_99,w_1920,h_882",
+    ),
   },
   {
     categories: ["video"],
@@ -139,6 +166,92 @@ export const workProjects: WorkProject[] = [
     posterUrl: videoPoster("v1790692940/Titan_One_DVC"),
   },
 
+  // ── Reels (Video Production sub-facet) ────────
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Brand Reel",
+    headline: ["Kaami,", "in motion."],
+    title: "Kaami Reel",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693350/kaami.mp4",
+    posterUrl: videoPoster("v1790693350/kaami", 1),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Campaign",
+    headline: ["Celebrate", "every woman."],
+    title: "Women's Day HC",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693346/Women_s_Day_HC.mp4",
+    posterUrl: videoPoster("v1790693346/Women_s_Day_HC"),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Stitch Reel",
+    headline: ["Sky high,", "stitch tight."],
+    title: "Sky Stitch Reel",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693337/Sky_Stitch.mp4",
+    posterUrl: videoPoster("v1790693337/Sky_Stitch"),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Evergreen Reel",
+    headline: ["Content that", "lasts."],
+    title: "Evergreen Reel",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693272/Evergreen.mp4",
+    posterUrl: videoPoster("v1790693272/Evergreen", 1),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Food Reel",
+    headline: ["Serve it", "street style."],
+    title: "Food Chowk Reel",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693266/Food_Chowk.mp4",
+    posterUrl: videoPoster("v1790693266/Food_Chowk", 1),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Product Reel",
+    headline: ["Draped to", "fit."],
+    title: "Autodrapes Reel",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693206/Auto_Drapes.mp4",
+    posterUrl: videoPoster("v1790693206/Auto_Drapes"),
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "reels",
+    eyebrow: "Social / Brand Reel",
+    headline: ["Breeze in", "motion."],
+    title: "Breezeland Reel",
+    tags: "Concept · Filming · Editing",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693204/Breezeland_1.mp4",
+    posterUrl: videoPoster("v1790693204/Breezeland_1", 1),
+  },
+
   // ── Live client websites ───────────────────────
   {
     categories: ["web"],
@@ -160,8 +273,7 @@ export const workProjects: WorkProject[] = [
     title: "Autodrapes",
     tags: "Store · UI/UX · Development",
     summary: "Shopify store selling car sunshades for all models.",
-    thumbnailUrl:
-      thumbnail("v1790686606/autodrapes.png"),
+    thumbnailUrl: thumbnail("v1790765376/webautodrapes.png"),
     liveUrl: "https://autodrapes.com/",
   },
   {
@@ -224,6 +336,7 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["video", "ai"],
     visual: "video",
+    videoKind: "ai",
     eyebrow: "AI Video / Reel",
     headline: ["Fuji Film,", "AI crafted."],
     title: "Fuji AI Reel",
@@ -235,6 +348,7 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["video", "social", "ai"],
     visual: "video",
+    videoKind: "ai",
     eyebrow: "Social / Brand Reel",
     headline: ["International", "Cat Day."],
     title: "Fasfars International Cats Day",
@@ -246,6 +360,7 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["video", "social", "ai"],
     visual: "video",
+    videoKind: "ai",
     eyebrow: "Launch / Brand Film",
     headline: ["Veerpak,", "unwrapped."],
     title: "Veerpak Brand Film",
@@ -257,6 +372,7 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["video", "social", "ai"],
     visual: "video",
+    videoKind: "ai",
     eyebrow: "Product / Reel",
     headline: ["Oats,", "reel style."],
     title: "Fasfars Oats Reel",
@@ -268,6 +384,7 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["video", "social", "ai"],
     visual: "video",
+    videoKind: "ai",
     eyebrow: "Social / Stitch Reel",
     headline: ["Sky high,", "stitch tight."],
     title: "Sky Stitch Reel 01",
@@ -279,6 +396,7 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["video", "ai"],
     visual: "video",
+    videoKind: "ai",
     eyebrow: "AI / Evergreen Reel",
     headline: ["Content that", "lasts."],
     title: "Evergreen AI Reel",
@@ -308,8 +426,9 @@ export const workCounts = workCategories.reduce(
 /**
  * Videos without an explicit `videoKind` belong to the Reels sub-tab, so the
  * existing production reels keep showing without needing a per-entry tag.
+ * AI reels are tagged `ai` and stay inside the AI Content category.
  */
-export const videoSubKind = (project: WorkProject): VideoSubCategoryId =>
+export const videoSubKind = (project: WorkProject): VideoSubKindId =>
   project.videoKind ?? "reels";
 
 export const videoSubCounts = videoSubCategories.reduce(

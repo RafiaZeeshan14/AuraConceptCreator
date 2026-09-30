@@ -1,12 +1,13 @@
 
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { HiChevronLeft, HiChevronRight, HiXMark } from "react-icons/hi2";
 import { BsPlayFill } from "react-icons/bs";
 
 import { useBodyScrollLock, useModalNavigation } from "@/components/effects";
 import { cn } from "@/lib/utils";
+import { videoStreamUrl } from "@/data/portfolio-data";
 import type { WorkProject } from "@/data/portfolio-data";
 
 /** Media orientation the modal should lay out for. */
@@ -44,6 +45,14 @@ export function VideoModal({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
+  /** Phones get the 720p rendition so playback starts on mobile data. */
+  const [streamWidth] = useState<720 | 1080>(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 768px)").matches
+      ? 720
+      : 1080,
+  );
+
   const goTo = useCallback(
     (nextIndex: number) => {
       if (total === 0) return;
@@ -68,6 +77,18 @@ export function VideoModal({
       video.pause();
     }
   }, []);
+
+  /* Autoplay can still be refused (low-power mode, data saver) — fall back to
+     the custom play button instead of sitting on a stalled video. */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const attempt = video.play();
+    if (attempt) {
+      attempt.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    }
+  }, [project?.videoUrl]);
 
   if (!project) return null;
 
@@ -135,12 +156,17 @@ export function VideoModal({
     <video
       ref={videoRef}
       key={project.videoUrl}
-      src={project.videoUrl}
+      src={videoStreamUrl(project.videoUrl, streamWidth)}
       poster={project.posterUrl}
       className="absolute inset-0 h-full w-full object-cover"
       autoPlay
+      /* Mobile browsers (iOS Safari, Chrome Android) refuse to autoplay a
+         video with audio — muted is required, and native controls still
+         allow unmuting. */
+      muted
       controls
       playsInline
+      preload="auto"
       onPlay={() => setIsPlaying(true)}
       onPause={() => setIsPlaying(false)}
     />
