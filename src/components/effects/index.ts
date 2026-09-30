@@ -10,6 +10,7 @@ export { useModalNavigation } from "./use-modal-navigation";
 export { useRevealOnScroll } from "./use-reveal-on-scroll";
 
 // Animated layers
+export { CursorAura } from "./cursor-aura";
 export { PointerParallaxLayer } from "./pointer-parallax-layer";
 
 // Reveal helpers

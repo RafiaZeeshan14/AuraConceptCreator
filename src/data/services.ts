@@ -7,10 +7,13 @@ import {
   HiOutlineMegaphone,
 } from "react-icons/hi2";
 
+import type { WorkFilter } from "./portfolio-data";
+
 export const services = [
    {
     number: "01",
     title: "Branding & Creative Design",
+    portfolioCategory: "branding" as WorkFilter,
     intro:
       "Creative visuals that capture attention and communicate your brand message across both digital and print platforms.",
     items: [
@@ -26,6 +29,7 @@ export const services = [
    {
     number: "02",
     title: "Digital Marketing & Social Media",
+    portfolioCategory: "social" as WorkFilter,
     intro:
       "Grow your online presence with data-driven marketing strategies and engaging social media management.",
     items: [
@@ -44,6 +48,7 @@ export const services = [
   {
     number: "03",
     title: "Video Production & Editing",
+    portfolioCategory: "video" as WorkFilter,
     intro:
       "Professional content creation that tells your story through high-quality visuals and engaging videos.",
     items: [
@@ -62,6 +67,7 @@ export const services = [
   {
     number: "04",
     title: "Web & E-Commerce",
+    portfolioCategory: "web" as WorkFilter,
     intro:
       "Modern websites and e-commerce solutions designed for performance, user experience, and business growth.",
     items: [
@@ -77,6 +83,7 @@ export const services = [
   {
     number: "05",
     title: "AI Content Creation",
+    portfolioCategory: "ai" as WorkFilter,
     intro:
       "Create high-quality, on-brand content faster with AI-powered ideas, copy, visuals, and content workflows tailored to your audience.",
     items: [
@@ -93,6 +100,7 @@ export const services = [
   {
     number: "06",
     title: "Specialized Services",
+    portfolioCategory: "specialized" as WorkFilter,
     intro:
       "Tailored creative solutions designed for unique business requirements and large-scale projects.",
     items: [

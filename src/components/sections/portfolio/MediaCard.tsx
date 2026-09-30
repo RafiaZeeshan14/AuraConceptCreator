@@ -64,6 +64,7 @@ export function MediaCard({
       <button
         type="button"
         aria-label={isPlayable ? `Play ${project.title}` : `Open ${project.title}`}
+        data-cursor-label={isPlayable ? "Play" : "Open"}
         disabled={!isPlayable && !isLinked}
         onClick={activate}
         className="group block w-full cursor-pointer overflow-hidden rounded-[1.25rem] border border-wine/10 bg-[#f7f3ec] text-left shadow-[0_1px_2px_rgba(93,16,17,0.04)] transition-all duration-500 ease-out hover:-translate-y-1 hover:border-wine/20 hover:shadow-[0_18px_40px_rgba(93,16,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:shadow-[0_1px_2px_rgba(93,16,17,0.04)]"

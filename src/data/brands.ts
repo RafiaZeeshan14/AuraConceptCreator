@@ -11,7 +11,7 @@ const LOGO_TRANSFORM = "e_trim:transparency/c_limit,h_300,q_auto";
 /** [id, displayName, versioned public path, intrinsic width, intrinsic height] */
 const brandAssets = [
   ["zameenibaat", "Zameenibaat", "v1790606762/zameenibaat.png", 590, 300],
-  ["vicky-farmhouse", "Vicky Farmhouse", "v1790606760/vickyfarmhouse.png", 426, 300],
+  ["vicky-farmhouse", "Vicky Farmhouse", "v1790781342/vickyfarmhouselogo.png", 426, 300],
   ["sweatshed", "Sweatshed", "v1790606759/sweatshed.png", 219, 300],
   ["kampadel", "Kampadel", "v1790606758/kampadel.png", 252, 300],
   ["kaami", "Kaami", "v1790606757/kaami.png", 421, 300],

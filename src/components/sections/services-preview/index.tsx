@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { HiArrowUpRight } from "react-icons/hi2";
 import { useRevealOnScroll } from "@/components/effects";
 import { services } from "@/data/services";
@@ -32,30 +33,37 @@ export function ServicesPreview() {
         </div>
 
         <div className="services-preview__grid mt-14 sm:mt-16">
-          {services.map(({ number, title, intro, items, icon: Icon }) => (
-            <article key={title} className="services-preview__card">
-              <div className="flex items-start justify-between">
-                <span className="text-[10px] font-semibold tracking-[0.18em] text-accent">{number}</span>
-                <span className="services-preview__icon"><Icon /></span>
-              </div>
-              <h3>
-                {title === "AI Content Creation" ? (
-                  <>
-                    AI Content
-                    <br />
-                    Creation
-                  </>
-                ) : (
-                  title
-                )}
-              </h3>
-              <p>{intro}</p>
-              <ul>
-                {items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <span className="services-preview__arrow"><HiArrowUpRight /></span>
-            </article>
-          ))}
+          {services.map(
+            ({ number, title, intro, items, icon: Icon, portfolioCategory }) => (
+              <Link
+                key={title}
+                href={`/portfolio?category=${portfolioCategory}`}
+                aria-label={`See ${title} projects`}
+                className="services-preview__card group/card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-inset"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="text-[10px] font-semibold tracking-[0.18em] text-accent">{number}</span>
+                  <span className="services-preview__icon"><Icon /></span>
+                </div>
+                <h3>
+                  {title === "AI Content Creation" ? (
+                    <>
+                      AI Content
+                      <br />
+                      Creation
+                    </>
+                  ) : (
+                    title
+                  )}
+                </h3>
+                <p>{intro}</p>
+                <ul>
+                  {items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+                <span className="services-preview__arrow"><HiArrowUpRight /></span>
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </section>

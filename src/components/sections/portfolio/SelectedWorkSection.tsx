@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import type {
   VideoSubCategoryId,
@@ -34,11 +34,78 @@ const mediaCardSubCategories: Partial<
   reels: { label: "Reels", orientation: "portrait" },
 };
 
-export function SelectedWorkSection() {
-  const [activeCategory, setActiveCategory] = useState<WorkCategoryId>("all");
+export function SelectedWorkSection({
+  initialCategory = "all",
+}: {
+  initialCategory?: WorkCategoryId;
+}) {
+  const [activeCategory, setActiveCategory] = useState<WorkCategoryId>(
+    initialCategory,
+  );
   const [activeSubCategory, setActiveSubCategory] =
     useState<VideoSubCategoryId>("dvc");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const isDeepLink = initialCategory !== "all";
+
+  /* Deep-linked category (/portfolio?category=ai) opens straight on the work
+     grid, skipping the hero. The intro overlay locks scrolling on a fresh
+     load, so the scroll waits for it to disappear. */
+  useEffect(() => {
+    if (!isDeepLink) return;
+
+    const reveal = () => {
+      const target = document.getElementById("work");
+      if (!target) return;
+
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      target.scrollIntoView({
+        behavior: reduced ? "auto" : "smooth",
+        block: "start",
+      });
+    };
+
+    if (!document.querySelector(".intro-loader")) {
+      const frame = requestAnimationFrame(reveal);
+      return () => cancelAnimationFrame(frame);
+    }
+
+    const observer = new MutationObserver(() => {
+      if (document.querySelector(".intro-loader")) return;
+      observer.disconnect();
+      reveal();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    const fallback = window.setTimeout(() => {
+      observer.disconnect();
+      reveal();
+    }, 3200);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(fallback);
+    };
+  }, [isDeepLink]);
+
+  /* Keep the URL in step with the active tab so the link can be shared,
+     without triggering a Next navigation or re-render. */
+  const selectCategory = (id: WorkCategoryId) => {
+    setActiveCategory(id);
+    setActiveIndex(null);
+
+    if (typeof window === "undefined") return;
+
+    const url = new URL(window.location.href);
+    if (id === "all") url.searchParams.delete("category");
+    else url.searchParams.set("category", id);
+
+    window.history.replaceState(null, "", url);
+  };
 
   const isVideoTab = activeCategory === "video";
   const isAIContent = activeCategory === "ai";
@@ -108,7 +175,7 @@ export function SelectedWorkSection() {
               <button
                 key={category.id}
                 type="button"
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => selectCategory(category.id)}
                 aria-pressed={isActive}
                 className={cn(
                   "shrink-0 cursor-pointer snap-start rounded-full border px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#b62935]/45 focus-visible:ring-inset sm:text-[10px]",

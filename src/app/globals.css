@@ -50,6 +50,13 @@ a {
   color: var(--wine);
 }
 
+/* Custom pointer: the real cursor is hidden only while CursorAura is mounted
+   (fine pointers, motion allowed). Everything else keeps the native cursor. */
+.cursor-aura,
+.cursor-aura * {
+  cursor: none !important;
+}
+
 .intro-loader {
   position: fixed;
   z-index: 9999;

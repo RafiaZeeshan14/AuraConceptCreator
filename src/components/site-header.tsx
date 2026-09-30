@@ -21,8 +21,8 @@ const navigation: NavigationItem[] = [
   { label: "Services", hasMenu: true },
   { label: "Pricing", href: "/pricing" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Contact", href: "/#contact" },
-  { label: "Careers", href: "/#careers" },
+  { label: "Contact", href: "/contact" },
+  // { label: "Careers", href: "/#careers" },
 ];
 
 const socialLinks = [
@@ -61,13 +61,14 @@ export function SiteHeader() {
                     All services
                   </p>
                   {services.map((service) => (
-                    <span
+                    <Link
                       key={service.number}
+                      href={`/portfolio?category=${service.portfolioCategory}`}
                       className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-cream/75 transition-colors hover:bg-cream/10 hover:text-cream"
                     >
                       <span className="text-[9px] font-semibold text-accent">{service.number}</span>
                       {service.title}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               )}
