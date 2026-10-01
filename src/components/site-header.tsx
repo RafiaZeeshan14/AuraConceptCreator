@@ -33,6 +33,7 @@ const socialLinks = [
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 text-cream">
@@ -131,53 +132,96 @@ export function SiteHeader() {
       <nav
         aria-label="Main navigation"
         className={cn(
-          "absolute top-[108px] right-5 z-30 w-[min(420px,calc(100vw-40px))] origin-top-right overflow-hidden rounded-[30px] border border-cream/20 bg-[linear-gradient(145deg,rgba(237,232,223,0.13),rgba(75,12,15,0.82))] shadow-[inset_0_1px_0_rgba(237,232,223,0.12),0_35px_100px_rgba(20,0,2,0.42)] backdrop-blur-3xl transition-[max-height,opacity,transform] duration-300 sm:right-8 lg:hidden",
+          "absolute top-[100px] right-4 z-30 w-[min(340px,calc(100vw-32px))] origin-top-right overflow-hidden rounded-[24px] border border-cream/20 bg-[linear-gradient(145deg,rgba(237,232,223,0.13),rgba(75,12,15,0.82))] shadow-[inset_0_1px_0_rgba(237,232,223,0.12),0_35px_100px_rgba(20,0,2,0.42)] backdrop-blur-3xl transition-[max-height,opacity,transform] duration-300 sm:right-8 lg:hidden",
           menuOpen
-            ? "max-h-[620px] translate-y-0 scale-100 opacity-100"
+            ? "max-h-[540px] translate-y-0 scale-100 opacity-100"
             : "pointer-events-none max-h-0 -translate-y-3 scale-95 opacity-0",
         )}
       >
-        <div className="flex items-end justify-between border-b border-cream/10 px-7 pt-6 pb-5">
+        <div className="flex items-end justify-between border-b border-cream/10 px-5 pt-4 pb-3.5">
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-cream/40">
+            <p className="text-[8px] font-semibold uppercase tracking-[0.24em] text-cream/40">
               Navigation
             </p>
-            <p className="mt-1 text-sm text-cream/70">Explore Aura</p>
+            <p className="mt-0.5 text-xs text-cream/70">Explore Aura</p>
           </div>
-          <span className="size-2 rounded-full bg-accent shadow-[0_0_16px_rgba(214,74,85,0.85)]" />
+          <span className="size-1.5 rounded-full bg-accent shadow-[0_0_16px_rgba(214,74,85,0.85)]" />
         </div>
 
-        <ul className="space-y-1 p-5">
+        <ul className="space-y-0.5 p-3.5">
           {navigation.map((item, index) => (
             <li key={item.label}>
               {item.hasMenu ? (
-                <div className="group flex items-center justify-between rounded-2xl px-4 py-4 text-cream/80 transition-all hover:bg-cream/10 hover:pl-5 hover:text-cream">
-                  <span className="flex items-center gap-4">
-                    <span className="text-[9px] font-semibold text-cream/30">0{index + 1}</span>
-                    <span className="text-base font-medium tracking-[-0.02em]">{item.label}</span>
-                  </span>
-                  <HiOutlineChevronDown className="size-4" />
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setServicesOpen((current) => !current)}
+                    aria-expanded={servicesOpen}
+                    aria-controls="mobile-services"
+                    className="group flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-cream/80 transition-all hover:bg-cream/10 hover:pl-4 hover:text-cream"
+                  >
+                    <span className="flex items-center gap-3">
+                      <span className="text-[8px] font-semibold text-cream/30">0{index + 1}</span>
+                      <span className="text-[15px] font-medium tracking-[-0.02em]">{item.label}</span>
+                    </span>
+                    <HiOutlineChevronDown
+                      className={cn(
+                        "size-3.5 transition-transform duration-300",
+                        servicesOpen && "rotate-180",
+                      )}
+                    />
+                  </button>
+
+                  {/* Service sub-list — same targets as the desktop dropdown. */}
+                  <div
+                    id="mobile-services"
+                    className={cn(
+                      "grid transition-[grid-template-rows] duration-300 ease-out",
+                      servicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                    )}
+                  >
+                    <ul className="overflow-hidden">
+                      <li className="mt-1 space-y-0.5 border-l border-cream/12 pl-3">
+                        {services.map((service) => (
+                          <Link
+                            key={service.number}
+                            href={`/portfolio?category=${service.portfolioCategory}`}
+                            onClick={() => {
+                              setMenuOpen(false);
+                              setServicesOpen(false);
+                            }}
+                            className="flex items-center gap-2.5 rounded-lg py-2 pr-2 text-[13px] text-cream/70 transition-colors hover:text-cream"
+                          >
+                            <span className="text-[8px] font-semibold text-accent">
+                              {service.number}
+                            </span>
+                            {service.title}
+                          </Link>
+                        ))}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               ) : (
                 <Link
                   href={item.href ?? "#"}
                   onClick={() => setMenuOpen(false)}
-                  className="group flex items-center justify-between rounded-2xl px-4 py-4 text-cream/80 transition-all hover:bg-cream/10 hover:pl-5 hover:text-cream"
+                  className="group flex items-center justify-between rounded-xl px-3 py-2.5 text-cream/80 transition-all hover:bg-cream/10 hover:pl-4 hover:text-cream"
                 >
-                  <span className="flex items-center gap-4">
-                    <span className="text-[9px] font-semibold text-cream/30">0{index + 1}</span>
-                    <span className="text-base font-medium tracking-[-0.02em]">{item.label}</span>
+                  <span className="flex items-center gap-3">
+                    <span className="text-[8px] font-semibold text-cream/30">0{index + 1}</span>
+                    <span className="text-[15px] font-medium tracking-[-0.02em]">{item.label}</span>
                   </span>
                   <span className="h-px w-0 bg-cream/60 transition-all duration-300 group-hover:w-6" />
                 </Link>
               )}
             </li>
           ))}
-          <li className="pt-2">
+          <li className="pt-1.5">
             <Link
-              href="/#contact"
+              href="/contact"
               onClick={() => setMenuOpen(false)}
-              className="block cursor-pointer rounded-2xl bg-cream px-4 py-4 text-center text-sm font-semibold text-wine shadow-[0_12px_35px_rgba(20,0,2,0.18)] transition-transform hover:-translate-y-0.5"
+              className="block cursor-pointer rounded-xl bg-cream px-3 py-3 text-center text-[13px] font-semibold text-wine shadow-[0_12px_35px_rgba(20,0,2,0.18)] transition-transform hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
