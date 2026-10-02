@@ -18,7 +18,7 @@ import {
 import type { IconType } from "react-icons";
 
 export const contactDetails = {
-  address: "Gulshan-e-Maymar, Shehryaar Towers, Mezzanine Floor, Office No: 12",
+  address: "Gulshan-e-Maymar, Shehryar Towers, Mezzanine Floor, Office No: 12",
   phone: "+92 319 6865993",
   phoneLink: "+923196865993",
   email: "auraconceptcreator@gmail.com",
@@ -91,9 +91,3 @@ export const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
 export const mapDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   mapQuery,
 )}`;
-
-export const socialLinks = [
-  { label: "Facebook", href: "#facebook" },
-  { label: "Instagram", href: "#instagram" },
-  { label: "LinkedIn", href: "#linkedin" },
-] as const;

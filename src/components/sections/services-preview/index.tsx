@@ -39,7 +39,7 @@ export function ServicesPreview() {
                 key={title}
                 href={`/portfolio?category=${portfolioCategory}`}
                 aria-label={`See ${title} projects`}
-                className="services-preview__card group/card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-inset"
+                className="services-preview__card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-inset"
               >
                 <div className="flex items-start justify-between">
                   <span className="text-[10px] font-semibold tracking-[0.18em] text-accent">{number}</span>

@@ -1,7 +1,8 @@
-import { HiArrowRight, HiChevronLeft, HiChevronRight, HiStar } from "react-icons/hi2";
-import { testimonials } from "@/data/testimonials";
+import { HiStar } from "react-icons/hi2";
+import { cn } from "@/lib/utils";
+import { testimonials, type Testimonial } from "@/data/testimonials";
 
-function TestimonialCard({ quote, name, role, initials }: (typeof testimonials)[number]) {
+function TestimonialCard({ quote, name, role, initials }: Testimonial) {
   return (
     <article className="testimonials__card">
       <span className="testimonials__quote-mark" aria-hidden="true">“</span>
@@ -20,7 +21,39 @@ function TestimonialCard({ quote, name, role, initials }: (typeof testimonials)[
   );
 }
 
+/**
+ * One vertical belt. The list is rendered twice and the belt travels exactly
+ * half its own height, so the loop is seamless. Every card carries a bottom
+ * margin, which keeps that half-height distance identical to the gap between
+ * cards — otherwise the last card of one copy would butt against the first of
+ * the next.
+ */
+function ScrollColumn({
+  items,
+  up = false,
+}: {
+  items: readonly Testimonial[];
+  up?: boolean;
+}) {
+  return (
+    <div className="testimonials__column">
+      <div
+        className={cn("testimonials__track", up && "testimonials__track--up")}
+      >
+        {[...items, ...items].map((testimonial, index) => (
+          <TestimonialCard key={`${testimonial.name}-${index}`} {...testimonial} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Testimonials() {
+  // Both columns carry the full roster but in a different order, so the two
+  // belts never show the same review at the same height.
+  const columnOne = testimonials;
+  const columnTwo = [testimonials[1], testimonials[2], testimonials[0]];
+
   return (
     <section className="testimonials relative overflow-hidden bg-wine text-cream">
       <div className="section-sparkline" aria-hidden="true" />
@@ -28,28 +61,20 @@ export function Testimonials() {
       <div className="mx-auto w-full max-w-[1600px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
         <div className="testimonials__layout">
           <div className="testimonials__intro">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">05 — Testimonials</p>
-            <h2 className="mt-7 text-[clamp(4rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
+            <p className="section-reveal text-[9px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-[10px]">05 — Testimonials</p>
+            <h2 className="section-reveal section-reveal--delay-1 mt-7 text-[clamp(4rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
               <span className="whitespace-nowrap">Voices of</span>
               <span className="about-impact block font-editorial italic">impact.</span>
             </h2>
-            <p className="mt-8 max-w-xs text-sm leading-7 text-cream/65 sm:text-base sm:leading-8">
+            <p className="section-reveal section-reveal--delay-2 mt-8 max-w-xs text-sm leading-7 text-cream/65 sm:text-base sm:leading-8">
               Real stories from real partners who trusted us to bring their ideas to life and create measurable results.
             </p>
-            <a href="#reviews" className="mt-9 inline-flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-cream transition-colors hover:text-accent">
-              <span className="grid size-12 place-items-center rounded-full bg-accent shadow-[0_12px_28px_rgba(182,41,53,0.3)]"><HiArrowRight className="size-5" /></span>
-              See all reviews
-            </a>
           </div>
 
           <div className="testimonials__content">
-            <div className="testimonials__controls" aria-hidden="true">
-              <span><HiChevronLeft /></span>
-              <i className="is-active" /><i /><i /><i />
-              <span><HiChevronRight /></span>
-            </div>
-            <div className="testimonials__cards">
-              {testimonials.map((testimonial) => <TestimonialCard key={testimonial.name} {...testimonial} />)}
+            <div className="testimonials__marquee">
+              <ScrollColumn items={columnOne} />
+              <ScrollColumn items={columnTwo} up />
             </div>
           </div>
         </div>

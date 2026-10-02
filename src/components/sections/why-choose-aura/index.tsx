@@ -22,11 +22,11 @@ export function WhyChooseAura() {
 
           {/* LEFT INTRO */}
           <div className="why-choose-aura__intro relative z-10 max-w-[500px]">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
+            <p className="section-reveal text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
               04 — Why choose Aura
             </p>
 
-            <h2 className="mt-7 text-[clamp(3.4rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
+            <h2 className="section-reveal section-reveal--delay-1 mt-7 text-[clamp(3.4rem,6.5vw,6.8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
               <span className="block">Why</span>
               <span className="block">choose</span>
               <span className="about-impact block font-editorial italic">
@@ -34,9 +34,9 @@ export function WhyChooseAura() {
               </span>
             </h2>
 
-            <span className="why-choose-aura__rule mt-8 block" />
+            <span className="why-choose-aura__rule section-reveal section-reveal--delay-2 mt-8 block" />
 
-            <p className="mt-7 max-w-xs text-sm leading-7 text-wine/65 sm:text-base sm:leading-8">
+            <p className="section-reveal section-reveal--delay-2 mt-7 max-w-xs text-sm leading-7 text-wine/65 sm:text-base sm:leading-8">
               We blend creativity, strategy and technology to deliver
               digital experiences that drive impact and build lasting
               connections.

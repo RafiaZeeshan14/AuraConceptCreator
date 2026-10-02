@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { HiOutlineChevronDown, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
 import { BrandLogo } from "@/components/brand-logo";
 import { services } from "@/data/services";
+import { socialLinks } from "@/data/social";
 import { cn } from "@/lib/utils";
 
 type NavigationItem = {
@@ -24,12 +24,6 @@ const navigation: NavigationItem[] = [
   { label: "Contact", href: "/contact" },
   // { label: "Careers", href: "/#careers" },
 ];
-
-const socialLinks = [
-  { label: "Facebook", href: "#facebook", icon: FaFacebookF },
-  { label: "LinkedIn", href: "#linkedin", icon: FaLinkedinIn },
-  { label: "Instagram", href: "#instagram", icon: FaInstagram },
-] as const;
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -83,19 +77,14 @@ export function SiteHeader() {
               <Link
                 key={label}
                 href={href}
+                target="_blank"
+                rel="noreferrer"
                 aria-label={label}
                 className="grid size-8 place-items-center text-cream/65 transition-all hover:-translate-y-0.5 hover:text-cream"
               >
                 <Icon className="size-4" />
               </Link>
             ))}
-            <Link
-              href="#youtube"
-              aria-label="YouTube"
-              className="grid size-8 place-items-center text-cream/65 transition-all hover:-translate-y-0.5 hover:text-cream"
-            >
-              <FaYoutube className="size-5" />
-            </Link>
           </div>
 
           <button

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { HiArrowUpRight } from "react-icons/hi2";
+
+import { socialLinks } from "@/data/social";
 
 const footerLinks = [
   { label: "About", href: "/about" },
@@ -95,12 +96,18 @@ export function SiteFooter() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="#instagram" aria-label="Instagram" className="grid size-9 place-items-center rounded-full border border-cream/20 text-cream/65 transition-colors hover:border-accent hover:text-cream">
-              <FaInstagram className="size-4" />
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+            <Link
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              className="grid size-9 place-items-center rounded-full border border-cream/20 text-cream/65 transition-colors hover:border-accent hover:text-cream"
+            >
+              <Icon className="size-4" />
             </Link>
-            <Link href="#linkedin" aria-label="LinkedIn" className="grid size-9 place-items-center rounded-full border border-cream/20 text-cream/65 transition-colors hover:border-accent hover:text-cream">
-              <FaLinkedinIn className="size-4" />
-            </Link>
+          ))}
           </div>
         </div>
 

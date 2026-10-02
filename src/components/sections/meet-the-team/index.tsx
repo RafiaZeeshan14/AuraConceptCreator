@@ -21,12 +21,12 @@ export function MeetTheTeam() {
       <div className="mx-auto w-full max-w-[1600px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28">
         <div className="meet-team__intro flex flex-col gap-8 border-t border-wine/15 pt-5 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
+            <p className="section-reveal text-[9px] font-semibold uppercase tracking-[0.24em] text-wine/45 sm:text-[10px]">
               06 — Meet the team
             </p>
             <h2
               id="meet-the-team-title"
-              className="mt-6 w-max max-w-full text-[clamp(3.7rem,7.4vw,7.4rem)] font-medium leading-[0.82] tracking-[-0.075em]"
+              className="section-reveal section-reveal--delay-1 mt-6 w-max max-w-full text-[clamp(3.7rem,7.4vw,7.4rem)] font-medium leading-[0.82] tracking-[-0.075em]"
             >
               <span className="block whitespace-nowrap">People</span>
               <span className="block whitespace-nowrap">behind</span>
@@ -34,7 +34,7 @@ export function MeetTheTeam() {
             </h2>
           </div>
 
-          <div className="max-w-sm lg:text-right">
+          <div className="section-reveal section-reveal--delay-2 max-w-sm lg:text-right">
             <p className="text-sm leading-7 text-wine/60 sm:text-base sm:leading-8">
               A small, curious team bringing strategy, craft and momentum to every
               collaboration.

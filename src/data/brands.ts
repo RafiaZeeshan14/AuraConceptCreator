@@ -10,9 +10,9 @@ const LOGO_TRANSFORM = "e_trim:transparency/c_limit,h_300,q_auto";
 
 /** [id, displayName, versioned public path, intrinsic width, intrinsic height] */
 const brandAssets = [
-  ["zameenibaat", "Zameenibaat", "v1790606762/zameenibaat.png", 590, 300],
+  ["zameenibaat", "Zameenibaat", "v1790850207/zameenibaat.png", 590, 300],
   ["vicky-farmhouse", "Vicky Farmhouse", "v1790781342/vickyfarmhouselogo.png", 426, 300],
-  ["sweatshed", "Sweatshed", "v1790606759/sweatshed.png", 219, 300],
+  ["sweatshed", "Sweatshed", "v1790849819/sweatshed.png", 219, 300],
   ["kampadel", "Kampadel", "v1790606758/kampadel.png", 252, 300],
   ["kaami", "Kaami", "v1790606757/kaami.png", 421, 300],
   ["heights", "Heights", "v1790606755/heights.png", 877, 300],
@@ -29,11 +29,15 @@ const brandAssets = [
   ["breeze-lamd", "Breeze Lamd", "v1790606741/breezlamd.png", 329, 300],
   ["bright-future", "Bright Future", "v1790606741/brightfuture.png", 1345, 300],
   ["bluewater", "Bluewater", "v1790606738/bluewater.png", 1184, 300],
-  ["beauty-mark", "Beauty Mark", "v1790606737/beautymark.png", 763, 300],
+  ["beauty-mark", "Beauty Mark", "v1790850140/beautymark.png", 763, 300],
   ["autodrapes", "Autodrapes", "v1790688827/autodrapes.png", 435, 300],
   ["amarat", "Amarat", "v1790606734/amarat.png", 199, 300],
-  ["al-jeddah", "Al Jeddah", "v1790606734/aljeddah.png", 398, 300],
+  ["al-jeddah", "Al Jeddah", "v1790850069/aljeddah.png", 398, 300],
   ["ahadi", "Ahadi", "v1790606733/ahadi.png", 235, 300],
+  ["sindh-police", "Sindh Police", "v1790851002/kpo.png", 301, 300],
+  ["omi-motorsport", "OMI Motorsport", "v1790851075/omni.png", 274, 300],
+  ["born2run", "Born2Run Pakistan", "v1790851297/b2r.png", 849, 300],
+  ["jns", "JNS Church of Christ", "v1790852780/Jns.png", 439, 300],
 ] as const;
 
 export const brands = brandAssets.map(([id, name, path, width, height]) => ({

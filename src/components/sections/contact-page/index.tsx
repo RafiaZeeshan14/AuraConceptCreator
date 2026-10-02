@@ -48,9 +48,10 @@ export function ContactPageContent() {
 
           <div className="about-page-reveal about-delay-4 flex flex-wrap items-center justify-between gap-6 border-t border-cream/15 pt-7 text-[9px] uppercase tracking-[0.2em] text-cream/40">
             <span>Get in touch — 01</span>
+
             <a
               href="#contact-form"
-              className="group inline-flex items-center gap-3 transition-colors duration-300 hover:text-cream"
+              className="group inline-flex items-center gap-3 text-cream/70 transition-colors duration-300 hover:text-cream"
             >
               Jump to form
               <HiArrowRight className="size-3.5 -rotate-45 transition-transform duration-300 group-hover:rotate-0" />

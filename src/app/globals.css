@@ -823,8 +823,7 @@ a {
   animation: section-sparkline-glint 2.6s linear infinite;
 }
 
-.services-preview__header,
-.services-preview__grid {
+.services-preview__header {
   opacity: 0;
   transform: translateY(28px);
 }
@@ -833,8 +832,40 @@ a {
   animation: services-content-reveal 0.9s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.services-preview.is-visible .services-preview__grid {
-  animation: services-content-reveal 0.9s 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Cards reveal one by one once the section scrolls in. The grid itself stays
+   fully transparent so each card owns its own fade — animating the grid as a
+   single block left every card stuck at the same point. */
+.services-preview__card {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.services-preview.is-visible .services-preview__card {
+  animation: services-content-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.services-preview.is-visible .services-preview__card:nth-child(1) {
+  animation-delay: 0.24s;
+}
+
+.services-preview.is-visible .services-preview__card:nth-child(2) {
+  animation-delay: 0.33s;
+}
+
+.services-preview.is-visible .services-preview__card:nth-child(3) {
+  animation-delay: 0.42s;
+}
+
+.services-preview.is-visible .services-preview__card:nth-child(4) {
+  animation-delay: 0.51s;
+}
+
+.services-preview.is-visible .services-preview__card:nth-child(5) {
+  animation-delay: 0.6s;
+}
+
+.services-preview.is-visible .services-preview__card:nth-child(6) {
+  animation-delay: 0.69s;
 }
 
 .services-preview__orbit {
@@ -1735,49 +1766,71 @@ a {
   min-width: 0;
 }
 
-.testimonials__controls {
+/* Two vertical belts drifting against each other. The column clips the belt and
+   fades its edges, so reviews enter and leave softly instead of popping. */
+.testimonials__marquee {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 780px;
+  /* Caps the belt width, then pushes it to the far right of its column so the
+     cards hug the section edge instead of floating in the middle. */
+  margin-left: auto;
+  height: clamp(380px, 48vh, 500px);
+  mask-image: linear-gradient(180deg, transparent, black 11%, black 89%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, black 11%, black 89%, transparent);
+}
+
+.testimonials__column {
+  overflow: hidden;
+}
+
+.testimonials__track {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 34px;
-  color: rgb(237 232 223 / 48%);
+  flex-direction: column;
+  will-change: transform;
+  animation: testimonials-belt-down 62s linear infinite;
 }
 
-.testimonials__controls span {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border: 1px solid rgb(237 232 223 / 20%);
-  border-radius: 50%;
-  font-size: 18px;
+/* Each card owns its trailing space, which is what makes a half-height travel
+   land exactly on the next copy of the first review. */
+.testimonials__track--up {
+  animation-name: testimonials-belt-up;
+  animation-duration: 76s;
 }
 
-.testimonials__controls i {
-  width: 5px;
-  height: 5px;
-  border: 1px solid rgb(237 232 223 / 45%);
-  border-radius: 50%;
+@keyframes testimonials-belt-down {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
 }
 
-.testimonials__controls i.is-active {
-  border-color: var(--accent);
-  background: var(--accent);
+@keyframes testimonials-belt-up {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.testimonials__cards {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(3, minmax(210px, 282px));
-  justify-content: center;
+@media (prefers-reduced-motion: reduce) {
+  .testimonials__track {
+    animation: none;
+  }
 }
 
 .testimonials__card {
   width: 100%;
-  min-height: 360px;
-  padding: 28px 26px 16px;
-  border: 1px solid rgb(237 232 223 / 16%);
+  min-height: 300px;
+  margin-bottom: 1.25rem;
+  padding: 24px 22px 14px;
+  border: 1.5px solid rgb(237 232 223 / 30%);
   border-radius: 1rem;
   background: linear-gradient(145deg, rgb(182 41 53 / 20%), rgb(49 5 7 / 42%));
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 8%), 0 20px 45px rgb(18 0 2 / 20%);
@@ -1785,24 +1838,24 @@ a {
 }
 
 .testimonials__card:hover {
-  border-color: rgb(214 74 85 / 65%);
+  border-color: rgb(214 74 85 / 70%);
   transform: translateY(-7px);
 }
 
 .testimonials__quote-mark {
   display: block;
-  height: 48px;
+  height: 42px;
   color: var(--accent);
   font-family: Georgia, serif;
-  font-size: 76px;
+  font-size: 64px;
   line-height: 0.8;
 }
 
 .testimonials__quote {
-  min-height: 154px;
+  min-height: 120px;
   color: rgb(237 232 223 / 86%);
   font-size: 14px;
-  line-height: 1.9;
+  line-height: 1.85;
 }
 
 .testimonials__quote em {
@@ -1864,8 +1917,8 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .testimonials__cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .testimonials__marquee {
+    height: clamp(360px, 48vh, 460px);
   }
 
   .testimonials__intro {
@@ -1875,8 +1928,14 @@ a {
 }
 
 @media (max-width: 767px) {
-  .testimonials__cards {
+  /* One readable belt on phones instead of two narrow ones. */
+  .testimonials__marquee {
     grid-template-columns: 1fr;
+    height: clamp(340px, 46vh, 420px);
+  }
+
+  .testimonials__column:nth-child(2) {
+    display: none;
   }
 
   .testimonials__card {
@@ -1886,10 +1945,6 @@ a {
   .testimonials__quote {
     min-height: 0;
     margin-bottom: 24px;
-  }
-
-  .testimonials__controls {
-    justify-content: flex-start;
   }
 }
 
@@ -1935,6 +1990,62 @@ a {
   animation: about-scroll-reveal linear both;
   animation-timeline: view();
   animation-range: entry 8% cover 28%;
+}
+
+/* Scroll-driven reveal used across the home page: the element lifts and fades
+   in as it enters the viewport. `animation-range` start is what creates the
+   stagger — a later start means the reveal waits longer. Every range ends at
+   `entry 100%` so an element is fully painted by the time it has entered the
+   viewport; a longer range would leave cards sitting semi-transparent. */
+.section-reveal {
+  animation: section-scroll-reveal linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 70%;
+}
+
+.section-reveal--delay-1 {
+  animation-range: entry 12% entry 78%;
+}
+
+.section-reveal--delay-2 {
+  animation-range: entry 22% entry 86%;
+}
+
+.section-reveal--delay-3 {
+  animation-range: entry 32% entry 94%;
+}
+
+.section-reveal--delay-4 {
+  animation-range: entry 42% entry 100%;
+}
+
+@keyframes section-scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* No scroll-driven timeline available: show everything, never hide it. */
+@supports not (animation-timeline: view()) {
+  .section-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .why-choose-aura__intro > p:last-of-type {
@@ -2380,31 +2491,63 @@ a {
   position: relative;
   width: calc(100% + 2 * clamp(1.25rem, 5vw, 3.5rem));
   margin-left: calc(-1 * clamp(1.25rem, 5vw, 3.5rem));
-  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
 }
 
 .brands-showcase__track {
   display: flex;
   width: max-content;
-  align-items: center;
-  gap: clamp(2rem, 4vw, 4rem);
+  align-items: stretch;
+  /* 2px keeps every card visually separate without breaking the belt. */
+  gap: 5px;
   will-change: transform;
-  animation: brands-marquee-forward 90s linear infinite;
+  animation: brands-marquee-forward 95s linear infinite;
 }
 
-/* One uniform bounding box for every logo. The image scales to fit *inside*
-   this box with `object-fit: contain`, so each mark keeps its original aspect
-   ratio — nothing is stretched, cropped, or shrunk by baked-in transparent
-   padding (padding is stripped upstream via the Cloudinary `e_trim` transform).
-   Centering in a fixed box makes the perceived size consistent across brands. */
+/* Second row travels the other way. Both tracks hold the list twice, so a ±50%
+   travel loops seamlessly. */
+.brands-showcase__track--backward {
+  animation-name: brands-marquee-backward;
+  animation-duration: 110s;
+}
+
+@keyframes brands-marquee-backward {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* One uniform card per mark, identical size for every brand. The image scales to
+   fit *inside* the card with `object-fit: contain`, so each mark keeps its
+   original aspect ratio — nothing is stretched, cropped, or shrunk by baked-in
+   transparent padding (padding is stripped upstream via the Cloudinary `e_trim`
+   transform). */
 .brands-showcase__tile {
   display: flex;
   flex: 0 0 auto;
+  width: clamp(164px, 14.5vw, 208px);
+  height: clamp(98px, 8.9vw, 126px);
   align-items: center;
   justify-content: center;
-  width: clamp(140px, 15vw, 180px);
-  height: clamp(54px, 6vw, 70px);
+  padding: clamp(16px, 1.6vw, 24px);
+  border: 1px solid rgb(182 41 53 / 13%);
+  border-radius: clamp(12px, 1.1vw, 16px);
+  background: rgb(255 255 255 / 42%);
+  transition:
+    border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brands-showcase__tile:hover {
+  border-color: rgb(182 41 53 / 32%);
+  background: rgb(255 255 255 / 78%);
+  box-shadow: 0 12px 30px rgb(93 16 17 / 7%);
 }
 
 .brands-showcase__logo-img {
@@ -2419,7 +2562,7 @@ a {
 
 .brands-showcase__tile:hover .brands-showcase__logo-img,
 .brands-showcase__logo-img:focus-visible {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 @media (max-width: 767px) {
@@ -2434,10 +2577,13 @@ a {
     align-items: flex-start;
   }
 
-  .brands-showcase__marquee {
-    margin-top: 3.5rem;
+  /* Smaller cards on phones so more of the belt stays visible. */
+  .brands-showcase__tile {
+    width: 150px;
+    height: 90px;
+    padding: 15px;
+    border-radius: 12px;
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3039,6 +3185,10 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
 }
 
 @keyframes brands-marquee-forward {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
   to {
     transform: translate3d(-50%, 0, 0);
   }

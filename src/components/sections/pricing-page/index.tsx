@@ -12,6 +12,114 @@ import {
   type PlanTab,
 } from "@/data/pricing";
 
+interface CustomPackage {
+  title: string;
+  heading: readonly [string, string];
+  lead: string;
+  requirements?: readonly string[];
+  items?: readonly { title: string; description: string }[];
+  listLabel?: string;
+  meta?: readonly { label: string; value: string }[];
+  note?: string;
+  cta: string;
+}
+
+/**
+ * Landscape panel for a bespoke package: pitch on the left, the selectable
+ * building blocks on the right. Shared by every service that offers one.
+ */
+function CustomPackagePanel({ data }: { data: CustomPackage }) {
+  return (
+    <div className="mt-8 overflow-hidden rounded-[28px] border border-[#d8cbc1] bg-[#f8f4f0] shadow-[0_10px_26px_rgba(40,7,9,0.04)]">
+      <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1fr_1fr] lg:gap-12">
+        <div className="self-center">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.26em] text-[#7a4c52]">
+            {data.title}
+          </span>
+
+          <h3 className="mt-4 max-w-[460px] text-[clamp(1.7rem,3.2vw,2.9rem)] font-medium leading-[0.95] tracking-[-0.055em] text-[#4f1d1f]">
+            {data.heading[0]}
+            <span className="block font-editorial italic text-[#b73d4d]">
+              {data.heading[1]}
+            </span>
+          </h3>
+
+          <p className="mt-6 max-w-[520px] text-[15px] leading-8 text-[#665459]">
+            {data.lead}
+          </p>
+
+          {data.meta && (
+            <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+              {data.meta.map((row) => (
+                <div key={row.label}>
+                  <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#7a4c52]">
+                    {row.label}
+                  </dt>
+                  <dd className="mt-1 text-[15px] text-[#4f1d1f]">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          {data.note && (
+            <p className="mt-6 max-w-[520px] text-[15px] leading-8 text-[#4f1d1f]">
+              {data.note}
+            </p>
+          )}
+
+          <Link
+            href="/contact"
+            className="mt-8 inline-flex items-center gap-3 rounded-full border border-[#6a4f52]/50 px-6 py-3 text-sm font-semibold text-[#5d1011] transition-transform duration-300 hover:-translate-y-0.5 hover:bg-[#f1e8e2]"
+          >
+            {data.cta}
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+
+        <div>
+          {data.listLabel && (
+            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#7a4c52]">
+              {data.listLabel}
+            </p>
+          )}
+
+          {data.items ? (
+            <ul className="space-y-4 rounded-[24px] border border-[#d8cbc1] bg-[#fdfaf7] p-6 sm:p-7">
+              {data.items.map((item) => (
+                <li
+                  key={item.title}
+                  className="border-b border-[#eadfd6] pb-4 last:border-0 last:pb-0"
+                >
+                  <p className="text-[15px] font-semibold text-[#4f1d1f]">
+                    {item.title}
+                  </p>
+                  <p className="mt-0.5 text-[14px] leading-6 text-[#7a6165]">
+                    {item.description}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {data.requirements?.map((requirement) => (
+                <span
+                  key={requirement}
+                  className="flex items-center gap-3 rounded-2xl border border-[#d8cbc1] bg-[#fdfaf7] px-4 py-3.5 text-[14px] leading-6 text-[#4f1d1f]"
+                >
+                  <span className="grid size-4 shrink-0 place-items-center rounded-full bg-[#5d1011] text-[10px] font-bold text-white">
+                    <FiCheck />
+                  </span>
+                  {requirement}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function PricingPageContent() {
   const [activeTab, setActiveTab] = useState<PlanTab>("Social Media Management");
   const activePlanSet = servicePlans[activeTab];
@@ -38,7 +146,7 @@ export function PricingPageContent() {
 
             <div className="about-page-reveal about-delay-4 mt-8 flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/#contact"
+                  href="/contact"
                   className="inline-flex items-center justify-center rounded-full bg-[#f5efe8] px-7 py-3 text-sm font-semibold text-[#5d1011] shadow-[0_12px_25px_rgba(92,17,20,0.18)] transition-transform hover:-translate-y-0.5"
                 >
                   Get a Custom Quote <span className="ml-2">→</span>
@@ -161,27 +269,114 @@ export function PricingPageContent() {
                   >
                     {plan.label}
                   </span>
-                  {plan.featured && (
-                    <span className="rounded-full border border-[#f0dfe2]/40 bg-[#7c1b22] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f4e6e8]">
-                      Most Popular
+                  {(plan.badge ?? (plan.featured ? "Most Popular" : undefined)) && (
+                    <span className={cn(
+                      "rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em]",
+                      plan.featured
+                        ? "border-[#f0dfe2]/40 bg-[#7c1b22] text-[#f4e6e8]"
+                        : "border-[#d8cbc1] text-[#7a4c52]",
+                    )}>
+                      {plan.badge ?? "Most Popular"}
                     </span>
                   )}
                 </div>
 
-                <p className={[
-                  "max-w-xs text-sm leading-6",
-                  plan.featured ? "text-[#f3dfe4]" : "text-[#6e585d]",
-                ].join(" ")}>{plan.description}</p>
+                {plan.highlight && (
+                  <p className={cn(
+                    "mt-5 inline-flex w-fit items-center gap-2 rounded-full px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em]",
+                    plan.featured
+                      ? "bg-[#7c1b22] text-[#f4e6e8]"
+                      : "border border-[#b73d4d]/35 bg-[#f6e9ea] text-[#8d2a33]",
+                  )}>
+                    {plan.highlight}
+                  </p>
+                )}
 
-                <div className="mt-8 flex items-end gap-2">
-                  <span className="text-[clamp(2.3rem,3vw,4rem)] font-medium tracking-[-0.06em]">
-                    {plan.price}
-                  </span>
-                  <span className={[
-                    "pb-2 text-[14px] font-medium",
-                    plan.featured ? "text-[#e9c4ca]" : "text-[#6a4d51]",
-                  ].join(" ")}>{plan.suffix}</span>
-                </div>
+                {plan.heading && (
+                  <h3
+                    className={cn(
+                      "mt-5 text-[22px] font-medium leading-[1.15] tracking-[-0.03em]",
+                      plan.featured ? "text-[#f2ece7]" : "text-[#4f1d1f]",
+                    )}
+                  >
+                    {plan.heading}
+                  </h3>
+                )}
+
+                {plan.bestFor && (
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {plan.bestFor.map((item) => (
+                      <li
+                        key={item}
+                        className={cn(
+                          "rounded-full border px-3 py-1.5 text-[11px] leading-4",
+                          plan.featured
+                            ? "border-[#f0dfe2]/30 text-[#e9cbd1]"
+                            : "border-[#d8cbc1] text-[#7a4c52]",
+                        )}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {plan.description && (
+                  <p className={cn(
+                    "mt-5 max-w-xs text-sm leading-6",
+                    plan.featured ? "text-[#f3dfe4]" : "text-[#6e585d]",
+                  )}>{plan.description}</p>
+                )}
+
+                {plan.price ? (
+                  <div className="mt-8">
+                    {plan.priceNote && (
+                      <p className={cn(
+                        "text-[10px] font-semibold uppercase tracking-[0.24em]",
+                        plan.featured ? "text-[#e4c7cb]" : "text-[#7f4d52]",
+                      )}>
+                        {plan.priceNote}
+                      </p>
+                    )}
+
+                    <div className="mt-1 flex items-end gap-2">
+                      <span className="text-[clamp(2.3rem,3vw,4rem)] font-medium tracking-[-0.06em]">
+                        {plan.price}
+                      </span>
+                      {plan.suffix && (
+                        <span className={cn(
+                          "pb-2 text-[14px] font-medium",
+                          plan.featured ? "text-[#e9c4ca]" : "text-[#6a4d51]",
+                        )}>{plan.suffix}</span>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <p className={cn(
+                    "mt-8 text-[clamp(1.6rem,2.4vw,2.4rem)] font-medium tracking-[-0.05em]",
+                    plan.featured ? "text-[#f2ece7]" : "text-[#4f1d1f]",
+                  )}>
+                    Let&apos;s talk
+                  </p>
+                )}
+
+                {plan.meta && (
+                  <dl className="mt-6 space-y-2.5 border-t pt-5 text-[13px] leading-5" style={{ borderColor: plan.featured ? "rgb(240 223 226 / 25%)" : "rgb(216 203 193 / 100%)" }}>
+                    {plan.meta.map((row) => (
+                      <div key={row.label} className="flex flex-wrap gap-x-3">
+                        <dt className={cn(
+                          "font-semibold uppercase tracking-[0.12em]",
+                          plan.featured ? "text-[#e4c7cb]" : "text-[#7f4d52]",
+                        )}>
+                          {row.label}
+                        </dt>
+                        <dd className={plan.featured ? "text-[#f4ece9]" : "text-[#4f1d1f]"}>
+                          {row.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
 
                 <ul className="mt-7 space-y-3.5">
                   {plan.features.map((feature) => (
@@ -198,21 +393,31 @@ export function PricingPageContent() {
                 </ul>
 
                 <div className="mt-auto pt-8">
-                  <button
-                    type="button"
+                  <Link
+                    href="/contact#contact-form"
                     className={[
-                      "w-full cursor-pointer rounded-full border px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5",
+                      "block w-full cursor-pointer rounded-full border px-5 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5",
                       plan.featured
                         ? "border-[#f2e1e5] bg-[#f3efe9] text-[#5d1011]"
                         : "border-[#6a4f52]/50 bg-transparent text-[#5d1011] hover:bg-[#f1e8e2]",
                     ].join(" ")}
                   >
                     Get Started <span className="ml-2">→</span>
-                  </button>
+                  </Link>
                 </div>
               </article>
             ))}
           </div>
+
+          {activePlanSet.custom && (
+            <CustomPackagePanel data={activePlanSet.custom} />
+          )}
+
+          {activePlanSet.note && (
+            <p className="mt-8 max-w-[860px] text-[15px] leading-8 text-[#6f5257]">
+              {activePlanSet.note}
+            </p>
+          )}
         </div>
 
         <div className="mt-20">

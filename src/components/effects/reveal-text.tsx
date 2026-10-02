@@ -6,21 +6,22 @@ const textRevealVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.025,
+      staggerChildren: 0.03,
     },
   },
 };
 
+/** Each glyph sweeps in from the left, so the line reads as one motion. */
 const characterRevealVariants = {
   hidden: {
     opacity: 0,
-    y: "0.7em",
+    x: "-0.55em",
   },
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.78,
       ease: [0.16, 1, 0.3, 1] as const,
     },
   },
