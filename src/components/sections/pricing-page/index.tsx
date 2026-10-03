@@ -254,7 +254,7 @@ export function PricingPageContent() {
               <article
                 key={plan.label}
                 className={cn(
-                  "flex flex-col rounded-[28px] border p-6 sm:p-7 md:min-h-[600px]",
+                  "flex flex-col rounded-[28px] border p-5 sm:p-7 md:min-h-[600px]",
                   plan.featured
                     ? "border-[#5d1011] bg-[#5d1011] text-[#f2ece7] shadow-[0_16px_30px_rgba(28,3,4,0.18)]"
                     : "border-[#d8cbc1] bg-[#f8f4f0] text-[#4f1d1f] shadow-[0_10px_26px_rgba(40,7,9,0.04)]",
@@ -295,7 +295,7 @@ export function PricingPageContent() {
                 {plan.heading && (
                   <h3
                     className={cn(
-                      "mt-5 text-[22px] font-medium leading-[1.15] tracking-[-0.03em]",
+                      "mt-5 text-[19px] font-medium leading-[1.15] tracking-[-0.03em] sm:text-[22px]",
                       plan.featured ? "text-[#f2ece7]" : "text-[#4f1d1f]",
                     )}
                   >
@@ -323,7 +323,7 @@ export function PricingPageContent() {
 
                 {plan.description && (
                   <p className={cn(
-                    "mt-5 max-w-xs text-sm leading-6",
+                    "mt-5 max-w-xs text-[13px] leading-6 sm:text-sm",
                     plan.featured ? "text-[#f3dfe4]" : "text-[#6e585d]",
                   )}>{plan.description}</p>
                 )}
@@ -340,12 +340,12 @@ export function PricingPageContent() {
                     )}
 
                     <div className="mt-1 flex items-end gap-2">
-                      <span className="text-[clamp(2.3rem,3vw,4rem)] font-medium tracking-[-0.06em]">
+                      <span className="text-[27px] font-medium tracking-[-0.06em] sm:text-[clamp(2.3rem,3vw,4rem)]">
                         {plan.price}
                       </span>
                       {plan.suffix && (
                         <span className={cn(
-                          "pb-2 text-[14px] font-medium",
+                          "pb-1.5 text-[12px] font-medium sm:pb-2 sm:text-[14px]",
                           plan.featured ? "text-[#e9c4ca]" : "text-[#6a4d51]",
                         )}>{plan.suffix}</span>
                       )}
@@ -361,7 +361,7 @@ export function PricingPageContent() {
                 )}
 
                 {plan.meta && (
-                  <dl className="mt-6 space-y-2.5 border-t pt-5 text-[13px] leading-5" style={{ borderColor: plan.featured ? "rgb(240 223 226 / 25%)" : "rgb(216 203 193 / 100%)" }}>
+                  <dl className="mt-5 space-y-2.5 border-t pt-5 text-[12px] leading-5 sm:mt-6 sm:text-[13px]" style={{ borderColor: plan.featured ? "rgb(240 223 226 / 25%)" : "rgb(216 203 193 / 100%)" }}>
                     {plan.meta.map((row) => (
                       <div key={row.label} className="flex flex-wrap gap-x-3">
                         <dt className={cn(
@@ -378,11 +378,11 @@ export function PricingPageContent() {
                   </dl>
                 )}
 
-                <ul className="mt-7 space-y-3.5">
+                <ul className="mt-6 space-y-3 sm:mt-7 sm:space-y-3.5">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-[15px] leading-6">
+                    <li key={feature} className="flex items-start gap-2.5 text-[13.5px] leading-6 sm:gap-3 sm:text-[15px]">
                       <span className={[
-                        "mt-1 grid size-4 shrink-0 place-items-center rounded-full text-[10px] font-bold",
+                        "mt-1 grid size-3.5 shrink-0 place-items-center rounded-full text-[9px] font-bold sm:size-4 sm:text-[10px]",
                         plan.featured ? "bg-[#f4eef0] text-[#5d1011]" : "bg-[#5d1011] text-white",
                       ].join(" ")}>
                         <FiCheck />
@@ -392,11 +392,11 @@ export function PricingPageContent() {
                   ))}
                 </ul>
 
-                <div className="mt-auto pt-8">
+                <div className="mt-auto pt-7 sm:pt-8">
                   <Link
                     href="/contact#contact-form"
                     className={[
-                      "block w-full cursor-pointer rounded-full border px-5 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5",
+                      "block w-full cursor-pointer rounded-full border px-5 py-3 text-center text-[13px] font-semibold transition-transform hover:-translate-y-0.5 sm:text-sm",
                       plan.featured
                         ? "border-[#f2e1e5] bg-[#f3efe9] text-[#5d1011]"
                         : "border-[#6a4f52]/50 bg-transparent text-[#5d1011] hover:bg-[#f1e8e2]",

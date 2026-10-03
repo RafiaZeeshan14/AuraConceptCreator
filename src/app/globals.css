@@ -229,6 +229,9 @@ a {
 }
 
 .intro-loader__wordmark {
+  /* Base width for the widest glyph; each letter scales this by its own canvas
+     ratio so every letter shares one scale and optical size. */
+  --letter-w: clamp(54px, 6.5vw, 70px);
   display: flex;
   height: clamp(68px, 8vw, 86px);
   align-items: center;
@@ -238,7 +241,6 @@ a {
 
 .intro-loader__letter {
   display: grid;
-  width: clamp(54px, 6.5vw, 70px);
   height: 100%;
   place-items: center;
   opacity: 0;
@@ -459,11 +461,8 @@ a {
 
   .intro-loader__wordmark {
     height: 52px;
+    --letter-w: 44px;
     gap: 6px;
-  }
-
-  .intro-loader__letter {
-    width: 44px;
   }
 
   .intro-loader__concept {

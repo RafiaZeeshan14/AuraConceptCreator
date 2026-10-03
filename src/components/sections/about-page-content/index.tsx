@@ -27,7 +27,7 @@ export function AboutPageContent() {
           </div>
 
           <div className="my-16 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <h1 className="about-page-reveal about-delay-2 max-w-6xl text-[clamp(3.5rem,9.6vw,9rem)] font-medium leading-[0.82] tracking-[-0.075em]">
+            <h1 className="about-page-reveal about-delay-2 max-w-6xl text-[clamp(4.2rem,9.6vw,9rem)] font-medium leading-[0.82] tracking-[-0.075em]">
               We shape ideas into{" "}
               <span className="about-impact font-editorial font-medium italic">
                 impact.
@@ -243,7 +243,7 @@ export function AboutPageContent() {
         <div className="mx-auto w-full max-w-[1440px]">
 
           {/* Section Header */}
-          <div className="about-reveal mb-20 flex flex-col gap-6 border-b border-wine/15 pb-8 sm:mb-28 sm:flex-row sm:items-end sm:justify-between">
+          <div className="about-reveal mb-4 flex flex-col gap-6 border-b border-wine/15 pb-8 sm:mb-28 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-wine/45 sm:text-[10px]">
                 Our Principles — 04
@@ -270,7 +270,7 @@ export function AboutPageContent() {
             {principles.map((principle) => (
               <article
                 key={principle.number}
-                className="about-principle about-reveal group relative grid gap-8 border-b border-wine/15 py-10 sm:grid-cols-[100px_1fr_auto] sm:items-start sm:py-14"
+                className="about-principle about-reveal group relative grid gap-8 border-b border-wine/15 py-8 sm:grid-cols-[100px_1fr_auto] sm:items-start sm:py-14"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-semibold text-accent">

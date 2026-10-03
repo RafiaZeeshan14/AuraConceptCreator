@@ -3,12 +3,24 @@
 import Image from "next/image";
 import { useIntroPhase } from "@/components/effects";
 
+/**
+ * Each glyph is its own PNG, and the letter shapes are not the same width: the
+ * `A` sits on a square canvas while `U`/`R` sit on narrower ones. Since the
+ * letter box is width-constrained, a uniform box would scale the `A` down and
+ * the wordmark would read uneven. `ratio` is each canvas width relative to the
+ * widest one, so every glyph ends up on an identical scale.
+ */
+const LETTER_REFERENCE_WIDTH = 365;
+
 const logoLetters = [
   { src: "/loader-a.png", alt: "A", width: 365, height: 365 },
   { src: "/loader-u.png", alt: "U", width: 309, height: 361 },
   { src: "/loader-r.png", alt: "R", width: 309, height: 365 },
   { src: "/loader-a.png", alt: "A", width: 365, height: 365 },
-];
+].map((letter) => ({
+  ...letter,
+  ratio: letter.width / LETTER_REFERENCE_WIDTH,
+}));
 
 export function IntroLoader() {
   const { phase, closeIntro, isVisible } = useIntroPhase();
@@ -28,7 +40,7 @@ export function IntroLoader() {
       </div>
 
       <div aria-hidden="true" className="intro-loader__topline">
-        <span>Independent creative studio</span>
+        <span>Independent creative agency</span>
         <span>Est. 2025&nbsp;&nbsp;·&nbsp;&nbsp;Worldwide</span>
       </div>
 
@@ -46,7 +58,11 @@ export function IntroLoader() {
 
         <div className="intro-loader__wordmark" aria-hidden="true">
           {logoLetters.map((letter, index) => (
-            <span className="intro-loader__letter" key={`${letter.alt}-${index}`}>
+            <span
+              className="intro-loader__letter"
+              key={`${letter.alt}-${index}`}
+              style={{ width: `calc(var(--letter-w) * ${letter.ratio})` }}
+            >
               <Image
                 src={letter.src}
                 alt=""

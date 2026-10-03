@@ -33,10 +33,9 @@ export function ContactPageContent() {
 
           <div className="my-16 max-w-5xl">
             <h1 className="about-page-reveal about-delay-2 text-[clamp(3rem,8.6vw,8rem)] font-medium leading-[0.84] tracking-[-0.075em]">
-              Let&apos;s start
-              <span className="font-editorial font-medium italic">
-                {" "}
-                something.
+              Building brands
+              <span className="about-impact block font-editorial font-medium italic">
+                people remember.
               </span>
             </h1>
 
@@ -149,7 +148,7 @@ export function ContactPageContent() {
           MAP
       ───────────────────────────────────────────── */}
 
-      <section className="relative overflow-hidden bg-cream px-5 py-20 text-wine sm:px-8 sm:py-24 lg:px-14 lg:py-28">
+      <section className="relative overflow-hidden bg-cream px-5 py-15 text-wine sm:px-8 sm:py-24 lg:px-14 lg:py-28">
         <div className="mx-auto w-full max-w-[1440px]">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -163,7 +162,7 @@ export function ContactPageContent() {
               <h2 className="mt-8 text-[clamp(2rem,4.4vw,3.8rem)] font-medium leading-[0.94] tracking-[-0.06em]">
                 Visit the{" "}
                 <span className="font-editorial italic text-accent">
-                  studio.
+                  office.
                 </span>
               </h2>
             </div>

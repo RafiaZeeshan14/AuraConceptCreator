@@ -42,16 +42,7 @@ export function WhyChooseAura() {
               connections.
             </p>
 
-            <div className="mt-8 inline-flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.2em]">
-              <span className="grid size-12 place-items-center rounded-full bg-wine text-cream shadow-[0_12px_28px_rgba(93,16,17,0.22)]">
-                <span className="text-xl normal-case">
-                  →
-                </span>
-              </span>
-
-              Let&apos;s create impact
             </div>
-          </div>
 
           {/* CENTER ORBIT */}
           <div

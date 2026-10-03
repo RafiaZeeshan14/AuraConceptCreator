@@ -24,7 +24,7 @@ function HeroCardHeader({ label, labelClassName, meta }: HeroCardHeaderProps) {
  */
 export function PortfolioHeroCardStack() {
   return (
-    <div className="about-page-reveal about-delay-3 relative mx-auto h-[680px] w-full max-w-[620px] sm:h-[720px]">
+    <div className="about-page-reveal about-delay-3 relative mx-auto h-[480px] w-full max-w-[620px] sm:h-[720px]">
       {/* Background orbit */}
       <div
         aria-hidden="true"
@@ -32,7 +32,7 @@ export function PortfolioHeroCardStack() {
       />
 
       {/* CARD 01 — BACK */}
-      <div className="absolute right-[3%] top-[7%] w-[62%] rotate-[5deg] rounded-[2px] border border-cream/10 bg-[#71151b] p-5 sm:p-6">
+      <div className="absolute right-[3%] top-[2%] w-[62%] rotate-[5deg] rounded-[2px] border border-cream/10 bg-[#71151b] p-5 sm:top-[7%] sm:p-6">
         <HeroCardHeader
           label="Selected Work"
           labelClassName="text-cream/45"
@@ -55,7 +55,7 @@ export function PortfolioHeroCardStack() {
       </div>
 
       {/* CARD 02 — MAIN */}
-      <div className="absolute left-[5%] top-[16%] z-20 w-[72%] -rotate-[3deg] border border-[#d9b9b3]/20 bg-[#f4eee7] p-5 text-[#5b0d13] sm:p-7">
+      <div className="absolute left-[5%] top-[16%] z-20 w-[72%] -rotate-[3deg] border border-[#d9b9b3]/20 bg-[#f4eee7] p-5 text-[#5b0d13] sm:top-[16%] sm:p-7">
         <HeroCardHeader
           label="Featured Project"
           labelClassName="text-[#5b0d13]/45"
@@ -104,8 +104,8 @@ export function PortfolioHeroCardStack() {
         </div>
       </div>
 
-      {/* CARD 03 — FRONT / WHAT WE CREATE */}
-      <div className="absolute bottom-[2%] right-[3%] z-30 w-[55%] rotate-[4deg] border border-[#d9cfc6] bg-[#f4eee7] p-5 text-[#5b0d13] sm:p-6">
+      {/* CARD 03 — FRONT / WHAT WE CREATE (tablet and up only) */}
+      <div className="absolute bottom-[2%] right-[3%] z-30 hidden w-[55%] rotate-[4deg] border border-[#d9cfc6] bg-[#f4eee7] p-5 text-[#5b0d13] sm:block sm:p-6">
         <HeroCardHeader
           label="What we create"
           labelClassName="text-[#5b0d13]/45"
@@ -135,7 +135,7 @@ export function PortfolioHeroCardStack() {
       />
       <span
         aria-hidden="true"
-        className="absolute bottom-[8%] left-[18%] size-1.5 rounded-full bg-cream/40"
+        className="absolute bottom-[8%] left-[18%] hidden size-1.5 rounded-full bg-cream/40 sm:block"
       />
     </div>
   );

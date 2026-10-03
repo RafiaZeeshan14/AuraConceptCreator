@@ -28,8 +28,7 @@ export function MeetTheTeam() {
               id="meet-the-team-title"
               className="section-reveal section-reveal--delay-1 mt-6 w-max max-w-full text-[clamp(3.7rem,7.4vw,7.4rem)] font-medium leading-[0.82] tracking-[-0.075em]"
             >
-              <span className="block whitespace-nowrap">People</span>
-              <span className="block whitespace-nowrap">behind</span>
+              <span className="block lg:whitespace-nowrap">People behind</span>
               <span className="about-impact block font-editorial italic">the work.</span>
             </h2>
           </div>

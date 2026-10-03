@@ -21,7 +21,7 @@ export function PortfolioHero() {
           {/* LEFT — HERO CONTENT */}
           <div className="-translate-y-6 sm:-translate-y-8 lg:-translate-y-10">
             <div className="my-16 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-              <h1 className="about-page-reveal about-delay-2 max-w-6xl text-[clamp(3.5rem,9.6vw,9rem)] font-medium leading-[0.82] tracking-[-0.075em]">
+              <h1 className="about-page-reveal about-delay-2 max-w-6xl text-center text-[clamp(4.3rem,9.6vw,9rem)] font-medium leading-[0.82] tracking-[-0.075em] sm:text-left">
                 Ideas
                 <br />
                 <span className="about-impact font-editorial font-medium italic text-accent">
