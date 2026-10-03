@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist } from "next/font/google";
 
+import { FloatingActions } from "@/components/floating-actions";
 import { IntroLoader } from "@/components/intro-loader";
-import { WhatsAppButton } from "@/components/whatsapp-button";
 
 import "./globals.css";
 
@@ -40,7 +40,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <IntroLoader />
         {children}
-        <WhatsAppButton />
+        <FloatingActions />
       </body>
     </html>
   );

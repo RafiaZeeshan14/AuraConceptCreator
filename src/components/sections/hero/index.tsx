@@ -151,7 +151,7 @@ export function Hero() {
             className="hero-reveal mt-7 flex flex-col items-center justify-center gap-1 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3"
           >
             <Link
-              href="#contact"
+              href="/contact"
               className="group inline-flex w-full max-w-[280px] items-center gap-4 rounded-full border border-cream/45 bg-wine/20 p-1.5 pr-7 text-sm font-semibold text-cream shadow-[0_14px_45px_rgba(25,0,2,0.22)] backdrop-blur-md transition-colors hover:border-cream hover:bg-cream hover:text-wine sm:w-auto sm:max-w-none sm:text-base"
             >
               <span className="grid size-10 place-items-center rounded-full bg-accent text-cream transition-transform group-hover:translate-x-1">
@@ -160,7 +160,7 @@ export function Hero() {
               Start a project
             </Link>
             <Link
-              href="#work"
+              href="/portfolio"
               className="group inline-flex h-[52px] items-center gap-2 rounded-full px-5 text-sm font-semibold text-cream/75 transition-colors hover:text-cream sm:text-base"
             >
               Explore work
