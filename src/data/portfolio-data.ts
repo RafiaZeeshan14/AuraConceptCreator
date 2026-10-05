@@ -7,7 +7,6 @@
 
 // Category definitions — mirrored by the filter tabs.
 export const workCategories = [
-  { id: "all", label: "All Work" },
   { id: "branding", label: "Branding & Creative" },
   { id: "social", label: "Social Media" },
   { id: "video", label: "Video Production" },
@@ -17,7 +16,12 @@ export const workCategories = [
 ] as const;
 
 export type WorkCategoryId = (typeof workCategories)[number]["id"];
-export type WorkFilter = Exclude<WorkCategoryId, "all">;
+
+/** Default tab when no category is requested. */
+export const defaultWorkCategory: WorkCategoryId = "branding";
+
+/** Kept as an alias — every category is a filter now that "All Work" is gone. */
+export type WorkFilter = WorkCategoryId;
 
 /**
  * Card thumbnails are 3800px-wide multi-megabyte originals. `c_limit` scales
@@ -56,14 +60,24 @@ const VIDEO_CDN = "https://res.cloudinary.com/l92fw4gu/video/upload";
  * The stored originals are 40–70 MB, which stalls playback on mobile data.
  * This asks Cloudinary for a lighter H.264 rendition instead — 720p on phones,
  * 1080p on desktop, both with adaptive quality.
+ *
+ * `crop` strips baked-in letterbox bars. It has to run *before* the width
+ * scaling, otherwise the crop would be measured against the downscaled frame.
  */
-export const videoStreamUrl = (url: string | undefined, width: 720 | 1080 = 1080) => {
+export const videoStreamUrl = (
+  url: string | undefined,
+  width: 720 | 1080 = 1080,
+  crop?: string,
+) => {
   if (!url || !url.startsWith(`${VIDEO_CDN}/`)) return url;
 
-  return url.replace(
-    `${VIDEO_CDN}/`,
-    `${VIDEO_CDN}/vc_h264,q_auto:eco,w_${width}/`,
-  );
+  const [asset, ...rest] = url.slice(VIDEO_CDN.length + 1).split("/");
+  const chain = [
+    ...(crop ? [`c_crop,${crop}`] : []),
+    `vc_h264,q_auto:eco,w_${width}`,
+  ].join("/");
+
+  return `${VIDEO_CDN}/${chain}/${[asset, ...rest].join("/")}`;
 };
 
 // A single portfolio project.
@@ -79,6 +93,11 @@ export interface WorkProject {
   description?: string;
   videoUrl?: string;
   posterUrl?: string;
+  /**
+   * Cloudinary crop ("x,y,w,h") that trims baked-in letterbox bars. Applied
+   * to the video itself, not just the poster, so the modal plays full-bleed.
+   */
+  videoCrop?: string;
   /** Which Video Production sub-tab this project belongs to. */
   videoKind?: VideoSubKindId;
   /** Screenshot shown as the card artwork for web projects. */
@@ -166,6 +185,102 @@ export const workProjects: WorkProject[] = [
     posterUrl: videoPoster("v1790692940/Titan_One_DVC"),
   },
 
+  // ── Specialized services ────────
+  {
+    categories: ["specialized"],
+    visual: "video",
+    eyebrow: "Specialized / Testimonials",
+    headline: ["Real stories,", "told by real people."],
+    title: "Born2Run Testimonials",
+    tags: "Interview · Edit · Sound",
+    summary:
+      "A testimonial film built from athlete interviews, cut for social and paid distribution.",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791193181/Testimonials_Born2Run.mp4",
+    videoCrop: "x_0,y_99,w_1920,h_882",
+    posterUrl: videoPoster(
+      "v1791193181/Testimonials_Born2Run",
+      1,
+      "x_0,y_99,w_1920,h_882",
+    ),
+  },
+  {
+    categories: ["specialized"],
+    visual: "video",
+    eyebrow: "Specialized / Highlights",
+    headline: ["The race,", "in ninety seconds."],
+    title: "Born2Run Highlights",
+    tags: "Event · Highlights · Edit",
+    summary:
+      "Event highlight reel covering every race moment, split into social cuts.",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791193142/Highlights_Born2Run.mp4",
+    videoCrop: "x_0,y_44,w_854,h_392",
+    posterUrl: videoPoster(
+      "v1791193142/Highlights_Born2Run",
+      1,
+      "x_0,y_44,w_854,h_392",
+    ),
+  },
+  {
+    categories: ["specialized"],
+    visual: "video",
+    eyebrow: "Specialized / Event",
+    headline: ["An evening", "worth remembering."],
+    title: "Toyota Sure Gala",
+    tags: "Coverage · Editing · Motion",
+    summary:
+      "Event coverage film for Toyota's Sure Gala, delivered as a full recap cut.",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791193079/TOYOTA_SURE_GALA_low_file.mp4",
+    videoCrop: "x_0,y_99,w_1920,h_881",
+    posterUrl: videoPoster(
+      "v1791193079/TOYOTA_SURE_GALA_low_file",
+      1,
+      "x_0,y_99,w_1920,h_881",
+    ),
+  },
+  {
+    categories: ["specialized"],
+    visual: "video",
+    eyebrow: "Specialized / Brand Film",
+    headline: ["Omni,", "in motion."],
+    title: "Omni Project Film",
+    tags: "Concept · Filming · Edit",
+    summary:
+      "Brand film for Omni, built around product, people and the work between them.",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791192933/projectOmni.mp4",
+    posterUrl: videoPoster("v1791192933/projectOmni"),
+  },
+  {
+    categories: ["specialized"],
+    visual: "video",
+    eyebrow: "Specialized / Brand Film",
+    headline: ["Service", "with honour."],
+    title: "KPO Project Film",
+    tags: "Concept · Filming · Edit",
+    summary:
+      "Institutional brand film produced for KPO, from concept through final cut.",
+    videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791192857/projectKPO.mp4",
+    posterUrl: videoPoster("v1791192857/projectKPO"),
+  },
+  {
+    categories: ["specialized"],
+    visual: "video",
+    eyebrow: "Specialized / Campaign",
+    headline: ["Cholistan,", "told fresh."],
+    title: "Cholistan",
+    tags: "Concept · Filming · Edit",
+    summary:
+      "Campaign film for Cholistan, shot for digital-first viewing.",
+videoUrl:
+      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791192731/Cholistan.mp4",
+    videoCrop: "x_0,y_44,w_854,h_392",
+    posterUrl: videoPoster("v1791192731/Cholistan", 3, "x_0,y_44,w_854,h_392"),
+  },
+
   // ── Reels (Video Production sub-facet) ────────
   {
     categories: ["video"],
@@ -177,7 +292,7 @@ export const workProjects: WorkProject[] = [
     tags: "Concept · Filming · Editing",
     videoUrl:
       "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693350/kaami.mp4",
-    posterUrl: videoPoster("v1790693350/kaami", 1),
+    posterUrl: videoPoster("v1790693350/kaami", 6),
   },
   {
     categories: ["video"],
@@ -309,15 +424,7 @@ export const workProjects: WorkProject[] = [
     tags: "Logo · Guidelines · Collateral",
   },
   {
-    categories: ["specialized"],
-    visual: "orbit",
-    eyebrow: "Events / Specialized",
-    headline: ["Presence", "offline too."],
-    title: "Event & Exhibition Branding",
-    tags: "Stands · Signage · Print",
-  },
-  {
-    categories: ["video", "specialized"],
+    categories: ["video"],
     visual: "columns",
     eyebrow: "Production / Launch",
     headline: ["Launched", "with impact."],
@@ -325,7 +432,7 @@ export const workProjects: WorkProject[] = [
     tags: "Direction · Shoot · Edit",
   },
   {
-    categories: ["social", "specialized"],
+    categories: ["social"],
     visual: "discs",
     eyebrow: "Performance / Social",
     headline: ["Reach that", "performs."],
@@ -413,7 +520,8 @@ export const workProjects: WorkProject[] = [
 
 export const workCounts = workCategories.reduce(
   (counts, { id }) => {
-    counts[id] = id === "all" ? workProjects.length : workProjects.filter((p) => p.categories.includes(id)).length;
+    counts[id] = workProjects.filter((p) => p.categories.includes(id))
+      .length;
     return counts;
   },
   {} as Record<WorkCategoryId, number>,

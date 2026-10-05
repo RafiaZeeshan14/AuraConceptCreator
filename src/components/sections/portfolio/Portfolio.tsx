@@ -1,6 +1,6 @@
 "use client";
 
-import type { WorkCategoryId } from "@/data/portfolio-data";
+import { defaultWorkCategory, type WorkCategoryId } from "@/data/portfolio-data";
 import { PortfolioHero } from "./PortfolioHero";
 import { SelectedWorkSection } from "./SelectedWorkSection";
 
@@ -9,7 +9,9 @@ interface PortfolioProps {
   initialCategory?: string;
 }
 
-export function Portfolio({ initialCategory = "all" }: PortfolioProps) {
+export function Portfolio({
+  initialCategory = defaultWorkCategory,
+}: PortfolioProps) {
   return (
     <main className="overflow-hidden bg-cream text-wine">
       <PortfolioHero />

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Portfolio } from "@/components/sections/portfolio";
-import { workCategories } from "@/data/portfolio-data";
+import { defaultWorkCategory, workCategories } from "@/data/portfolio-data";
 
 
 
@@ -23,8 +23,9 @@ export default async function PortfolioPage({
 }) {
   const { category } = await searchParams;
   const requested = Array.isArray(category) ? category[0] : category;
+  /* Anything unknown — including a stale ?category=all — opens the first tab. */
   const initialCategory =
-    requested && categoryIds.has(requested) ? requested : "all";
+    requested && categoryIds.has(requested) ? requested : defaultWorkCategory;
 
   return (
     <>

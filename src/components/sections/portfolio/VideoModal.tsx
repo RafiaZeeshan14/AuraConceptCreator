@@ -28,7 +28,7 @@ const pad = (value: number) => String(value).padStart(2, "0");
  * Landscape media keeps a 16:9 frame inside the viewport height:
  * width = height x 16/9, so 58dvh tall becomes ~103dvh wide.
  */
-const landscapeWidth = "w-[min(100%,103dvh,880px)]";
+const landscapeWidth = "w-[min(100%,86dvh,880px)]";
 
 export function VideoModal({
   projects,
@@ -98,6 +98,10 @@ export function VideoModal({
   const arrowButton =
     "grid size-10 shrink-0 place-items-center rounded-full border border-cream/20 text-cream/85 transition-colors hover:border-cream/60 hover:bg-cream/10 focus-visible:ring-2 focus-visible:ring-accent/60 sm:size-11";
 
+  /* Compact variant for the landscape counter row, which is tight on phones. */
+  const arrowButtonSm =
+    "grid size-8 shrink-0 place-items-center rounded-full border border-cream/20 text-cream/85 transition-colors hover:border-cream/60 hover:bg-cream/10 focus-visible:ring-2 focus-visible:ring-accent/60 sm:size-10 lg:size-11";
+
   const progressTicks = (
     <span aria-hidden="true" className="flex items-center gap-1.5">
       {Array.from({ length: total }).map((_, tick) => (
@@ -156,9 +160,14 @@ export function VideoModal({
     <video
       ref={videoRef}
       key={project.videoUrl}
-      src={videoStreamUrl(project.videoUrl, streamWidth)}
+      src={videoStreamUrl(project.videoUrl, streamWidth, project.videoCrop)}
       poster={project.posterUrl}
-      className="absolute inset-0 h-full w-full object-cover"
+      className={cn(
+        "absolute inset-0 h-full w-full",
+        /* The landscape frame is height-capped, so contain keeps the whole
+           video visible instead of cropping the sides. */
+        isLandscape ? "object-contain" : "object-cover",
+      )}
       autoPlay
       /* Mobile browsers (iOS Safari, Chrome Android) refuse to autoplay a
          video with audio — muted is required, and native controls still
@@ -274,7 +283,7 @@ export function VideoModal({
           {/* 2 — Landscape media */}
           <div
             className={cn(
-              "relative mx-auto w-full shrink-0",
+              "relative mx-auto mt-3 w-full shrink-0 sm:mt-5",
               landscapeWidth,
             )}
           >
@@ -287,6 +296,9 @@ export function VideoModal({
             <div
               className={cn(
                 "relative isolate aspect-video w-full overflow-hidden",
+                /* Hard height cap so the heading, media and counter all fit
+                   inside the card on short viewports. */
+                "max-h-[50dvh]",
                 "rounded-[1.25rem] bg-black ring-1 ring-cream/15 sm:rounded-[1.5rem]",
               )}
             >
@@ -296,24 +308,24 @@ export function VideoModal({
           </div>
 
           {/* 3 — Counter and progress */}
-          <div className="mt-6 flex w-full shrink-0 items-center justify-center gap-6 lg:mt-1">
+          <div className="mt-5 flex w-full shrink-0 items-center justify-center gap-3 pb-2 sm:mt-6 sm:gap-6">
             <button
               type="button"
               aria-label="Previous project"
               onClick={previous}
-              className={cn(arrowButton, "hidden lg:grid")}
+              className={arrowButtonSm}
             >
-              <HiChevronLeft className="size-5" />
+              <HiChevronLeft className="size-4 sm:size-5" />
             </button>
 
-            <div className="flex items-center gap-4">
-              <span className="text-xl font-medium tabular-nums text-cream sm:text-2xl">
+            <div className="flex items-center gap-2.5 sm:gap-4">
+              <span className="text-lg font-medium tabular-nums text-cream sm:text-2xl">
                 {pad(index + 1)}
               </span>
 
               {progressTicks}
 
-              <span className="text-sm tabular-nums text-cream/40">
+              <span className="text-xs tabular-nums text-cream/40 sm:text-sm">
                 {pad(total)}
               </span>
             </div>
@@ -322,9 +334,9 @@ export function VideoModal({
               type="button"
               aria-label="Next project"
               onClick={next}
-              className={cn(arrowButton, "hidden lg:grid")}
+              className={arrowButtonSm}
             >
-              <HiChevronRight className="size-5" />
+              <HiChevronRight className="size-4 sm:size-5" />
             </button>
           </div>
         </div>

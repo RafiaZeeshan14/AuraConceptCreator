@@ -14,6 +14,7 @@ import {
   workCategories,
   workCounts,
   workProjects,
+  defaultWorkCategory,
 } from "@/data/portfolio-data";
 import { WorkCard } from "./WorkCard";
 import { ReelCard } from "./ReelCard";
@@ -34,8 +35,18 @@ const mediaCardSubCategories: Partial<
   reels: { label: "Reels", orientation: "portrait" },
 };
 
+/**
+ * Categories outside Video Production that render with the same landscape
+ * card, so the whole grid stays visually consistent.
+ */
+const mediaCardCategories: Partial<
+  Record<WorkCategoryId, { label: string; orientation: MediaCardOrientation }>
+> = {
+  specialized: { label: "Specialized", orientation: "landscape" },
+};
+
 export function SelectedWorkSection({
-  initialCategory = "all",
+  initialCategory = defaultWorkCategory,
 }: {
   initialCategory?: WorkCategoryId;
 }) {
@@ -46,7 +57,7 @@ export function SelectedWorkSection({
     useState<VideoSubCategoryId>("dvc");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const isDeepLink = initialCategory !== "all";
+  const isDeepLink = initialCategory !== defaultWorkCategory;
 
   /* Deep-linked category (/portfolio?category=ai) opens straight on the work
      grid, skipping the hero. The intro overlay locks scrolling on a fresh
@@ -101,7 +112,9 @@ export function SelectedWorkSection({
     if (typeof window === "undefined") return;
 
     const url = new URL(window.location.href);
-    if (id === "all") url.searchParams.delete("category");
+
+    /* The default tab is implicit, so keep the URL clean for it. */
+    if (id === defaultWorkCategory) url.searchParams.delete("category");
     else url.searchParams.set("category", id);
 
     window.history.replaceState(null, "", url);
@@ -110,17 +123,17 @@ export function SelectedWorkSection({
   const isVideoTab = activeCategory === "video";
   const isAIContent = activeCategory === "ai";
 
-  /** Media card layout for the active sub-category, if it uses one. */
+  /**
+   * Media card layout for the active view: a video sub-category inside the
+   * Video Production tab, or a category that opts in directly.
+   */
   const mediaCard = isVideoTab
     ? mediaCardSubCategories[activeSubCategory]
-    : undefined;
+    : mediaCardCategories[activeCategory];
 
-  const categoryProjects =
-    activeCategory === "all"
-      ? workProjects
-      : workProjects.filter((project) =>
-          project.categories.includes(activeCategory),
-        );
+  const categoryProjects = workProjects.filter((project) =>
+    project.categories.includes(activeCategory),
+  );
 
   // The DVC / Documentary / Reels facets only apply inside Video Production.
   const visibleProjects =

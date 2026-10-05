@@ -120,7 +120,7 @@ export function WorkCard({ project, index, onOpenVideo }: WorkCardProps) {
       {isVideo && (
         <>
           <video
-            src={videoStreamUrl(project.videoUrl, 720)}
+            src={videoStreamUrl(project.videoUrl, 720, project.videoCrop)}
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             muted
             playsInline
