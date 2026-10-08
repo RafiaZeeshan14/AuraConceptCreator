@@ -44,64 +44,63 @@ export function WhyChooseAura() {
 
             </div>
 
-          {/* CENTER ORBIT */}
           <div
-            className="why-choose-aura__orbit"
-            aria-hidden="true"
+            className="why-choose-aura__diagram"
           >
-            <span className="why-choose-aura__orbit-core">
-              <Image
-                src="/logo.png"
-                alt=""
-                width={1200}
-                height={1920}
-                className="why-choose-aura__logo"
-              />
-            </span>
-          </div>
+            {/* CENTER ORBIT */}
+            <div className="why-choose-aura__orbit" aria-hidden="true">
+              <span className="why-choose-aura__orbit-core">
+                <Image
+                  src="/logo.png"
+                  alt=""
+                  width={1200}
+                  height={1920}
+                  className="why-choose-aura__logo"
+                />
+              </span>
+            </div>
 
-          {/* STAT CARDS */}
-          <div className="why-choose-aura__reasons">
-            {whyChooseReasons.map(
-              ({ value, suffix, label, icon: Icon, position }) => (
-                <article
-                  key={label}
-                  className={`why-choose-aura__card why-choose-aura__card--${position}`}
-                >
-                  {/* ICON */}
-                  <span className="why-choose-aura__icon">
-                    <Icon className="size-7" />
-                  </span>
+            {/* STAT CARDS */}
+            <div className="why-choose-aura__reasons">
+              {whyChooseReasons.map(
+                ({ value, suffix, label, icon: Icon, position }) => (
+                  <article
+                    key={label}
+                    className={`why-choose-aura__card why-choose-aura__card--${position}`}
+                  >
+                    <span className="why-choose-aura__icon">
+                      <Icon className="size-7" />
+                    </span>
 
-                  {/* STAT CONTENT */}
-                  <div className="min-w-0">
-                    <span className="why-choose-aura__card-rule" />
+                    <div className="min-w-0">
+                      <span className="why-choose-aura__card-rule" />
 
-                    <h3 className="!mt-3 !mb-0 text-[2rem] font-medium leading-none tracking-[-0.04em] sm:text-[2.25rem]">
-                      <CountUpStat value={value} suffix={suffix} />
-                    </h3>
+                      <h3 className="!mt-3 !mb-0 text-[2rem] font-medium leading-none tracking-[-0.04em] sm:text-[2.25rem]">
+                        <CountUpStat value={value} suffix={suffix} />
+                      </h3>
 
-                    <p className="!mt-2 text-lg leading-5 text-wine/60 sm:text-[15px]">
-                      {label}
-                    </p>
-                  </div>
-                </article>
-              ),
-            )}
-          </div>
+                      <p className="!mt-2 text-lg leading-5 text-wine/60 sm:text-[15px]">
+                        {label}
+                      </p>
+                    </div>
+                  </article>
+                ),
+              )}
+            </div>
 
-          {/* SIDE NOTE */}
-          <div
-            className="why-choose-aura__side-note-frame"
-            aria-hidden="true"
-          >
-            <span className="why-choose-aura__side-line why-choose-aura__side-line--top" />
+            {/* SIDE NOTE */}
+            <div
+              className="why-choose-aura__side-note-frame"
+              aria-hidden="true"
+            >
+              <span className="why-choose-aura__side-line why-choose-aura__side-line--top" />
 
-            <p className="why-choose-aura__side-note">
-              Strategy · Design · Technology
-            </p>
+              <p className="why-choose-aura__side-note">
+                Strategy · Design · Technology
+              </p>
 
-            <span className="why-choose-aura__side-line why-choose-aura__side-line--bottom" />
+              <span className="why-choose-aura__side-line why-choose-aura__side-line--bottom" />
+            </div>
           </div>
         </div>
 

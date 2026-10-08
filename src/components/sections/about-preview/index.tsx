@@ -33,10 +33,10 @@ export function AboutPreview() {
         </div>
 
         {/* MAIN GRID */}
-        <div className="mt-8 grid gap-10 sm:mt-10 lg:grid-cols-[1.4fr_0.6fr] lg:items-start lg:gap-12">
+        <div className="mt-8 grid gap-10 sm:mt-10 md:grid-cols-[1.1fr_0.9fr] md:items-start md:gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:gap-12">
 
           {/* LEFT SIDE */}
-          <div className="order-2 w-full lg:order-1">
+          <div className="order-2 w-full md:order-1">
 
             {/* HEADING */}
             <motion.h2
@@ -102,7 +102,7 @@ export function AboutPreview() {
           </div>
 
           {/* RIGHT SIDE */}
-          <PointerParallaxLayer className="about-preview__story order-1 relative min-h-[280px] lg:order-2 lg:min-h-[520px]">
+          <PointerParallaxLayer className="about-preview__story order-1 relative min-h-[280px] md:order-2 md:min-h-[420px] lg:min-h-[520px]">
 
             {/* BACKGROUND NUMBER */}
             <span

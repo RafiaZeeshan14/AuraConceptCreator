@@ -611,6 +611,12 @@ a {
     specialized-service-popup-glow 3.2s ease-in-out 650ms infinite alternate;
 }
 
+@media (min-width: 640px) {
+  .specialized-service-popup {
+    bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+}
+
 @media (max-width: 639px) {
   .specialized-service-popup {
     left: 1rem;
@@ -2147,6 +2153,11 @@ a {
   transform: translate(-50%, -50%);
 }
 
+.why-choose-aura__diagram {
+  position: absolute;
+  inset: 0;
+}
+
 .why-choose-aura__orbit::before,
 .why-choose-aura__orbit::after {
   position: absolute;
@@ -2371,7 +2382,88 @@ a {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .why-choose-aura .relative.min-h-\[680px\] {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .why-choose-aura__intro {
+    max-width: 100%;
+  }
+
+  .why-choose-aura__diagram {
+    position: relative;
+    inset: auto;
+    flex: none;
+    height: 700px;
+    margin-top: 2rem;
+  }
+
+  .why-choose-aura__orbit {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: min(36vw, 300px);
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .why-choose-aura__reasons {
+    position: absolute;
+    inset: 0;
+  }
+
+  .why-choose-aura__card {
+    width: min(220px, 29%);
+    min-width: 0;
+  }
+
+  .why-choose-aura__card--top-left {
+    top: 3%;
+    left: 8%;
+  }
+
+  .why-choose-aura__card--top-right {
+    top: 3%;
+    right: 8%;
+    left: auto;
+  }
+
+  .why-choose-aura__card--middle-left {
+    top: calc(50% - 69px);
+    left: 0;
+  }
+
+  .why-choose-aura__card--middle-right {
+    top: calc(50% - 69px);
+    right: 0;
+    left: auto;
+  }
+
+  .why-choose-aura__card--bottom-left {
+    bottom: 3%;
+    left: 8%;
+  }
+
+  .why-choose-aura__card--bottom-right {
+    right: 8%;
+    bottom: 3%;
+    left: auto;
+  }
+
+  .why-choose-aura__side-note-frame {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
+  .why-choose-aura__diagram {
+    display: contents;
+  }
+
   .why-choose-aura__intro {
     max-width: 100%;
   }
@@ -2491,6 +2583,13 @@ a {
   border-radius: 50%;
   content: "";
   pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .brands-showcase__intro h2,
+  .why-choose-aura__intro h2 {
+    font-size: clamp(4rem, 8vw, 5.5rem);
+  }
 }
 
 .brands-showcase::before {
@@ -3025,6 +3124,12 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-preview__mini-card {
+    width: min(300px, calc(100% - 1rem));
+  }
+}
+
 @media (max-width: 767px) {
   .about-preview__topline {
     border-top-width: 1px;
@@ -3053,9 +3158,9 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
   }
 
   .about-preview__orbit-copy {
-    top: 18px;
+    top: 30px;
     width: 280px;
-    left: calc(50% + 10px);
+    left: calc(100% - 200px);
     opacity: 0.75;
   }
 
