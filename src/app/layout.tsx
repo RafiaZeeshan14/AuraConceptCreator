@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Geist } from "next/font/google";
 
 import { FloatingActions } from "@/components/floating-actions";
 import { IntroLoader } from "@/components/intro-loader";
-import { BottomProjectTicker } from "@/components/effects/bottom-project-ticker";
+import { AnimatedAgencyTicker } from "@/components/effects/animated-agency-ticker";
 import { CursorGhost } from "@/components/effects/cursor-ghost";
 
 import "./globals.css";
@@ -43,7 +43,7 @@ export default function RootLayout({
         <IntroLoader />
         {children}
         <CursorGhost />
-        <BottomProjectTicker />
+        <AnimatedAgencyTicker />
         <FloatingActions />
       </body>
     </html>
