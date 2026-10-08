@@ -102,6 +102,12 @@ export interface WorkProject {
   videoKind?: VideoSubKindId;
   /** Screenshot shown as the card artwork for web projects. */
   thumbnailUrl?: string;
+  /** Render only the thumbnail, without the standard project-card artwork. */
+  imageOnly?: boolean;
+  /** Identifies a gallery that can be opened in the portfolio section. */
+  gallerySlug?: string;
+  /** Full-width project gallery images. */
+  galleryImages?: string[];
   /** Live site opened when the card is clicked. */
   liveUrl?: string;
 }
@@ -112,7 +118,7 @@ export interface WorkProject {
 
 export const workProjects: WorkProject[] = [
   {
-    categories: ["branding", "social"],
+    categories: ["social"],
     visual: "orbit",
     eyebrow: "Social / Branding",
     headline: ["Building", "attention."],
@@ -120,7 +126,7 @@ export const workProjects: WorkProject[] = [
     tags: "Strategy · Creative · Social Media",
   },
   {
-    categories: ["branding", "video"],
+    categories: ["video"],
     visual: "rings",
     eyebrow: "Campaign / Creative",
     headline: ["Stories", "people feel."],
@@ -417,11 +423,49 @@ videoUrl:
   },
   {
     categories: ["branding"],
-    visual: "discs",
-    eyebrow: "Branding / Identity",
+    visual: "columns",
+    eyebrow: "Restaurant / Brand Identity",
     headline: ["A brand", "you recall."],
-    title: "Brand Identity System",
-    tags: "Logo · Guidelines · Collateral",
+    title: "AL-Jeddah",
+    tags: "Restaurant · Brand Identity · Visual Kit",
+    description:
+      "A visual identity kit for AL-Jeddah, a restaurant brand.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/1.png",
+    imageOnly: true,
+    gallerySlug: "brewe-packaging",
+    galleryImages: [
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/1.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/2.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/3.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/4.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364734/5.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364734/6.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364734/7.png",
+    ],
+  },
+  {
+    categories: ["branding"],
+    visual: "columns",
+    eyebrow: "Apparel / Brand Identity",
+    headline: ["A brand", "with character."],
+    title: "Sky Stitch Patches",
+    tags: "Apparel · Brand Identity · Visual Kit",
+    description:
+      "A visual identity kit for Sky Stitch Patches, bringing its custom patches to life.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452499/slide-01.png",
+    imageOnly: true,
+    gallerySlug: "sky-stitch-patches",
+    galleryImages: [
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452499/slide-01.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452497/slide-02.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452497/slide-03.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452497/slide-04.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452502/slide-05.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452501/slide-06.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452499/slide-07.png",
+    ],
   },
   {
     categories: ["video"],

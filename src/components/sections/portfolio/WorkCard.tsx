@@ -13,9 +13,15 @@ interface WorkCardProps {
   project: WorkProject;
   index: number;
   onOpenVideo?: (project: WorkProject) => void;
+  onOpenGallery?: (project: WorkProject) => void;
 }
 
-export function WorkCard({ project, index, onOpenVideo }: WorkCardProps) {
+export function WorkCard({
+  project,
+  index,
+  onOpenVideo,
+  onOpenGallery,
+}: WorkCardProps) {
   const number = String(index + 1).padStart(2, "0");
 
   const isVideo = Boolean(project.videoUrl);
@@ -25,6 +31,30 @@ export function WorkCard({ project, index, onOpenVideo }: WorkCardProps) {
   const isWebsite = !isVideo && hasLiveUrl && Boolean(project.thumbnailUrl);
 
   const isInteractive = isVideo || hasLiveUrl;
+
+  if (project.imageOnly && project.thumbnailUrl) {
+    return (
+      <div
+        style={revealDelay(staggerDelay(index))}
+        className="hero-reveal"
+      >
+        <button
+          type="button"
+          aria-label={`View ${project.title} image gallery`}
+          onClick={() => onOpenGallery?.(project)}
+          className="group relative block aspect-video w-full cursor-pointer overflow-hidden rounded-[1.25rem] border border-wine/10 bg-[#f7f3ec] text-left shadow-[0_1px_2px_rgba(93,16,17,0.04)] transition-all duration-500 hover:-translate-y-1 hover:border-wine/20 hover:shadow-[0_18px_40px_rgba(93,16,17,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+        >
+          <Image
+            src={project.thumbnailUrl}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+        </button>
+      </div>
+    );
+  }
 
   /** Videos open the modal, web projects open the live site. */
   const activate = () => {

@@ -20,6 +20,7 @@ import { WorkCard } from "./WorkCard";
 import { ReelCard } from "./ReelCard";
 import { MediaCard } from "./MediaCard";
 import type { MediaCardOrientation } from "./MediaCard";
+import { ProjectGallery } from "./ProjectGallery";
 import { VideoModal } from "./VideoModal";
 
 /**
@@ -56,8 +57,38 @@ export function SelectedWorkSection({
   const [activeSubCategory, setActiveSubCategory] =
     useState<VideoSubCategoryId>("dvc");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeGallery, setActiveGallery] = useState<WorkProject | null>(null);
+  const [hasDeepLinkedProject, setHasDeepLinkedProject] = useState(false);
 
-  const isDeepLink = initialCategory !== defaultWorkCategory;
+  const isDeepLink =
+    initialCategory !== defaultWorkCategory || hasDeepLinkedProject;
+
+  useEffect(() => {
+    const syncFromLocation = () => {
+      const url = new URL(window.location.href);
+      const requestedCategory = url.searchParams.get("category");
+      const category = workCategories.find(
+        ({ id }) => id === requestedCategory,
+      );
+      const slug = url.searchParams.get("project");
+      const gallery = workProjects.find(
+        (project) =>
+          project.gallerySlug === slug && project.galleryImages?.length,
+      );
+
+      setActiveGallery(gallery ?? null);
+      setHasDeepLinkedProject(Boolean(gallery));
+      setActiveIndex(null);
+      setActiveCategory(
+        category?.id ?? gallery?.categories[0] ?? defaultWorkCategory,
+      );
+    };
+
+    window.addEventListener("popstate", syncFromLocation);
+    syncFromLocation();
+
+    return () => window.removeEventListener("popstate", syncFromLocation);
+  }, []);
 
   /* Deep-linked category (/portfolio?category=ai) opens straight on the work
      grid, skipping the hero. The intro overlay locks scrolling on a fresh
@@ -108,15 +139,40 @@ export function SelectedWorkSection({
   const selectCategory = (id: WorkCategoryId) => {
     setActiveCategory(id);
     setActiveIndex(null);
+    setActiveGallery(null);
 
     if (typeof window === "undefined") return;
 
     const url = new URL(window.location.href);
+    url.searchParams.delete("project");
 
     /* The default tab is implicit, so keep the URL clean for it. */
     if (id === defaultWorkCategory) url.searchParams.delete("category");
     else url.searchParams.set("category", id);
 
+    window.history.replaceState(null, "", url);
+  };
+
+  const openGallery = (project: WorkProject) => {
+    if (!project.gallerySlug || !project.galleryImages?.length) {
+      throw new Error(`Project "${project.title}" has no image gallery.`);
+    }
+
+    setActiveGallery(project);
+    setActiveCategory(project.categories[0]);
+    setActiveIndex(null);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("category", project.categories[0]);
+    url.searchParams.set("project", project.gallerySlug);
+    window.history.pushState(null, "", url);
+  };
+
+  const closeGallery = () => {
+    setActiveGallery(null);
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("project");
     window.history.replaceState(null, "", url);
   };
 
@@ -254,7 +310,9 @@ export function SelectedWorkSection({
         )}
 
         {/* Projects - filtered by the active category and sub-tab */}
-        {visibleProjects.length === 0 ? (
+        {activeGallery ? (
+          <ProjectGallery project={activeGallery} onClose={closeGallery} />
+        ) : visibleProjects.length === 0 ? (
           <p className="mt-14 border-t border-wine/15 pt-8 text-sm text-wine/45">
             New work in this category is on the way - tell us what you want to
             build.
@@ -301,6 +359,7 @@ export function SelectedWorkSection({
                   project={project}
                   index={index}
                   onOpenVideo={openVideo}
+                  onOpenGallery={openGallery}
                 />
               );
             })}
