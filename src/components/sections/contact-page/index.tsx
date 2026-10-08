@@ -15,7 +15,7 @@ export function ContactPageContent() {
           HERO
       ───────────────────────────────────────────── */}
 
-      <section className="relative isolate flex min-h-[70svh] items-end overflow-hidden bg-wine px-5 pb-16 pt-36 text-cream sm:px-8 sm:pb-20 sm:pt-44 lg:px-14">
+      <section className="contact-page-hero relative isolate flex min-h-[70svh] items-end overflow-hidden bg-wine px-5 pb-16 pt-36 text-cream sm:px-8 sm:pb-20 sm:pt-44 lg:px-14">
         <div
           aria-hidden="true"
           className="about-hero__grid absolute inset-0 -z-10"
@@ -24,8 +24,7 @@ export function ContactPageContent() {
           aria-hidden="true"
           className="about-hero__halo absolute left-1/2 top-[48%] -z-10 -translate-x-1/2 -translate-y-1/2"
         />
-
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col justify-between">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col justify-between">
           <div className="about-page-reveal about-delay-1 flex items-center gap-3 text-[9px] font-semibold uppercase tracking-[0.24em] text-cream/55 sm:text-[10px]">
             <span className="size-1.5 rounded-full bg-accent shadow-[0_0_14px_rgba(214,74,85,0.9)]" />
             Contact Aura Concept Creator
@@ -69,7 +68,7 @@ export function ContactPageContent() {
             {/* Left column */}
             <div>
               <span className="inline-flex items-center gap-2.5 rounded-full border border-wine/20 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-wine/70">
-                <span className="size-1.5 rotate-45 bg-accent" />
+                <span className="size-1.5 rounded-full bg-accent" />
                 Contact Us
               </span>
 

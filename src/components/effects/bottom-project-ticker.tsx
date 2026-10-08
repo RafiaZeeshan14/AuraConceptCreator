@@ -35,7 +35,7 @@ function TickerGroup({ duplicate = false }: { duplicate?: boolean }) {
 export function BottomProjectTicker() {
   return (
     <Link
-      href="/contact"
+      href="/contact#contact-form"
       aria-label="Have a project in mind? Get a quote"
       className="bottom-project-ticker fixed inset-x-0 bottom-0 z-[9980] flex h-[calc(3rem+env(safe-area-inset-bottom))] w-screen items-center overflow-hidden text-wine sm:h-[calc(3.25rem+env(safe-area-inset-bottom))]"
     >

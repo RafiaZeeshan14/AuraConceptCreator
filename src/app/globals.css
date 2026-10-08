@@ -50,11 +50,124 @@ a {
   color: var(--wine);
 }
 
-/* Custom pointer: the real cursor is hidden only while CursorAura is mounted
-   (fine pointers, motion allowed). Everything else keeps the native cursor. */
-.cursor-aura,
-.cursor-aura * {
-  cursor: none !important;
+.cursor-ghost {
+  top: -100px;
+  left: -100px;
+  opacity: 0;
+  transition:
+    opacity 0.18s ease,
+    left 0.1s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: left, top, opacity;
+}
+
+.cursor-ghost.is-visible {
+  opacity: 1;
+}
+
+.cursor-ghost__art {
+  overflow: visible;
+  filter: drop-shadow(0 4px 4px rgb(93 16 17 / 18%));
+}
+
+.cursor-ghost.is-moving .cursor-ghost__body {
+  animation: cursor-ghost-float 0.55s ease-in-out infinite alternate;
+}
+
+.cursor-ghost__right-arm,
+.cursor-ghost__left-arm {
+  transform-box: fill-box;
+  transform-origin: 50% 20%;
+}
+
+.cursor-ghost__face,
+.cursor-ghost__zzz {
+  display: none;
+}
+
+.cursor-ghost[data-pose="float"] .cursor-ghost__face--happy,
+.cursor-ghost[data-pose="wave"] .cursor-ghost__face--happy {
+  display: block;
+}
+
+.cursor-ghost[data-pose="curious"] .cursor-ghost__face--curious {
+  display: block;
+}
+
+.cursor-ghost[data-pose="sleep"] .cursor-ghost__face--sleep,
+.cursor-ghost[data-pose="sleep"] .cursor-ghost__zzz {
+  display: block;
+}
+
+.cursor-ghost[data-pose="wave"] .cursor-ghost__right-arm {
+  transform: rotate(-42deg);
+  animation: cursor-ghost-wave 0.4s ease-in-out infinite alternate;
+}
+
+.cursor-ghost[data-pose="curious"] .cursor-ghost__body {
+  transform: rotate(5deg);
+}
+
+.cursor-ghost[data-pose="sleep"] .cursor-ghost__body {
+  animation: cursor-ghost-snooze 1.8s ease-in-out infinite;
+}
+
+.cursor-ghost[data-pose="sleep"] .cursor-ghost__zzz {
+  animation: cursor-ghost-zzz 1.8s ease-in-out infinite;
+}
+
+.cursor-ghost.is-idle .cursor-ghost__sparkle {
+  animation: cursor-ghost-twinkle 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes cursor-ghost-float {
+  from {
+    transform: translateY(1px) rotate(-2deg);
+  }
+  to {
+    transform: translateY(-3px) rotate(2deg);
+  }
+}
+
+@keyframes cursor-ghost-wave {
+  from {
+    transform: rotate(-32deg);
+  }
+  to {
+    transform: rotate(-52deg);
+  }
+}
+
+@keyframes cursor-ghost-snooze {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(2px) scale(1.03);
+  }
+}
+
+@keyframes cursor-ghost-zzz {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(2px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes cursor-ghost-twinkle {
+  from {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
 .intro-loader {
