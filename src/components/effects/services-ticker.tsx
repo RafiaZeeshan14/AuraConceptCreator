@@ -19,7 +19,7 @@ export function ServicesTicker() {
               <span className="px-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-cream/65 sm:px-12 sm:text-xs">
                 {service}
               </span>
-              <span className="text-lg text-accent">✦</span>
+              <span className="text-lg text-accent">•</span>
             </div>
           ))}
         </div>

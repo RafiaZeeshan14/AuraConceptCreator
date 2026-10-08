@@ -569,6 +569,25 @@ a {
   animation: services-ticker 28s linear infinite;
 }
 
+.bottom-project-ticker__track {
+  animation: bottom-project-ticker 24s linear infinite;
+}
+
+.bottom-project-ticker {
+  border-top: 1px solid rgb(255 255 255 / 55%);
+  background: rgb(237 232 223 / 58%);
+  box-shadow:
+    0 -8px 36px rgb(38 8 10 / 12%),
+    0 -1px 0 rgb(255 255 255 / 52%) inset;
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  backdrop-filter: blur(18px) saturate(145%);
+}
+
+.bottom-project-ticker:hover .bottom-project-ticker__track,
+.bottom-project-ticker:focus-visible .bottom-project-ticker__track {
+  animation-play-state: paused;
+}
+
 .specialized-service-popup {
   border: 1px solid transparent;
   background:
@@ -3202,6 +3221,12 @@ body:has(.intro-loader:not(.intro-loader--exiting)) .about-page-reveal {
 }
 
 @keyframes services-ticker {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes bottom-project-ticker {
   to {
     transform: translate3d(-50%, 0, 0);
   }

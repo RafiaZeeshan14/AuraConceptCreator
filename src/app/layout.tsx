@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Geist } from "next/font/google";
 
 import { FloatingActions } from "@/components/floating-actions";
 import { IntroLoader } from "@/components/intro-loader";
+import { BottomProjectTicker } from "@/components/effects/bottom-project-ticker";
 
 import "./globals.css";
 
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <IntroLoader />
         {children}
+        <BottomProjectTicker />
         <FloatingActions />
       </body>
     </html>

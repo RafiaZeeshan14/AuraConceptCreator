@@ -24,7 +24,7 @@ const scrollToTop = () => {
  */
 export function FloatingActions() {
   return (
-    <div className="fixed right-4 bottom-4 z-[9990] flex flex-col items-center gap-3 sm:right-7 sm:bottom-7">
+    <div className="fixed right-4 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-[9990] flex flex-col items-center gap-3 sm:right-7 sm:bottom-[calc(5rem+env(safe-area-inset-bottom))]">
       <button
         type="button"
         onClick={scrollToTop}
