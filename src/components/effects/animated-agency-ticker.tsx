@@ -47,7 +47,7 @@ export function AnimatedAgencyTicker() {
 
         car.classList.remove("is-static");
         const duration = conditions.mobile
-          ? 8
+          ? 10
           : conditions.tablet
             ? 15
             : 18;
