@@ -236,7 +236,7 @@ export function SelectedWorkSection({
         <div
           role="group"
           aria-label="Filter projects by category"
-          className="mt-10 flex snap-x snap-mandatory items-center gap-2 overflow-x-auto border-y border-wine/15 py-4 [scrollbar-width:none] sm:mt-12 sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden"
+          className="mt-10 flex flex-wrap items-center gap-2 border-y border-wine/15 py-4 sm:mt-12"
         >
           {workCategories.map((category) => {
             const isActive = category.id === activeCategory;
