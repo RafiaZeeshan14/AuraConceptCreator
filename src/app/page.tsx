@@ -7,23 +7,27 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Testimonials } from "@/components/sections/testimonials";
 import { ServicesPreview } from "@/components/sections/services-preview";
+import { SpecializedServicePopup } from "@/components/sections/specialized-service-popup";
 import { FaqSection } from "@/components/sections/faq-section";
 import { ServicesTicker } from "@/components/effects";
 
 export default function Home() {
   return (
-    <main className="min-h-svh overflow-hidden">
-      <SiteHeader />
-      <Hero />
-      <ServicesTicker />
-      <BrandsShowcase />
-      <AboutPreview />
-      <ServicesPreview />
-      <WhyChooseAura />
-      <Testimonials />
-      <MeetTheTeam />
-      <FaqSection />
-      <SiteFooter />
-    </main>
+    <>
+      <main className="min-h-svh overflow-hidden">
+        <SiteHeader />
+        <Hero />
+        <ServicesTicker />
+        <BrandsShowcase />
+        <AboutPreview />
+        <ServicesPreview />
+        <WhyChooseAura />
+        <Testimonials />
+        <MeetTheTeam />
+        <FaqSection />
+        <SiteFooter />
+      </main>
+      <SpecializedServicePopup />
+    </>
   );
 }
