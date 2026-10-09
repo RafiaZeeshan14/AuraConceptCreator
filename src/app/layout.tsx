@@ -7,6 +7,7 @@ import { AnimatedAgencyTicker } from "@/components/effects/animated-agency-ticke
 import { CursorGhost } from "@/components/effects/cursor-ghost";
 
 import "./globals.css";
+import { BottomProjectTicker } from "@/components/effects/bottom-project-ticker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +44,9 @@ export default function RootLayout({
         <IntroLoader />
         {children}
         <CursorGhost />
-        <AnimatedAgencyTicker />
+        <BottomProjectTicker />
+        
+        {/* <AnimatedAgencyTicker /> */}
         <FloatingActions />
       </body>
     </html>
