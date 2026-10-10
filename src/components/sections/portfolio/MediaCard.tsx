@@ -5,7 +5,7 @@ import { BsPlayFill } from "react-icons/bs";
 import { HiArrowUpRight } from "react-icons/hi2";
 import { revealDelay, staggerDelay } from "@/components/effects";
 import { cn } from "@/lib/utils";
-import type { WorkProject } from "@/data/portfolio-data";
+import { hasVideoSource, type WorkProject } from "@/data/portfolio-data";
 
 /** Media aspect handled by the card — drives the frame only. */
 export type MediaCardOrientation = "landscape" | "portrait";
@@ -44,7 +44,7 @@ export function MediaCard({
   /** Duration is optional — the badge only renders when the data carries it. */
   const duration = (project as { duration?: string }).duration;
 
-  const isPlayable = Boolean(project.videoUrl && onOpenVideo);
+  const isPlayable = Boolean(hasVideoSource(project) && onOpenVideo);
   const isLinked = Boolean(!isPlayable && project.liveUrl && onOpenLink);
 
   const activate = () => {

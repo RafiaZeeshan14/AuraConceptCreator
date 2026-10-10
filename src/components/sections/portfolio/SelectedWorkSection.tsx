@@ -11,6 +11,7 @@ import {
   videoSubCategories,
   videoSubCounts,
   videoSubKind,
+  hasVideoSource,
   workCategories,
   workCounts,
   workProjects,
@@ -197,7 +198,8 @@ export function SelectedWorkSection({
       ? categoryProjects
       : categoryProjects.filter(
           (project) =>
-            project.videoUrl && videoSubKind(project) === activeSubCategory,
+            hasVideoSource(project) &&
+            videoSubKind(project) === activeSubCategory,
         );
 
   const openVideo = (project: WorkProject) => {

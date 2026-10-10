@@ -81,6 +81,8 @@ export function VideoModal({
   /* Autoplay can still be refused (low-power mode, data saver) — fall back to
      the custom play button instead of sitting on a stalled video. */
   useEffect(() => {
+    if (project?.youtubeVideoId) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -88,7 +90,7 @@ export function VideoModal({
     if (attempt) {
       attempt.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     }
-  }, [project?.videoUrl]);
+  }, [project?.videoUrl, project?.youtubeVideoId]);
 
   if (!project) return null;
 
@@ -156,7 +158,17 @@ export function VideoModal({
     </>
   );
 
-  const media = (
+  const media = project.youtubeVideoId ? (
+    <iframe
+      key={project.youtubeVideoId}
+      src={`https://www.youtube-nocookie.com/embed/${project.youtubeVideoId}?autoplay=1&playsinline=1&rel=0`}
+      title={project.title}
+      className="absolute inset-0 h-full w-full border-0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerPolicy="strict-origin-when-cross-origin"
+      allowFullScreen
+    />
+  ) : (
     <video
       ref={videoRef}
       key={project.videoUrl}
@@ -181,7 +193,7 @@ export function VideoModal({
     />
   );
 
-  const playOverlay = !isPlaying && (
+  const playOverlay = !project.youtubeVideoId && !isPlaying && (
     <button
       type="button"
       aria-label={`Play ${project.title}`}

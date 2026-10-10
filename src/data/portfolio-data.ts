@@ -92,6 +92,8 @@ export interface WorkProject {
   summary?: string;
   description?: string;
   videoUrl?: string;
+  /** YouTube video ID for videos hosted on YouTube instead of the video CDN. */
+  youtubeVideoId?: string;
   posterUrl?: string;
   /**
    * Cloudinary crop ("x,y,w,h") that trims baked-in letterbox bars. Applied
@@ -111,6 +113,10 @@ export interface WorkProject {
   /** Live site opened when the card is clicked. */
   liveUrl?: string;
 }
+
+export const hasVideoSource = (
+  project: Pick<WorkProject, "videoUrl" | "youtubeVideoId">,
+) => Boolean(project.videoUrl || project.youtubeVideoId);
 
 // ─────────────────────────────────────────────
 // PROJECT LIST
@@ -190,6 +196,39 @@ export const workProjects: WorkProject[] = [
       "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692940/Titan_One_DVC.mp4",
     posterUrl: videoPoster("v1790692940/Titan_One_DVC"),
   },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "documentary",
+    eyebrow: "Documentary / SOORTY",
+    headline: ["Stories", "worth telling."],
+    title: "Soorty Documentary",
+    tags: "Documentary · Storytelling · Film",
+    youtubeVideoId: "fqli3qon-R0",
+    posterUrl: "https://i.ytimg.com/vi/fqli3qon-R0/hqdefault.jpg",
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "documentary",
+    eyebrow: "Documentary / Raja Umar Khattab",
+    headline: ["A life of", "courage."],
+    title: "Raja Umar Khattab Documentary",
+    tags: "Documentary · Storytelling · Film",
+    youtubeVideoId: "a0qYtduc6L0",
+    posterUrl: "https://i.ytimg.com/vi/a0qYtduc6L0/hqdefault.jpg",
+  },
+  {
+    categories: ["video"],
+    visual: "video",
+    videoKind: "documentary",
+    eyebrow: "Documentary / DLFNE",
+    headline: ["A story", "uncovered."],
+    title: "DLFNE Documentary",
+    tags: "Documentary · Storytelling · Film",
+    youtubeVideoId: "Mjxj7Dww_1o",
+    posterUrl: "https://i.ytimg.com/vi/Mjxj7Dww_1o/hqdefault.jpg",
+  },
 
   // ── Specialized services ────────
   {
@@ -197,7 +236,7 @@ export const workProjects: WorkProject[] = [
     visual: "video",
     eyebrow: "Specialized / Testimonials",
     headline: ["Real stories,", "told by real people."],
-    title: "Born2Run Testimonials",
+    title: "Shuhada Run Testimonials",
     tags: "Interview · Edit · Sound",
     summary:
       "A testimonial film built from athlete interviews, cut for social and paid distribution.",
@@ -215,7 +254,7 @@ export const workProjects: WorkProject[] = [
     visual: "video",
     eyebrow: "Specialized / Highlights",
     headline: ["The race,", "in ninety seconds."],
-    title: "Born2Run Highlights",
+    title: "Shuhada Run Highlights",
     tags: "Event · Highlights · Edit",
     summary:
       "Event highlight reel covering every race moment, split into social cuts.",
@@ -251,7 +290,7 @@ export const workProjects: WorkProject[] = [
     visual: "video",
     eyebrow: "Specialized / Brand Film",
     headline: ["Omni,", "in motion."],
-    title: "Omni Project Film",
+    title: "Omni karting Race Coverage",
     tags: "Concept · Filming · Edit",
     summary:
       "Brand film for Omni, built around product, people and the work between them.",
@@ -264,7 +303,7 @@ export const workProjects: WorkProject[] = [
     visual: "video",
     eyebrow: "Specialized / Brand Film",
     headline: ["Service", "with honour."],
-    title: "KPO Project Film",
+    title: "Shaheen Force Flag March Coverage ",
     tags: "Concept · Filming · Edit",
     summary:
       "Institutional brand film produced for KPO, from concept through final cut.",
@@ -277,7 +316,7 @@ export const workProjects: WorkProject[] = [
     visual: "video",
     eyebrow: "Specialized / Campaign",
     headline: ["Cholistan,", "told fresh."],
-    title: "Cholistan",
+    title: "Cholistan Rally Coverage",
     tags: "Concept · Filming · Edit",
     summary:
       "Campaign film for Cholistan, shot for digital-first viewing.",
@@ -586,7 +625,7 @@ export const videoSubKind = (project: WorkProject): VideoSubKindId =>
 export const videoSubCounts = videoSubCategories.reduce(
   (counts, { id }) => {
     counts[id] = workProjects.filter(
-      (project) => project.videoUrl && videoSubKind(project) === id,
+      (project) => hasVideoSource(project) && videoSubKind(project) === id,
     ).length;
 
     return counts;
