@@ -1,17 +1,30 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
-// import { CursorAura } from "@/components/effects";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Portfolio } from "@/components/sections/portfolio";
 import { defaultWorkCategory, workCategories } from "@/data/portfolio-data";
-
-
+import { BreadcrumbStructuredData } from "@/components/seo/structured-data";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Portfolio — Our Work & Creative Projects",
   description:
-    "Explore Aura Concept Creator's portfolio of creative campaigns, digital experiences, branding, and social media work.",
+    "Explore Aura Concept Creator's portfolio of creative campaigns, brand identities, social media content, video productions, and web experiences from our Karachi-based creative agency.",
+  keywords: [
+    "creative portfolio",
+    "branding work",
+    "social media content",
+    "video production portfolio",
+    "web design portfolio",
+    "AI content examples",
+    "creative campaigns karachi",
+    "brand identity portfolio",
+    "event coverage",
+    "reels portfolio",
+  ],
+  alternates: {
+    canonical: "https://auraconceptcreator.com/portfolio",
+  },
 };
 
 const categoryIds = new Set<string>(workCategories.map(({ id }) => id));
@@ -29,9 +42,12 @@ export default async function PortfolioPage({
 
   return (
     <>
-      {/* Custom pointer effect — enable later by uncommenting both this line
-          and the import above. */}
-      {/* <CursorAura /> */}
+      <BreadcrumbStructuredData
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Portfolio", href: "/portfolio" },
+        ]}
+      />
       <SiteHeader />
       <Portfolio initialCategory={initialCategory} />
       <SiteFooter />
