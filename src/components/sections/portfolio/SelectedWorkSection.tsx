@@ -20,6 +20,7 @@ import {
 import { WorkCard } from "./WorkCard";
 import { ReelCard } from "./ReelCard";
 import { MediaCard } from "./MediaCard";
+import { SocialMediaCard } from "./SocialMediaCard";
 import type { MediaCardOrientation } from "./MediaCard";
 import { ProjectGallery } from "./ProjectGallery";
 import { VideoModal } from "./VideoModal";
@@ -335,6 +336,16 @@ export function SelectedWorkSection({
             )}
           >
             {visibleProjects.map((project, index) => {
+              if (activeCategory === "social") {
+                return (
+                  <SocialMediaCard
+                    key={project.title}
+                    project={project}
+                    index={index}
+                  />
+                );
+              }
+
               if (mediaCard) {
                 return (
                   <MediaCard

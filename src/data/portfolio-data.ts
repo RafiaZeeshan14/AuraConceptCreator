@@ -126,10 +126,68 @@ export const workProjects: WorkProject[] = [
   {
     categories: ["social"],
     visual: "orbit",
-    eyebrow: "Social / Branding",
-    headline: ["Building", "attention."],
-    title: "Brand & Social Presence",
-    tags: "Strategy · Creative · Social Media",
+    eyebrow: "Social Media / Account Showcase",
+    headline: ["Made to", "stand out."],
+    title: "Sky Stitch Patches",
+    tags: "Instagram Presence · Content · Community",
+    description: "Social media presence and content showcase for Sky Stitch Patches.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791804565/ss-patches.jpg",
+  },
+  {
+    categories: ["social"],
+    visual: "orbit",
+    eyebrow: "Social Media / Account Showcase",
+    headline: ["A feed with", "flavour."],
+    title: "AL-Jeddah",
+    tags: "Instagram Presence · Content · Community",
+    description: "Social media presence and content showcase for AL-Jeddah.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802480/ss-aljeddah.jpg",
+  },
+  {
+    categories: ["social"],
+    visual: "orbit",
+    eyebrow: "Social Media / Account Showcase",
+    headline: ["A sharper", "digital presence."],
+    title: "Dimitris",
+    tags: "Instagram Presence · Content · Community",
+    description: "Social media presence and content showcase for Dimitris.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802480/ss-dimitris.jpg",
+  },
+  {
+    categories: ["social"],
+    visual: "orbit",
+    eyebrow: "Social Media / Account Showcase",
+    headline: ["Built for", "the scroll."],
+    title: "Elite",
+    tags: "Instagram Presence · Content · Community",
+    description: "Social media presence and content showcase for Elite.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802479/ss-elite.jpg",
+  },
+  {
+    categories: ["social"],
+    visual: "orbit",
+    eyebrow: "Social Media / Account Showcase",
+    headline: ["A feed that", "feels distinct."],
+    title: "Corum",
+    tags: "Instagram Presence · Content · Community",
+    description: "Social media presence and content showcase for Corum.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802478/ss-corum.jpg",
+  },
+  {
+    categories: ["social"],
+    visual: "orbit",
+    eyebrow: "Social Media / Account Showcase",
+    headline: ["Content with", "character."],
+    title: "KAM",
+    tags: "Instagram Presence · Content · Community",
+    description: "Social media presence and content showcase for KAM.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802468/ss-kam.jpg",
   },
   {
     categories: ["video"],
@@ -146,14 +204,6 @@ export const workProjects: WorkProject[] = [
     headline: ["Make it", "memorable."],
     title: "Photo & Video Production",
     tags: "Direction · Shoot · Edit",
-  },
-  {
-    categories: ["social"],
-    visual: "orbit",
-    eyebrow: "Social / Content",
-    headline: ["Always", "in the feed."],
-    title: "Social Content Engine",
-    tags: "Reels · Calendar · Community",
   },
   // ── DVC (Video Production sub-facet) ───────────
   {
@@ -463,6 +513,28 @@ videoUrl:
   {
     categories: ["branding"],
     visual: "columns",
+    eyebrow: "Wellness / Brand Identity",
+    headline: ["A brand", "that restores."],
+    title: "Sweat & Shed",
+    tags: "Wellness · Brand Identity · Visual Kit",
+    description:
+      "A visual identity kit for Sweat & Shed, a wellness brand built around feeling at home.",
+    thumbnailUrl:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791800699/0-slide.png",
+    imageOnly: true,
+    gallerySlug: "sweat-and-shed",
+    galleryImages: [
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791800699/0-slide.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799973/1-slide.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799990/2-slide.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799972/3-slide.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799973/4-slide.png",
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799976/5-slide.png",
+    ],
+  },
+  {
+    categories: ["branding"],
+    visual: "columns",
     eyebrow: "Restaurant / Brand Identity",
     headline: ["A brand", "you recall."],
     title: "AL-Jeddah",
@@ -514,14 +586,6 @@ videoUrl:
     title: "Product Launch Film",
     tags: "Direction · Shoot · Edit",
   },
-  {
-    categories: ["social"],
-    visual: "discs",
-    eyebrow: "Performance / Social",
-    headline: ["Reach that", "performs."],
-    title: "Performance Campaign",
-    tags: "Paid Social · Reporting · Growth",
-  },
   // ── Video / Reel projects ──────────────────────
   {
     categories: ["video", "ai"],
@@ -536,7 +600,7 @@ videoUrl:
     posterUrl: "https://res.cloudinary.com/l92fw4gu/video/upload/v1790592134/FUJI_VIDEO_LOW.jpg",
   },
   {
-    categories: ["video", "social", "ai"],
+    categories: ["video", "ai"],
     visual: "video",
     videoKind: "ai",
     eyebrow: "Social / Brand Reel",
@@ -548,7 +612,7 @@ videoUrl:
     posterUrl: "https://res.cloudinary.com/l92fw4gu/video/upload/v1790167213/Fasfars_International_Cats_Day_low.jpg",
   },
   {
-    categories: ["video", "social", "ai"],
+    categories: ["video", "ai"],
     visual: "video",
     videoKind: "ai",
     eyebrow: "Launch / Brand Film",
@@ -560,7 +624,7 @@ videoUrl:
     posterUrl: "https://res.cloudinary.com/l92fw4gu/video/upload/v1790167201/Veerpak_low.jpg",
   },
   {
-    categories: ["video", "social", "ai"],
+    categories: ["video", "ai"],
     visual: "video",
     videoKind: "ai",
     eyebrow: "Product / Reel",
@@ -572,7 +636,7 @@ videoUrl:
     posterUrl: "https://res.cloudinary.com/l92fw4gu/video/upload/v1790167201/Fasfars_Oats_Reel_low.jpg",
   },
   {
-    categories: ["video", "social", "ai"],
+    categories: ["video", "ai"],
     visual: "video",
     videoKind: "ai",
     eyebrow: "Social / Stitch Reel",
