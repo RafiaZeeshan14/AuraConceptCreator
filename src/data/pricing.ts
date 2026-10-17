@@ -30,6 +30,10 @@ export interface PlanDetails {
   priceNote?: string;
   description?: string;
   features: readonly string[];
+  featureGroups?: readonly {
+    heading: string;
+    features: readonly string[];
+  }[];
   badge?: string;
   /** Single line at the top of the card for what sets the package apart. */
   highlight?: string;
@@ -339,60 +343,101 @@ export const servicePlans: Record<PlanTab, PlanSet> = {
       "Precision-driven performance strategies that keep acquisition efficient, measurable and focused on what moves your business.",
     plans: [
       {
-        label: "1. Launch",
-        badge: "Starter",
+        label: "Starter",
+        badge: "Entry Level",
         price: "PKR 25,000",
         suffix: "/ month",
         description: "For small businesses starting with paid ads.",
-        features: [
-          "Meta Ads Management (Facebook & Instagram)",
-          "Up to 2 active campaigns",
-          "Up to 4 ad creatives",
-          "Audience Research & Targeting",
-          "Pixel & Conversion Tracking Review",
-          "Monthly Performance Report",
+        features: [],
+        featureGroups: [
+          {
+            heading: "Campaign Management",
+            features: [
+              "Platforms: Meta Ads (Facebook & Instagram)",
+              "Campaigns: Up to 2 active campaigns",
+              "Ad Creatives: 4 per month",
+              "Audience & Competitor Research",
+              "Campaign Setup & Pixel Check",
+              "Basic A/B Testing",
+              "Lead Generation / Traffic Campaigns",
+              "Budget Monitoring & Optimization",
+            ],
+          },
+          {
+            heading: "Support",
+            features: [
+              "Monthly Performance Report",
+              "Monthly Strategy Meeting",
+              "Basic Conversion Tracking Review",
+            ],
+          },
         ],
-        meta: [{ label: "Ad spend", value: "Billed separately" }],
         featured: false,
       },
       {
-        label: "2. Growth",
-        badge: "Popular",
+        label: "Standard",
+        badge: "Recommended",
         price: "PKR 45,000",
         suffix: "/ month",
-        description: "For businesses looking to generate consistent leads and sales.",
-        features: [
-          "Meta Ads Management",
-          "Up to 4 active campaigns",
-          "Up to 8 ad creatives",
-          "Retargeting Campaigns",
-          "Pixel, Events & Conversion Tracking Setup",
-          "A/B Testing & Audience Optimization",
-          "Weekly Performance Monitoring",
-          "Monthly Report & Strategy Call",
+        description: "For businesses focused on consistent leads and sales.",
+        features: [],
+        featureGroups: [
+          {
+            heading: "Campaign Management",
+            features: [
+              "Platforms: Meta Ads (Facebook & Instagram)",
+              "Campaigns: Up to 4 active campaigns",
+              "Ad Creatives: 8 per month",
+              "Advanced Audience & Competitor Research",
+              "Retargeting Campaigns",
+              "A/B Testing & Creative Optimization",
+              "Lead Generation / Sales Campaigns",
+              "Landing Page Recommendations",
+              "Conversion Tracking Review",
+            ],
+          },
+          {
+            heading: "Support",
+            features: [
+              "Bi-Weekly Performance Reports",
+              "Bi-Weekly Strategy Meetings",
+              "Lead Quality & Campaign Analysis",
+            ],
+          },
         ],
-        meta: [{ label: "Ad spend", value: "Billed separately" }],
         featured: true,
       },
       {
-        label: "3. Scale",
-        badge: "Advanced",
-        price: "PKR 65,000",
+        label: "Premium",
+        badge: "Growth Focused",
+        price: "PKR 75,000",
         suffix: "/ month",
-        description: "For established brands aiming to scale campaigns and maximize conversions.",
-        features: [
-          "Meta Ads Management",
-          "Google Ads Management",
-          "Up to 6 active campaigns across platforms",
-          "Up to 12 ad creatives",
-          "Advanced Retargeting & Funnel Strategy",
-          "Conversion Tracking & Analytics",
-          "Continuous A/B Testing & Optimization",
-          "Weekly Reports & Monthly Strategy Meeting",
-        ],
-        meta: [
-          { label: "Ad spend", value: "Billed separately" },
-          { label: "Google Ads", value: "Subject to account and campaign requirements" },
+        description: "For established businesses scaling their advertising results.",
+        features: [],
+        featureGroups: [
+          {
+            heading: "Campaign Management",
+            features: [
+              "Platforms: Meta Ads; Google Ads included",
+              "Campaigns: Up to 6 active campaigns",
+              "Ad Creatives: 12 per month",
+              "Advanced Audience Segmentation",
+              "Retargeting & Funnel Strategy",
+              "A/B Testing & Ongoing Optimization",
+              "Lead Generation / Conversion Campaigns",
+              "Landing Page & Conversion Recommendations",
+              "Conversion Tracking Review",
+              "Competitor & Market Analysis",
+            ],
+          },
+          {
+            heading: "Support",
+            features: [
+              "Weekly Performance Updates",
+              "Monthly Strategy Meetings",
+              "Monthly Growth Strategy & Insights",
+            ],
+          },
         ],
         featured: false,
       },

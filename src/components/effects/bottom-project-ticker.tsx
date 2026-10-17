@@ -7,6 +7,8 @@ const tickerItems = [
   "Get a quote",
 ] as const;
 
+const TICKER_GROUP_COUNT = 6;
+
 function TickerGroup({ duplicate = false }: { duplicate?: boolean }) {
   return (
     <span
@@ -40,8 +42,12 @@ export function BottomProjectTicker() {
       className="bottom-project-ticker fixed inset-x-0 bottom-0 z-[9980] flex h-[calc(3rem+env(safe-area-inset-bottom))] w-screen items-center overflow-hidden text-wine sm:h-[calc(3.25rem+env(safe-area-inset-bottom))]"
     >
       <span className="bottom-project-ticker__track flex w-max items-center py-3 text-[9px] font-semibold uppercase tracking-[0.15em] sm:py-3.5 sm:text-[10px] sm:tracking-[0.2em]">
-        <TickerGroup />
-        <TickerGroup duplicate />
+        {Array.from({ length: TICKER_GROUP_COUNT * 2 }, (_, index) => (
+          <TickerGroup
+            key={index}
+            duplicate={index >= TICKER_GROUP_COUNT}
+          />
+        ))}
       </span>
     </Link>
   );

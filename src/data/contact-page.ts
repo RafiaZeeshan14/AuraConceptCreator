@@ -19,8 +19,8 @@ import type { IconType } from "react-icons";
 
 export const contactDetails = {
   address: "Gulshan-e-Maymar, Shehryar Towers, Mezzanine Floor, Office No: 12",
-  phone: "+92 319 6865993",
-  phoneLink: "+923196865993",
+  phone: "0311 1092787",
+  phoneLink: "+923111092787",
   email: "auraconceptcreator@gmail.com",
 } as const;
 

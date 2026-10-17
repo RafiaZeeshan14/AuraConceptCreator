@@ -51,8 +51,8 @@ export const SITE_KEYWORDS: string[] = [
 export const COMPANY_DETAILS = {
   name: SITE_NAME,
   email: "auraconceptcreator@gmail.com",
-  phone: "+92 319 6865993",
-  phoneLink: "+923196865993",
+  phone: "+92 311 1092787",
+  phoneLink: "+923111092787",
   address: "Gulshan-e-Maymar, Shehryar Towers, Mezzanine Floor, Office No: 12",
   addressLocality: "Karachi",
   addressRegion: "Sindh",

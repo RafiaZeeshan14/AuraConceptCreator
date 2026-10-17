@@ -43,10 +43,10 @@ export function SiteFooter() {
               Bring us the rough idea, the ambitious question or the next big move. We&apos;ll bring the clarity and craft to make it real.
             </p>
             <a
-              href="mailto:hello@auraconceptcreator.com"
+              href="mailto:auraconceptcreator@gmail.com"
               className="site-footer__email group mt-8 inline-flex items-center gap-3 text-sm font-semibold sm:text-base"
             >
-              hello@auraconceptcreator.com
+              auraconceptcreator@gmail.com
               <span className="grid size-9 place-items-center rounded-full bg-accent text-cream transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
                 <HiArrowUpRight className="size-4" />
               </span>

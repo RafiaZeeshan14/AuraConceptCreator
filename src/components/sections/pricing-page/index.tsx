@@ -378,18 +378,42 @@ export function PricingPageContent() {
                   </dl>
                 )}
 
-                <ul className="mt-6 space-y-3 sm:mt-7 sm:space-y-3.5">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5 text-[13.5px] leading-6 sm:gap-3 sm:text-[15px]">
-                      <span className={[
-                        "mt-1 grid size-3.5 shrink-0 place-items-center rounded-full text-[9px] font-bold sm:size-4 sm:text-[10px]",
-                        plan.featured ? "bg-[#f4eef0] text-[#5d1011]" : "bg-[#5d1011] text-white",
-                      ].join(" ")}>
-                        <FiCheck />
-                      </span>
-                      <span className={plan.featured ? "text-[#f4ece9]" : "text-[#4f1d1f]"}>{feature}</span>
-                    </li>
-                  ))}
+                <ul className="mt-6 space-y-4 sm:mt-7">
+                  {plan.featureGroups
+                    ? plan.featureGroups.map((group) => (
+                        <li key={group.heading}>
+                          <h4 className={cn(
+                            "mb-2 text-[13px] font-semibold sm:text-sm",
+                            plan.featured ? "text-[#f4ece9]" : "text-[#4f1d1f]",
+                          )}>
+                            {group.heading}
+                          </h4>
+                          <ul className="space-y-2 sm:space-y-2.5">
+                            {group.features.map((feature) => (
+                              <li key={feature} className="flex items-start gap-2.5 text-[13.5px] leading-6 sm:gap-3 sm:text-[15px]">
+                                <span className={[
+                                  "mt-1 grid size-3.5 shrink-0 place-items-center rounded-full text-[9px] font-bold sm:size-4 sm:text-[10px]",
+                                  plan.featured ? "bg-[#f4eef0] text-[#5d1011]" : "bg-[#5d1011] text-white",
+                                ].join(" ")}>
+                                  <FiCheck />
+                                </span>
+                                <span className={plan.featured ? "text-[#f4ece9]" : "text-[#4f1d1f]"}>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))
+                    : plan.features.map((feature) => (
+                        <li key={feature} className="flex items-start gap-2.5 text-[13.5px] leading-6 sm:gap-3 sm:text-[15px]">
+                          <span className={[
+                            "mt-1 grid size-3.5 shrink-0 place-items-center rounded-full text-[9px] font-bold sm:size-4 sm:text-[10px]",
+                            plan.featured ? "bg-[#f4eef0] text-[#5d1011]" : "bg-[#5d1011] text-white",
+                          ].join(" ")}>
+                            <FiCheck />
+                          </span>
+                          <span className={plan.featured ? "text-[#f4ece9]" : "text-[#4f1d1f]"}>{feature}</span>
+                        </li>
+                      ))}
                 </ul>
 
                 <div className="mt-auto pt-7 sm:pt-8">
