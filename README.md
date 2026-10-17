@@ -1,57 +1,67 @@
 # Aura Concept Creator
 
-A production-ready foundation for a digital creative agency website.
+The website for Aura Concept Creator, a creative agency based in Karachi,
+Pakistan. This project is built with Next.js, React, and TypeScript.
 
-## Stack
+## Get started
 
-- Next.js 16 App Router and React 19
-- TypeScript with strict type checking
-- Tailwind CSS 4
-- GPU-friendly CSS animations with reduced-motion support
-- React Icons for tree-shakeable icon sets
-- React Bits Magic Rings powered by Three.js
-- `clsx` + `tailwind-merge` via `src/lib/utils.ts`
+You’ll need Node.js 20.9 or newer installed on your computer.
 
-## Commands
+1. Open a terminal in the project folder.
+2. Install the project dependencies:
 
-```bash
-npm run dev        # local development
-npm run dev:clean  # reset the .next cache, then start local development
-npm run clean      # reset the .next cache only
-npm run check      # lint and type-check
-npm run build      # optimized production build
-npm run start      # serve the production build
-```
+   ```bash
+   npm ci
+   ```
 
-Node.js 20.9 or newer is required. Keep pages as Server Components by default and
-add `"use client"` only to interactive components to minimize browser JavaScript.
+3. Start the local development server:
 
-## Troubleshooting
+   ```bash
+   npm run dev
+   ```
 
-### Links stop navigating (for example `/about` does nothing)
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-This is a stale dev-server state, not a routing bug: after a broken/saved
-intermediate import the running `next dev` keeps a corrupt module graph in
-`.next`, so the RSC payload for the target route keeps failing and the client
-router silently falls back to a full page load that never renders.
+The server refreshes the site as you save changes. Press `Ctrl+C` in the
+terminal when you want to stop it.
 
-Recover with:
+## Useful commands
 
-```bash
-# stop the current dev server (Ctrl+C), then:
-npm run dev:clean
-```
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the development server |
+| `npm run dev:clean` | Clears the Next.js cache, then starts development |
+| `npm run check` | Runs lint and TypeScript checks |
+| `npm run build` | Builds the site for production |
+| `npm run start` | Serves a production build |
+| `npm run clean` | Clears the generated Next.js cache |
 
-If a browser tab is still open on the broken session, hard-refresh it once
-(Ctrl+Shift+R) so the old client runtime is discarded.
+Run `npm run build` before deploying to check that the production build works.
 
+## Updating images and videos
 
-## Dependency notes
+The site’s images, logos, and videos are hosted on Cloudinary.
 
-- `.npmrc` sets `legacy-peer-deps=true`. `lightswind` ships stale optional peer
-  ranges (`framer-motion ^10–^12`, `tailwind-merge ^2.6.1`) that this project
-  intentionally exceeds, so npm's strict peer resolution would abort
-  `npm install` with `ERESOLVE` on clean installs (including Vercel builds).
-- `package-lock.json` is committed and pins React to 19.2.8 because
-  `@react-three/fiber` currently requires `react >=19 <19.3`. Keep the lockfile
-  in sync (`npm install`) instead of deleting it.
+1. Sign in to Cloudinary—or create an account using **alternate0@gmail.com**.
+2. Open **Media Library** and upload the image or video.
+3. Open the uploaded asset and copy its **Secure URL**.
+4. Add that URL to the matching project data:
+   - Brand logos: `src/data/brands.ts`
+   - Team photos: `src/data/team.ts`
+   - Portfolio images and videos: `src/data/portfolio-data.ts`
+
+Keep the Cloudinary URL and filename intact. Brand logos use a shared image
+transform in `src/data/brands.ts`; enter each logo’s display name and dimensions
+alongside its asset path so it appears correctly in the scrolling showcase.
+
+## Where to make common changes
+
+- Pages and page metadata: `src/app/`
+- Shared page sections and components: `src/components/`
+- Site content and service plans: `src/data/`
+- Global styles: `src/app/globals.css`
+
+## A note about dependencies
+
+Keep `package-lock.json` in the project and commit it with dependency changes.
+Use `npm ci` to install the exact dependency versions recorded in the lockfile.

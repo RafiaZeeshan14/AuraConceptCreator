@@ -50,6 +50,4 @@ export const brands = brandAssets.map(([id, name, path, width, height]) => ({
   height,
 }));
 
-export const loopedBrands = [...brands, ...brands];
-
 export type Brand = (typeof brands)[number];
