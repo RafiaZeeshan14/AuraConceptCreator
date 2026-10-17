@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import { Cormorant_Garamond, Geist } from "next/font/google";
 
 import { FloatingActions } from "@/components/floating-actions";
@@ -116,8 +117,6 @@ export default function RootLayout({
         {children}
         <CursorGhost />
         <BottomProjectTicker />
-
-        {/* <AnimatedAgencyTicker /> */}
         <FloatingActions />
       </body>
     </html>

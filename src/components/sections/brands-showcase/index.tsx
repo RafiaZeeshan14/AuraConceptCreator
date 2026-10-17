@@ -46,15 +46,9 @@ function BrandRow({
 }
 
 export function BrandsShowcase() {
-  // The two belts run opposite ways and must never read as the same sequence.
-  // Rotating the list is not enough — the cyclic order stays identical, so both
-  // rows eventually line up logo-for-logo. Interleaving the roster re-orders it
-  // for real, so no two windows can ever match. Built during render from a
-  // fixed source, so server and client markup always agree.
-  const evens = brands.filter((_, index) => index % 2 === 0);
-  const odds = brands.filter((_, index) => index % 2 === 1);
-  const topOrder = brands;
-  const bottomOrder = [...evens, ...odds];
+  // Keep the rows disjoint so the same brand can never line up across them.
+  const topOrder = brands.filter((_, index) => index % 2 === 0);
+  const bottomOrder = brands.filter((_, index) => index % 2 === 1);
 
   return (
     <section

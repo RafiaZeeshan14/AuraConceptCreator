@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin 'lightswind/plugin';
+
 :root {
   --cream: #ede8df;
   --wine: #5d1011;
@@ -2941,14 +2941,14 @@ a {
   /* 2px keeps every card visually separate without breaking the belt. */
   gap: 5px;
   will-change: transform;
-  animation: brands-marquee-forward 95s linear infinite;
+  animation: brands-marquee-forward 47.5s linear infinite;
 }
 
 /* Second row travels the other way. Both tracks hold the list twice, so a ±50%
    travel loops seamlessly. */
 .brands-showcase__track--backward {
   animation-name: brands-marquee-backward;
-  animation-duration: 110s;
+  animation-duration: 55s;
 }
 
 @keyframes brands-marquee-backward {
