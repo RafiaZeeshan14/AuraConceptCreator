@@ -41,7 +41,7 @@ export function IntroLoader() {
 
       <div aria-hidden="true" className="intro-loader__topline">
         <span>Independent creative agency</span>
-        <span>Est. 2025&nbsp;&nbsp;·&nbsp;&nbsp;Worldwide</span>
+        <span>Est. 2026&nbsp;&nbsp;·&nbsp;&nbsp;Worldwide</span>
       </div>
 
       <span aria-hidden="true" className="intro-loader__side-note intro-loader__side-note--left">

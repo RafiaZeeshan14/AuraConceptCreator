@@ -22,7 +22,7 @@ export const heroTags = [
 export const heroAvatars = ["A", "N", "O"] as const;
 
 export const heroCopy = {
-  badge: "Independent creative studio",
+  badge: "Independent creative agency ",
   headlineLead: "Designing",
   headlineAccent: "futures",
   description:
