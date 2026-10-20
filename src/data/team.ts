@@ -1,6 +1,14 @@
 import type { TeamMember } from "@/components/lightswind/team-carousel";
 
 export const teamMembers: TeamMember[] = [
+   {
+    id: "maaz-moeed",
+    name: "Maaz Moeed",
+    role: "CEO",
+    tag: "Leadership",
+    image:
+      "https://res.cloudinary.com/l92fw4gu/image/upload/v1792484982/ChatGPT_Image_Oct_19_2026_03_14_18_PM.png",
+  },
   {
     id: "asma",
     name: "Asma Shahzad",
