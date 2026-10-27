@@ -206,6 +206,7 @@ export const workProjects: WorkProject[] = [
     tags: "Direction · Shoot · Edit",
   },
   // ── DVC (Video Production sub-facet) ───────────
+  /*
   {
     categories: ["video"],
     visual: "video",
@@ -222,6 +223,7 @@ export const workProjects: WorkProject[] = [
       "x_0,y_99,w_1920,h_882",
     ),
   },
+  */
   {
     categories: ["video"],
     visual: "video",
@@ -231,8 +233,9 @@ export const workProjects: WorkProject[] = [
     title: "Vicky Farmhouse DVC",
     tags: "DVC · Cinematography · Edit",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692972/Vicky_Farmhous_DVC.mp4",
-    posterUrl: videoPoster("v1790692972/Vicky_Farmhous_DVC"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110176/Vicky_Farmhous_DVC.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110176/Vicky_Farmhous_DVC.jpg",
   },
   {
     categories: ["video"],
@@ -243,8 +246,9 @@ export const workProjects: WorkProject[] = [
     title: "Titan One DVC",
     tags: "DVC · Direction · Post",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790692940/Titan_One_DVC.mp4",
-    posterUrl: videoPoster("v1790692940/Titan_One_DVC"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110168/Titan_One_DVC.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110168/Titan_One_DVC.jpg",
   },
   {
     categories: ["video"],
@@ -291,13 +295,10 @@ export const workProjects: WorkProject[] = [
     summary:
       "A testimonial film built from athlete interviews, cut for social and paid distribution.",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791193181/Testimonials_Born2Run.mp4",
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793113274/Shuhada_Run_Testimonals.mp4",
     videoCrop: "x_0,y_99,w_1920,h_882",
-    posterUrl: videoPoster(
-      "v1791193181/Testimonials_Born2Run",
-      1,
-      "x_0,y_99,w_1920,h_882",
-    ),
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1,c_crop,x_0,y_99,w_1920,h_882/v1793113274/Shuhada_Run_Testimonals.jpg",
   },
   {
     categories: ["specialized"],
@@ -309,13 +310,10 @@ export const workProjects: WorkProject[] = [
     summary:
       "Event highlight reel covering every race moment, split into social cuts.",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791193142/Highlights_Born2Run.mp4",
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793113207/Shuhuda_Run_Highlgihts.mp4",
     videoCrop: "x_0,y_44,w_854,h_392",
-    posterUrl: videoPoster(
-      "v1791193142/Highlights_Born2Run",
-      1,
-      "x_0,y_44,w_854,h_392",
-    ),
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1,c_crop,x_0,y_44,w_854,h_392/v1793113207/Shuhuda_Run_Highlgihts.jpg",
   },
   {
     categories: ["specialized"],
@@ -327,13 +325,10 @@ export const workProjects: WorkProject[] = [
     summary:
       "Event coverage film for Toyota's Sure Gala, delivered as a full recap cut.",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791193079/TOYOTA_SURE_GALA_low_file.mp4",
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793113331/TOYOTA_SURE_GALA.mp4",
     videoCrop: "x_0,y_99,w_1920,h_881",
-    posterUrl: videoPoster(
-      "v1791193079/TOYOTA_SURE_GALA_low_file",
-      1,
-      "x_0,y_99,w_1920,h_881",
-    ),
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1,c_crop,x_0,y_99,w_1920,h_881/v1793113331/TOYOTA_SURE_GALA.jpg",
   },
   {
     categories: ["specialized"],
@@ -345,8 +340,9 @@ export const workProjects: WorkProject[] = [
     summary:
       "Brand film for Omni, built around product, people and the work between them.",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791192933/projectOmni.mp4",
-    posterUrl: videoPoster("v1791192933/projectOmni"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793113275/Omni_Karting_Race_Coverage.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1/v1793113275/Omni_Karting_Race_Coverage.jpg",
   },
   {
     categories: ["specialized"],
@@ -358,8 +354,9 @@ export const workProjects: WorkProject[] = [
     summary:
       "Institutional brand film produced for KPO, from concept through final cut.",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791192857/projectKPO.mp4",
-    posterUrl: videoPoster("v1791192857/projectKPO"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793113286/Shaheen_Force_Flag_March.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1/v1793113286/Shaheen_Force_Flag_March.jpg",
   },
   {
     categories: ["specialized"],
@@ -370,10 +367,11 @@ export const workProjects: WorkProject[] = [
     tags: "Concept · Filming · Edit",
     summary:
       "Campaign film for Cholistan, shot for digital-first viewing.",
-videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1791192731/Cholistan.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793113276/Cholistan_Rally_Coverage.mp4",
     videoCrop: "x_0,y_44,w_854,h_392",
-    posterUrl: videoPoster("v1791192731/Cholistan", 3, "x_0,y_44,w_854,h_392"),
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_3,c_crop,x_0,y_44,w_854,h_392/v1793113276/Cholistan_Rally_Coverage.jpg",
   },
 
   // ── Reels (Video Production sub-facet) ────────
@@ -465,7 +463,7 @@ videoUrl:
     tags: "Web Design · Development · CMS",
     summary: "Portfolio site for an event management company.",
     thumbnailUrl:
-      thumbnail("v1790686611/westturn-media.png"),
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112940/westturn-media.webp",
     liveUrl: "https://westurn-media.vercel.app/",
   },
   {
@@ -476,7 +474,8 @@ videoUrl:
     title: "Autodrapes",
     tags: "Store · UI/UX · Development",
     summary: "Shopify store selling car sunshades for all models.",
-    thumbnailUrl: thumbnail("v1790765376/webautodrapes.png"),
+    thumbnailUrl:
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112936/webautodrapes.webp",
     liveUrl: "https://autodrapes.com/",
   },
   {
@@ -488,7 +487,7 @@ videoUrl:
     tags: "Web Design · Booking Flow · SEO",
     summary: "Booking website for a countryside farmhouse.",
     thumbnailUrl:
-      thumbnail("v1790686605/vickyfarmhouse.png"),
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112933/vickyfarmhouse.webp",
     liveUrl: "https://vickyfarmhouse.com/",
   },
   {
@@ -500,7 +499,7 @@ videoUrl:
     tags: "Web Design · Content · Development",
     summary: "Profile site for an event management company.",
     thumbnailUrl:
-      thumbnail("v1790686608/heights-communications.png"),
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112930/heights-communications.webp",
     liveUrl: "https://heights-communications.com/",
   },
   {
