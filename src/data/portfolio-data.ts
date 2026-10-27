@@ -386,8 +386,9 @@ videoUrl:
     title: "Kaami Reel",
     tags: "Concept · Filming · Editing",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693350/kaami.mp4",
-    posterUrl: videoPoster("v1790693350/kaami", 6),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110693/Kaami.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_6/v1793110693/Kaami.jpg",
   },
   {
     categories: ["video"],
@@ -398,8 +399,9 @@ videoUrl:
     title: "Women's Day HC",
     tags: "Concept · Filming · Editing",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693346/Women_s_Day_HC.mp4",
-    posterUrl: videoPoster("v1790693346/Women_s_Day_HC"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110733/Women_s_Day_HC.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110733/Women_s_Day_HC.jpg",
   },
   {
     categories: ["video"],
@@ -410,8 +412,9 @@ videoUrl:
     title: "Sky Stitch Reel",
     tags: "Concept · Filming · Editing",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693337/Sky_Stitch.mp4",
-    posterUrl: videoPoster("v1790693337/Sky_Stitch"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110776/Sky_Stitch.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110776/Sky_Stitch.jpg",
   },
   {
     categories: ["video"],
@@ -422,8 +425,9 @@ videoUrl:
     title: "Evergreen Reel",
     tags: "Concept · Filming · Editing",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693272/Evergreen.mp4",
-    posterUrl: videoPoster("v1790693272/Evergreen", 1),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110816/Evergreen.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1/v1793110816/Evergreen.jpg",
   },
   {
     categories: ["video"],
@@ -434,8 +438,9 @@ videoUrl:
     title: "Food Chowk Reel",
     tags: "Concept · Filming · Editing",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693266/Food_Chowk.mp4",
-    posterUrl: videoPoster("v1790693266/Food_Chowk", 1),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110850/Food_Chowk.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/so_1/v1793110850/Food_Chowk.jpg",
   },
   {
     categories: ["video"],
@@ -446,22 +451,10 @@ videoUrl:
     title: "Autodrapes Reel",
     tags: "Concept · Filming · Editing",
     videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693206/Auto_Drapes.mp4",
-    posterUrl: videoPoster("v1790693206/Auto_Drapes"),
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110872/Auto_Drapes.mp4",
+    posterUrl:
+      "https://res.cloudinary.com/dtzgqlr3/video/upload/v1793110872/Auto_Drapes.jpg",
   },
-  {
-    categories: ["video"],
-    visual: "video",
-    videoKind: "reels",
-    eyebrow: "Social / Brand Reel",
-    headline: ["Breeze in", "motion."],
-    title: "Breezeland Reel",
-    tags: "Concept · Filming · Editing",
-    videoUrl:
-      "https://res.cloudinary.com/l92fw4gu/video/upload/v1790693204/Breezeland_1.mp4",
-    posterUrl: videoPoster("v1790693204/Breezeland_1", 1),
-  },
-
   // ── Live client websites ───────────────────────
   {
     categories: ["web"],
@@ -520,16 +513,16 @@ videoUrl:
     description:
       "A visual identity kit for Sweat & Shed, a wellness brand built around feeling at home.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791800699/0-slide.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109290/01.png",
     imageOnly: true,
     gallerySlug: "sweat-and-shed",
     galleryImages: [
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791800699/0-slide.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799973/1-slide.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799990/2-slide.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799972/3-slide.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799973/4-slide.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791799976/5-slide.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109290/01.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109290/02.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109291/03.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109292/04.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109295/05.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109296/06.png",
     ],
   },
   {
@@ -565,17 +558,17 @@ videoUrl:
     description:
       "A visual identity kit for Sky Stitch Patches, bringing its custom patches to life.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452499/slide-01.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109665/ss-01.png",
     imageOnly: true,
     gallerySlug: "sky-stitch-patches",
     galleryImages: [
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452499/slide-01.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452497/slide-02.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452497/slide-03.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452497/slide-04.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452502/slide-05.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452501/slide-06.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791452499/slide-07.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109665/ss-01.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109689/ss-02.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109690/ss-03.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109693/ss-04.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109712/ss-05.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109713/ss-06.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793109715/ss-07.png",
     ],
   },
   {
