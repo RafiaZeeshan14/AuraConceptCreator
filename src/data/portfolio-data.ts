@@ -542,17 +542,17 @@ videoUrl:
     description:
       "A visual identity kit for AL-Jeddah, a restaurant brand.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/1.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108335/slide-01.png",
     imageOnly: true,
-    gallerySlug: "brewe-packaging",
+    gallerySlug: "al-jeddah",
     galleryImages: [
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/1.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/2.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/3.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364733/4.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364734/5.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364734/6.png",
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791364734/7.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108335/slide-01.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108343/slide-02.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108344/slide-03.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108344/slide-04.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108345/slide-05.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108346/slide-06.png",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793108347/slide-07.png",
     ],
   },
   {
