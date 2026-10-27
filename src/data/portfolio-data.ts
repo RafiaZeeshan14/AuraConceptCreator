@@ -132,7 +132,7 @@ export const workProjects: WorkProject[] = [
     tags: "Instagram Presence · Content · Community",
     description: "Social media presence and content showcase for Sky Stitch Patches.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791804565/ss-patches.jpg",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112468/ss-patches.webp",
   },
   {
     categories: ["social"],
@@ -143,7 +143,7 @@ export const workProjects: WorkProject[] = [
     tags: "Instagram Presence · Content · Community",
     description: "Social media presence and content showcase for AL-Jeddah.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802480/ss-aljeddah.jpg",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112461/ss-aljeddah.webp",
   },
   {
     categories: ["social"],
@@ -154,7 +154,7 @@ export const workProjects: WorkProject[] = [
     tags: "Instagram Presence · Content · Community",
     description: "Social media presence and content showcase for Dimitris.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802480/ss-dimitris.jpg",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112459/ss-dimitris.webp",
   },
   {
     categories: ["social"],
@@ -165,7 +165,7 @@ export const workProjects: WorkProject[] = [
     tags: "Instagram Presence · Content · Community",
     description: "Social media presence and content showcase for Elite.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802479/ss-elite.jpg",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112478/ss-elite.webp",
   },
   {
     categories: ["social"],
@@ -176,7 +176,7 @@ export const workProjects: WorkProject[] = [
     tags: "Instagram Presence · Content · Community",
     description: "Social media presence and content showcase for Corum.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802478/ss-corum.jpg",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112474/ss-corum.webp",
   },
   {
     categories: ["social"],
@@ -187,7 +187,7 @@ export const workProjects: WorkProject[] = [
     tags: "Instagram Presence · Content · Community",
     description: "Social media presence and content showcase for KAM.",
     thumbnailUrl:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1791802468/ss-kam.jpg",
+      "https://res.cloudinary.com/dtzgqlr3/image/upload/v1793112471/ss-kam.webp",
   },
   {
     categories: ["video"],
