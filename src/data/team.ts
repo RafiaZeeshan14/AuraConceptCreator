@@ -51,14 +51,14 @@ export const teamMembers: TeamMember[] = [
     image:
       "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602335/Alishba.png",
   },
-  {
-    id: "rafia",
-    name: "Rafia Zeeshan",
-    role: "Web Developer",
-    tag: "Development",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790675378/rafia1.png",
-  },
+  // {
+  //   id: "rafia",
+  //   name: "Rafia Zeeshan",
+  //   role: "Web Developer",
+  //   tag: "Development",
+  //   image:
+  //     "https://res.cloudinary.com/l92fw4gu/image/upload/v1790675378/rafia1.png",
+  // },
    {
     id: "kaif",
     name: "Kaif Khan",
@@ -75,13 +75,13 @@ export const teamMembers: TeamMember[] = [
     image:
       "https://res.cloudinary.com/l92fw4gu/image/upload/v1790608562/Rayyan.png",
   },
-  {
-    id: "huzaifa",
-    name: "Huzaifa Atiq",
-    role: "Graphic Designer",
-    tag: "Design",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602334/Huzaifa.png",
-  },
+  // {
+  //   id: "huzaifa",
+  //   name: "Huzaifa Atiq",
+  //   role: "Graphic Designer",
+  //   tag: "Design",
+  //   image:
+  //     "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602334/Huzaifa.png",
+  // },
   
 ];
