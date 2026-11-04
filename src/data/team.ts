@@ -6,24 +6,21 @@ export const teamMembers: TeamMember[] = [
     name: "Maaz Moeed",
     role: "CEO",
     tag: "Leadership",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1792484982/ChatGPT_Image_Oct_19_2026_03_14_18_PM.png",
+    image: "/team/Maaz.png",
   },
   {
     id: "asma",
     name: "Asma Shahzad",
     role: "Manager",
     tag: "Management",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602333/Asma.png",
+    image: "/team/Asma.jpg",
   },
   {
     id: "manaim-ahmed",
     name: "Manaim Ahmed",
     role: "Creative Head",
     tag: "Creative",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602332/Manaim.png",
+    image: "/team/Manaim.jpg",
   },
   
   
@@ -32,24 +29,21 @@ export const teamMembers: TeamMember[] = [
     name: "Mashood ul Hassan",
     role: "Office Head",
     tag: "Management",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602331/Mashood.png",
+    image: "/team/Mashood.jpg",
   },
   {
     id: "ahmed",
     name: "Syed Ahmed Hassan",
     role: "Video Editor",
     tag: "Video",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602397/Ahmed.png",
+    image: "/team/Ahmed.jpg",
   },
   {
     id: "alishba-khan",
     name: "Alishba Khan",
     role: "Social Media Manager",
     tag: "Social",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602335/Alishba.png",
+    image: "/team/Alishba.jpg",
   },
   // {
   //   id: "rafia",
@@ -64,8 +58,7 @@ export const teamMembers: TeamMember[] = [
     name: "Kaif Khan",
     role: "Videographer",
     tag: "Video",
-    image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790602333/Kaif.png",
+    image: "/team/Kaif.jpg",
   },
   {
     id: "rayyan",
@@ -73,7 +66,7 @@ export const teamMembers: TeamMember[] = [
     role: "Graphic Designer",
     tag: "Design",
     image:
-      "https://res.cloudinary.com/l92fw4gu/image/upload/v1790608562/Rayyan.png",
+      "/team/Rayyan.webp",
   },
   // {
   //   id: "huzaifa",
