@@ -6,7 +6,7 @@ const CLOUDINARY_IMAGE_BASE = "https://res.cloudinary.com/l92fw4gu/image/upload"
  * ever cropping its content. Each logo keeps its true aspect ratio (recorded
  * in `width`/`height`) so the row renders at a uniform size with even gaps.
  */
-const LOGO_TRANSFORM = "c_limit,h_300,q_auto";
+const LOGO_TRANSFORM = "e_trim:transparency/c_limit,h_300,q_auto";
 
 /** [id, displayName, versioned public path, intrinsic width, intrinsic height] */
 const brandAssets = [
